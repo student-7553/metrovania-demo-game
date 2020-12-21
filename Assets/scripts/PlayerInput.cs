@@ -24,7 +24,7 @@ public class PlayerInput : MonoBehaviour
         ProcessInputs();
         
         horizontal = Mathf.Clamp(horizontal, -1f, 1f);
-        Debug.Log(horizontal.ToString());
+    
     }
 
     void FixedUpdate(){
@@ -53,7 +53,7 @@ public class PlayerInput : MonoBehaviour
 
 		//Accumulate button inputs
 		jumpPressed		= jumpPressed || Input.GetButtonDown("Jump");
-        Debug.Log(jumpPressed);
+    
 		jumpHeld		= jumpHeld || Input.GetButton("Jump");
 
 		crouchPressed	= crouchPressed || Input.GetButtonDown("Crouch");
