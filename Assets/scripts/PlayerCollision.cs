@@ -7,11 +7,13 @@ public class PlayerCollision : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    int layer_mask;
+    // public int layer_mask;
+
+    public LayerMask groundLayer;	
     
     [Space]
     [Header("State")]
-    public bool onGround;
+    public bool isOnGround;
     // public bool onWall;
     // public bool onRightWall;
     // public bool onLeftWall;
@@ -30,21 +32,25 @@ public class PlayerCollision : MonoBehaviour
 
     void Start()
     {
-        layer_mask = LayerMask.GetMask("Platform");
+        // layer_mask = LayerMask.GetMask("Platform");
     }
     // Update is called once per frame
     void Update()
     {
 
-        RaycastHit2D leftLegHit = Raycast( leftLegOffset, Vector2.down, groundDistance, layer_mask);
-        RaycastHit2D rightLeftHit = Raycast( rightLegOffset, Vector2.down, groundDistance, layer_mask);
+        isOnGround = false;
+
+        RaycastHit2D leftLegHit = Raycast( leftLegOffset, Vector2.down, groundDistance, groundLayer);
+        RaycastHit2D rightLeftHit = Raycast( rightLegOffset, Vector2.down, groundDistance, groundLayer);
+        
+
         if(leftLegHit || rightLeftHit){
-            onGround = true;
+            isOnGround = true;
         }
 
     }
 
-    RaycastHit2D Raycast(Vector2 offset, Vector2 rayDirection, float length, int mask)
+    RaycastHit2D Raycast(Vector2 offset, Vector2 rayDirection, float length, LayerMask mask)
 	{
 		Vector2 pos = transform.position;
 		RaycastHit2D hit = Physics2D.Raycast(pos + offset, rayDirection, length, mask);

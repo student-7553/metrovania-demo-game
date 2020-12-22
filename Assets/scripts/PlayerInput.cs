@@ -23,8 +23,8 @@ public class PlayerInput : MonoBehaviour
         ClearInput();
         ProcessInputs();
         
-        horizontal = Mathf.Clamp(horizontal, -1f, 1f);
-    
+        // horizontal = Mathf.Clamp(horizontal, -1f, 1f);
+
     }
 
     void FixedUpdate(){
@@ -47,11 +47,9 @@ public class PlayerInput : MonoBehaviour
 
     void ProcessInputs()
 	{
-		//Accumulate horizontal axis input
-		horizontal		+= Input.GetAxis("Horizontal");
-        // horizontal		= Input.GetAxis("Horizontal");
 
-		//Accumulate button inputs
+		horizontal		= Input.GetAxis("Horizontal");
+
 		jumpPressed		= jumpPressed || Input.GetButtonDown("Jump");
     
 		jumpHeld		= jumpHeld || Input.GetButton("Jump");
