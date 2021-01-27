@@ -13,17 +13,22 @@ public class PlayerCollision : MonoBehaviour
     
     [Space]
     [Header("State")]
-    public bool isOnGround;
-    // public bool onWall;
-    // public bool onRightWall;
-    // public bool onLeftWall;
+    public bool onGround;
+    public bool onWall;
+
+    public bool onRightWall;
+    public bool onLeftWall;
     // public int wallSide;
 
     [Space]
-    [Header("Collision")]
+    [Header("CollisionData")]
     public float groundDistance = .2f;
-    public Vector2 leftLegOffset;
-    public Vector2 rightLegOffset;
+
+    private Vector2 leftLegOffset;
+    private Vector2 rightLegOffset;
+
+    private Vector2 leftWallOffset;
+    private Vector2 rightWallOffset;
 
 
     public bool drawDebugRay = false;
@@ -37,16 +42,36 @@ public class PlayerCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector2 scale = transform.localScale;
+        onGround = false;
 
-        isOnGround = false;
+        leftLegOffset = new Vector2(-(scale.x / 2) , -(scale.y / 2));
+        rightLegOffset = new Vector2((scale.x / 2) , -(scale.y / 2));
+
+        leftWallOffset = new Vector2(-(scale.x / 2) ,0);
+        rightWallOffset = new Vector2((scale.x / 2) , 0);
+
 
         RaycastHit2D leftLegHit = Raycast( leftLegOffset, Vector2.down, groundDistance, groundLayer);
-        RaycastHit2D rightLeftHit = Raycast( rightLegOffset, Vector2.down, groundDistance, groundLayer);
-        
+        RaycastHit2D rightLeftHit = Raycast( rightLegOffset, Vector2.down, groundDistance, groundLayer);   
 
         if(leftLegHit || rightLeftHit){
-            isOnGround = true;
+            onGround = true;
         }
+
+        RaycastHit2D leftWallHit = Raycast( leftWallOffset, Vector2.left, groundDistance, groundLayer);
+        RaycastHit2D rightWallHit = Raycast( rightWallOffset, Vector2.right, groundDistance, groundLayer);  
+
+        onRightWall = rightWallHit;
+        onLeftWall = leftWallHit;
+
+        onWall = false;
+
+        if(leftWallHit || rightWallHit){
+            onWall = true;
+        }
+
+
 
     }
 

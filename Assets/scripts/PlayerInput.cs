@@ -14,6 +14,8 @@ public class PlayerInput : MonoBehaviour
      public bool jumpPressed;
      public bool crouchHeld;
      public bool crouchPressed;
+     public bool grabHeld;
+     public bool grabPressed;
 
     bool readyToClear;
     // Update is called once per frame
@@ -42,6 +44,8 @@ public class PlayerInput : MonoBehaviour
         jumpHeld = false;
         crouchPressed = false;
         crouchHeld = false;
+        grabPressed = false;
+        grabHeld = false;
         readyToClear = false;
     }
 
@@ -55,7 +59,12 @@ public class PlayerInput : MonoBehaviour
 		jumpHeld		= jumpHeld || Input.GetButton("Jump");
 
 		crouchPressed	= crouchPressed || Input.GetButtonDown("Crouch");
+
 		crouchHeld		= crouchHeld || Input.GetButton("Crouch");
+
+        grabPressed =  grabPressed || Input.GetButtonDown("Grab");;
+
+        grabHeld = grabHeld || Input.GetButton("Grab");;
 	}
 
 }
