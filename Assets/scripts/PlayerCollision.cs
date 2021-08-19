@@ -22,7 +22,7 @@ public class PlayerCollision : MonoBehaviour
 
     [Space]
     [Header("CollisionData")]
-    public float groundDistance = .2f;
+    public float groundDistance ;
 
     private Vector2 leftLegOffset;
     private Vector2 rightLegOffset;

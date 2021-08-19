@@ -16,6 +16,8 @@ public class PlayerInput : MonoBehaviour
      public bool crouchPressed;
      public bool grabHeld;
      public bool grabPressed;
+     
+     public bool dashPressed;
 
     bool readyToClear;
     // Update is called once per frame
@@ -47,6 +49,7 @@ public class PlayerInput : MonoBehaviour
         grabPressed = false;
         grabHeld = false;
         readyToClear = false;
+        dashPressed= false;
     }
 
     void ProcessInputs()
@@ -64,7 +67,9 @@ public class PlayerInput : MonoBehaviour
 
         grabPressed =  grabPressed || Input.GetButtonDown("Grab");;
 
-        grabHeld = grabHeld || Input.GetButton("Grab");;
+        grabHeld = grabHeld || Input.GetButton("Grab");
+
+        dashPressed = dashPressed || Input.GetButton("Fire1");
 	}
 
 }
