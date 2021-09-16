@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637645031222268835
-    m_Hash: 1666380921
+      ticks: 637661938015326197
+    m_Hash: 4105508971
   m_LockFileStatus:
     m_FilePath: C:/Users/Blue/Documents/unity/demo/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637645031222356243
-    m_Hash: 2774247815
+      ticks: 637661938015431361
+    m_Hash: 2605320635
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -78,6 +78,7 @@ m_PackageAssets:
         - 3.2.6
         - 3.2.9
         - 3.2.10
+        - 3.2.11
         - 4.0.0
         - 4.0.1
         - 4.1.0
@@ -105,6 +106,7 @@ m_PackageAssets:
         - 6.0.5
         - 7.0.0-pre.2
         - 7.0.0-pre.3
+        - 7.0.0
         compatible:
         - 5.0.6
         - 5.0.7
@@ -299,6 +301,7 @@ m_PackageAssets:
         - 6.0.0-pre.2
         - 6.0.0-pre.3
         - 6.0.0-pre.4
+        - 6.0.0
         compatible:
         - 4.1.0
         verified: 4.1.0
@@ -458,6 +461,7 @@ m_PackageAssets:
         - 3.0.14
         - 3.0.15
         - 3.0.16
+        - 3.0.17
         - 4.0.0
         - 4.0.1
         - 4.0.2
@@ -482,6 +486,7 @@ m_PackageAssets:
         - 6.0.1
         - 7.0.0-pre.2
         - 7.0.0-pre.3
+        - 7.0.0
         compatible:
         - 5.1.3
         - 5.1.4
@@ -593,6 +598,96 @@ m_PackageAssets:
         url: 
         revision: 
         path: 
+    - packageId: com.unity.2d.tilemap.extras@1.8.0-preview
+      testable: 0
+      isDirectDependency: 1
+      version: 1.8.0-preview
+      source: 1
+      resolvedPath: C:\Users\Blue\Documents\unity\demo\Library\PackageCache\com.unity.2d.tilemap.extras@1.8.0-preview
+      assetPath: Packages/com.unity.2d.tilemap.extras
+      name: com.unity.2d.tilemap.extras
+      displayName: 2D Tilemap Extras
+      author:
+        name: 
+        email: 
+        url: 
+      category: 2D
+      type: 
+      description: 2D Tilemap Extras is a package that contains extra scripts for
+        use with 2D Tilemap features in Unity. These include custom Tiles and Brushes
+        for the Tilemap feature.
+      status: 4
+      errors: []
+      versions:
+        all:
+        - 1.5.0-preview
+        - 1.6.0-preview.1
+        - 1.6.1-preview
+        - 1.6.2-preview
+        - 1.6.3-preview
+        - 1.6.4-preview
+        - 1.7.0-preview
+        - 1.8.0-preview
+        - 2.0.0-pre.1
+        - 2.0.0-pre.2
+        - 2.0.0
+        - 2.2.0
+        compatible:
+        - 1.5.0-preview
+        - 1.6.0-preview.1
+        - 1.6.1-preview
+        - 1.6.2-preview
+        - 1.6.3-preview
+        - 1.6.4-preview
+        - 1.7.0-preview
+        - 1.8.0-preview
+        verified: 
+      dependencies:
+      - name: com.unity.modules.tilemap
+        version: 1.0.0
+      - name: com.unity.2d.tilemap
+        version: 1.0.0
+      - name: com.unity.ugui
+        version: 1.0.0
+      - name: com.unity.modules.jsonserialize
+        version: 1.0.0
+      resolvedDependencies:
+      - name: com.unity.modules.tilemap
+        version: 1.0.0
+      - name: com.unity.modules.physics2d
+        version: 1.0.0
+      - name: com.unity.2d.tilemap
+        version: 1.0.0
+      - name: com.unity.ugui
+        version: 1.0.0
+      - name: com.unity.modules.ui
+        version: 1.0.0
+      - name: com.unity.modules.imgui
+        version: 1.0.0
+      - name: com.unity.modules.jsonserialize
+        version: 1.0.0
+      keywords:
+      - 2d
+      registry:
+        id: main
+        name: 
+        url: https://packages.unity.com
+        scopes: []
+        isDefault: 1
+        capabilities: 7
+      hasRegistry: 1
+      hideInEditor: 1
+      entitlements:
+        isAllowed: 1
+      isAssetStorePackage: 0
+      datePublishedTicks: 637592595530000000
+      documentationUrl: 
+      hasRepository: 1
+      repository:
+        type: git
+        url: git+https://github.com/Unity-Technologies/2d-extras.git
+        revision: 1144e0bb9586c083fd0308672690f6359a6aebc7
+        path: 
     - packageId: com.unity.cinemachine@2.6.9
       testable: 0
       isDirectDependency: 1
@@ -652,11 +747,13 @@ m_PackageAssets:
         - 2.6.4
         - 2.6.5
         - 2.6.9
+        - 2.6.10
         - 2.7.1
         - 2.7.2
         - 2.7.3
         - 2.7.4
         - 2.7.5
+        - 2.7.8
         - 2.8.0-exp.1
         - 2.8.0-exp.2
         - 2.8.0-pre.1
@@ -677,16 +774,18 @@ m_PackageAssets:
         - 2.6.4
         - 2.6.5
         - 2.6.9
+        - 2.6.10
         - 2.7.1
         - 2.7.2
         - 2.7.3
         - 2.7.4
         - 2.7.5
+        - 2.7.8
         - 2.8.0-exp.1
         - 2.8.0-exp.2
         - 2.8.0-pre.1
         - 2.8.0
-        verified: 2.6.9
+        verified: 2.6.10
       dependencies: []
       resolvedDependencies: []
       keywords:
@@ -1070,6 +1169,7 @@ m_PackageAssets:
         - 1.2.1
         - 1.2.2
         - 1.2.3
+        - 1.2.4
         compatible:
         - 1.0.2
         - 1.0.3
@@ -1082,7 +1182,8 @@ m_PackageAssets:
         - 1.2.1
         - 1.2.2
         - 1.2.3
-        verified: 1.2.3
+        - 1.2.4
+        verified: 1.2.4
       dependencies: []
       resolvedDependencies: []
       keywords: []
@@ -1156,9 +1257,11 @@ m_PackageAssets:
         - 1.1.24
         - 1.1.26
         - 1.1.27
+        - 1.1.29
         compatible:
         - 1.1.27
-        verified: 1.1.27
+        - 1.1.29
+        verified: 1.1.29
       dependencies:
       - name: com.unity.ext.nunit
         version: 1.0.6
@@ -3565,6 +3668,7 @@ m_PackageAssets:
         - 6.0.0-pre.2
         - 6.0.0-pre.3
         - 6.0.0-pre.4
+        - 6.0.0
         compatible:
         - 4.0.3
         verified: 4.0.3
@@ -3638,6 +3742,7 @@ m_PackageAssets:
         - 2.0.5
         - 2.0.6
         - 2.1.0
+        - 2.1.1
         - 3.0.0
         - 3.0.1
         - 3.0.2
@@ -3647,6 +3752,7 @@ m_PackageAssets:
         - 5.0.0-pre.1
         - 5.0.0-pre.2
         - 5.0.0
+        - 5.0.1
         compatible:
         - 4.0.1
         - 4.0.2

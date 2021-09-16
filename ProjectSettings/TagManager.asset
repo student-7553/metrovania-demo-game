@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - hitInteractable
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Platform
   - Background
   - Player
-  - 
+  - Traps
   - 
   - 
   - 
@@ -40,4 +41,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BackGround2
+    uniqueID: 1616926397
+    locked: 0
+  - name: Background
+    uniqueID: 1590490979
+    locked: 0
+  - name: Platforms
+    uniqueID: 2449985067
+    locked: 0
+  - name: Player
+    uniqueID: 2806702771
+    locked: 0
+  - name: Foreground
+    uniqueID: 1248651275
     locked: 0
