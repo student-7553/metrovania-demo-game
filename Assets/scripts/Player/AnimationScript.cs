@@ -47,7 +47,13 @@ public class AnimationScript : MonoBehaviour
         }
         anim.SetFloat("HorizontalAxis", x);
         anim.SetFloat("VerticalAxis", y);
-        anim.SetFloat("VerticalVelocity", yVel);
+
+        if(x > 0.1 || x < 0.1){
+            anim.SetFloat("VerticalVelocity", yVel);
+        } else {
+            anim.SetFloat("VerticalVelocity", 0);
+        }
+        
     }
 
     public void SetTrigger(string trigger)

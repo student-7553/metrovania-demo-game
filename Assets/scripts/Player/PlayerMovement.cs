@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         isJumping = true;
         playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 0);
         playerRigidBody.velocity += dir * jumpForce;
-
+        animationScript.SetTrigger("jump");    
 
         StartCoroutine(JumpFinishHandler());
         jumpParticle.Play();
