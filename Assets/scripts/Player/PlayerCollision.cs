@@ -43,11 +43,17 @@ public class PlayerCollision : MonoBehaviour
 
     private int collisionLayerValue;
 
+    private Vector2 boxColliderSize;
+    private Vector2 boxColliderOffset;
+
 
     void Start()
     {
         collisionLayerValue = groundLayer.value;
         // layer_mask = LayerMask.GetMask("Platform");
+        BoxCollider2D tempBox = GetComponent<BoxCollider2D>();
+        boxColliderSize = tempBox.size;
+        boxColliderOffset = tempBox.offset;
     }
     // Update is called once per frame
     void Update()
@@ -56,14 +62,14 @@ public class PlayerCollision : MonoBehaviour
         onGround = false;
 
         // leftLegOffset = new Vector2(-(scale.x / 2 - 0.2f) , -(scale.y / 2));
-        leftLegOffset = new Vector2(-(colliderSize.x/ 2 - 0.1f) , -(colliderSize.y / 2));
-        rightLegOffset = new Vector2((colliderSize.x / 2 - 0.1f) , -(colliderSize.y / 2));
+        leftLegOffset = new Vector2(-(boxColliderSize.x / 2 ) , 0);
+        rightLegOffset = new Vector2((boxColliderSize.x / 2 ) , 0);
 
-        leftWallOffset = new Vector2(-(colliderSize.x / 2) , 0);
-        rightWallOffset = new Vector2((colliderSize.x / 2) ,  0);
+        leftWallOffset = new Vector2(-(boxColliderSize.x / 2) , boxColliderSize.y/2);
+        rightWallOffset = new Vector2((boxColliderSize.x / 2) ,  boxColliderSize.y/2);
 
-        leftWallOffsetBottom = new Vector2(-(colliderSize.x / 2) , -(colliderSize.y / 2));
-        rightWallOffsetBottom = new Vector2((colliderSize.x / 2) ,  -(colliderSize.y / 2));
+        leftWallOffsetBottom = new Vector2(-(boxColliderSize.x / 2) , 0);
+        rightWallOffsetBottom = new Vector2((boxColliderSize.x / 2) , 0);
         // rightWallOffset = new Vector2((scale.x / 2 - 0.1f) ,  -(scale.y / 2) );
 
 
@@ -76,22 +82,24 @@ public class PlayerCollision : MonoBehaviour
 
         RaycastHit2D leftWallHit = Raycast( leftWallOffset, Vector2.left, groundDistance, collisionLayerValue);
         RaycastHit2D rightWallHit = Raycast( rightWallOffset, Vector2.right, groundDistance,collisionLayerValue);  
-        
 
         onRightWall = rightWallHit;
         onLeftWall = leftWallHit;
-
-        onWall = false;
-
-        if(leftWallHit || rightWallHit){
-            onWall = true;
-        }
 
         RaycastHit2D leftWallBottomHit = Raycast( leftWallOffsetBottom, Vector2.left, groundDistance, collisionLayerValue);
         RaycastHit2D rightWallBottomHit = Raycast( rightWallOffsetBottom, Vector2.right, groundDistance, collisionLayerValue);  
 
         onLeftBottomWall = leftWallBottomHit;
         onRightBottomWall = rightWallBottomHit;
+
+        onWall = false;
+
+        // if((leftWallHit || rightWallHit) ){
+        if((leftWallHit || rightWallHit) ||  (onLeftBottomWall || onRightBottomWall )){
+            onWall = true;
+        }
+
+        
         
 
 

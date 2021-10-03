@@ -12,23 +12,23 @@ public class PlayerMovement : MonoBehaviour
     [Header("Stats")]
 
 
-    public float normalSpeed = 10;
+    public float normalSpeed;
 
-    public float currentSpeed = 10;
-    public float jumpForce = 20;
-    public float slideSpeed = 3;
-    public float crouchSpeed = 5;
-    public float wallJumpLerp = 10;
-    public float dashSpeed = 20;
-    public float coyoteDuration = .5f;
+    public float currentSpeed;
+    public float jumpForce;
+    public float slideSpeed;
+    public float crouchSpeed;
+    public float wallJumpLerp;
+    public float dashSpeed;
+    public float coyoteDuration;
 
 
     [Space]
     [Header("Limit")]
-    public float verticalVelocityLimit = 40f;
+    public float verticalVelocityLimit;
 
-    public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 2f;
+    public float fallMultiplier;
+    public float lowJumpMultiplier;
     [Space]
     [Header("Booleans")]
     public bool canMove;
@@ -226,7 +226,6 @@ public class PlayerMovement : MonoBehaviour
         Vector2 dir = new Vector2(x, y);
 
         playerRigidBody.velocity = Vector2.zero + (dir.normalized * dashSpeed);
-        Debug.Log(playerRigidBody.velocity);
 
         StartCoroutine(DashWait());
     }
@@ -235,8 +234,6 @@ public class PlayerMovement : MonoBehaviour
 
         // FindObjectOfType<GhostTrail>().ShowGhost();
         StartCoroutine(GroundDash());
-        // DOVirtual.Float(14, 0, .8f, RigidbodyDrag);
-        // DOVirtual.Float(1, 0, .8f, RigidbodyDrag);
         // dashParticle.Play();
         playerRigidBody.gravityScale = 0;
         // canMove = false;
@@ -256,7 +253,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator WallClimbUp()
     {
-
+        
         StopCoroutine(DisableMovement(0));
         StartCoroutine(DisableMovement(.1f));
         bool isRight;
@@ -268,20 +265,22 @@ public class PlayerMovement : MonoBehaviour
         {
             isRight = false;
         }
-        playerRigidBody.velocity += Vector2.up * 4;
         wallJumped = true;
+        playerRigidBody.velocity += Vector2.up * 7;
+        
 
         yield return new WaitForSeconds(.05f);
-        playerRigidBody.velocity += Vector2.up * 4;
-        yield return new WaitForSeconds(.05f);
+        playerRigidBody.velocity += Vector2.up * 3;
+        yield return new WaitForSeconds(.03f);
         if (isRight)
         {
-            playerRigidBody.velocity = new Vector2(normalSpeed, 0);
+            playerRigidBody.velocity += Vector2.right * 8;
+            // playerRigidBody.velocity = new Vector2(normalSpeed, 0);
         }
         else
         {
-
-            playerRigidBody.velocity = new Vector2(-normalSpeed, 0);
+            playerRigidBody.velocity += Vector2.left * 8;
+            // playerRigidBody.velocity = new Vector2(-normalSpeed, 0);
         }
         yield return new WaitForSeconds(.1f);
         wallJumped = false;
@@ -309,7 +308,7 @@ public class PlayerMovement : MonoBehaviour
         if (wallGrab && !isDashing)
         {
             betterJumpEnabled = false;
-            if (playerCollision.onWall)
+            if (playerCollision.onRightWall || playerCollision.onLeftWall )
             {
                 playerRigidBody.gravityScale = 0;
                 float speedModifier = y > 0 ? .5f : 1;
@@ -352,9 +351,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void updateWallSlide(float x, float y)
     {
+        
         // START WALL SLIDE
         if (playerCollision.onWall && !playerCollision.onGround)
         {
+            Debug.Log("Triggering");
             if (x != 0f && !wallGrab)
             {
                 WallSlide();
