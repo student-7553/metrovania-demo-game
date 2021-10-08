@@ -30,9 +30,6 @@ public class Parallax : MonoBehaviour
         if (isInfinite)
         {
 
-            Debug.Log("Temp "+temp);
-            Debug.Log("startpos" + startpos );
-            Debug.Log("length" + length );
 
             if (temp > (startpos - startCameraPos) + length)
             {

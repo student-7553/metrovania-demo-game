@@ -11,8 +11,14 @@ public class AnimationScript : MonoBehaviour
     private PlayerCollision coll;
 
     private PlayerAttack attack;
+    private Rigidbody2D playerRigidBody;
+
     [HideInInspector]
     public SpriteRenderer sr;
+
+    private bool isFacingRight = true;
+
+    
 
     void Start()
     {
@@ -21,10 +27,24 @@ public class AnimationScript : MonoBehaviour
         move = GetComponentInParent<PlayerMovement>();
         attack = GetComponentInParent<PlayerAttack>();
         sr = GetComponent<SpriteRenderer>();
+        playerRigidBody = GetComponentInParent<Rigidbody2D>();
+
+        anim.SetFloat("isFacingRight", 1);
     }
 
     void Update()
     {
+        // Logic
+        if(!anim.GetBool("isWallGrabing") && move.wallGrab){
+            anim.SetTrigger("wallGrab");
+        }
+        
+        if(!anim.GetBool("onGround") && coll.onGround){
+            anim.SetTrigger("onGroundEntry");
+        }
+
+
+
         anim.SetBool("onGround", coll.onGround);
         anim.SetBool("onWall", coll.onWall);
         anim.SetBool("onRightWall", coll.onRightWall);
@@ -36,23 +56,43 @@ public class AnimationScript : MonoBehaviour
 
     }
 
-    public void SetHorizontalMovement(float x,float y, float yVel)
+    public void SetHorizontalMovement(float x,float y, float yVel, float xVel)
     {
 
-        if(x > 0.001){
-            anim.SetFloat("isFacingRight", 1);
-        } else if (x < -0.001){
-            anim.SetFloat("isFacingRight", -1);
+        // if(x > 0.001 && isFacingRight == false){
+        //     anim.SetFloat("isFacingRight", 1);
+        //     isFacingRight = true;
+        // } else if (x < -0.001 && isFacingRight == true){
+        //     anim.SetFloat("isFacingRight", -1);
+        //     isFacingRight = false;
+        // }
+
+
         
-        }
+
+        
+
         anim.SetFloat("HorizontalAxis", x);
         anim.SetFloat("VerticalAxis", y);
 
-        if(x > 0.1 || x < 0.1){
+        if(yVel > 0.1 || yVel < 0.1){
             anim.SetFloat("VerticalVelocity", yVel);
         } else {
             anim.SetFloat("VerticalVelocity", 0);
         }
+
+        if(xVel > 0.1 || xVel < 0.1){
+            anim.SetFloat("HorizontalVelocity", xVel);
+        } else {
+            anim.SetFloat("HorizontalVelocity", 0);
+        }
+
+        if(move.isFacingRight){
+            anim.SetFloat("isFacingRight", 1);
+        } else {
+            anim.SetFloat("isFacingRight", -1 );
+        }
+        
         
     }
 

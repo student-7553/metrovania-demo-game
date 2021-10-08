@@ -21,8 +21,7 @@ public class PlayerCollision : MonoBehaviour
 
     public bool onRightBottomWall;
     public bool onLeftBottomWall;
-    public Vector2 colliderSize;
-    // public int wallSide;
+
 
     [Space]
     [Header("CollisionData")]
@@ -79,7 +78,7 @@ public class PlayerCollision : MonoBehaviour
         if(leftLegHit || rightLeftHit){
             onGround = true;
         }
-
+        
         RaycastHit2D leftWallHit = Raycast( leftWallOffset, Vector2.left, groundDistance, collisionLayerValue);
         RaycastHit2D rightWallHit = Raycast( rightWallOffset, Vector2.right, groundDistance,collisionLayerValue);  
 

@@ -13,8 +13,6 @@ public class PlayerMovement : MonoBehaviour
 
 
     public float normalSpeed;
-
-    public float currentSpeed;
     public float jumpForce;
     public float slideSpeed;
     public float crouchSpeed;
@@ -63,6 +61,9 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
     public bool betterJumpEnabled = true;
     private float coyoteTime;
+    private float currentSpeed;
+
+    public bool isFacingRight;
 
     void Start()
     {
@@ -71,6 +72,8 @@ public class PlayerMovement : MonoBehaviour
         playerCollision = GetComponent<PlayerCollision>();
         animationScript = GetComponentInChildren<AnimationScript>();
         boxCollider = GetComponent<BoxCollider2D>();
+
+        currentSpeed = normalSpeed;
     }
 
     private void Walk(Vector2 dir)
@@ -100,11 +103,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump(Vector2 dir, bool wall)
     {
-       
+
         isJumping = true;
         playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 0);
         playerRigidBody.velocity += dir * jumpForce;
-        animationScript.SetTrigger("jump");    
+        animationScript.SetTrigger("jump");
 
         StartCoroutine(JumpFinishHandler());
         jumpParticle.Play();
@@ -133,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
         // betterJumpEnabled = true;
         Jump((Vector2.up / 3f + wallDir), true);
 
-        
+
     }
     private void WallSlide()
     {
@@ -185,10 +188,10 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, -verticalVelocityLimit);
         }
-        else if (playerRigidBody.velocity.y > verticalVelocityLimit)
-        {
-            playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, verticalVelocityLimit);
-        }
+        // else if (playerRigidBody.velocity.y > verticalVelocityLimit)
+        // {
+        //     playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, verticalVelocityLimit);
+        // }
         // END limit verticalVelocity
     }
 
@@ -203,7 +206,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRigidBody.drag = x;
     }
-    
+
     IEnumerator GroundDash()
     {
         yield return new WaitForSeconds(.15f);
@@ -242,7 +245,7 @@ public class PlayerMovement : MonoBehaviour
         isHorizontalLerp = true;
         isDashing = true;
 
-        yield return new WaitForSeconds(.15f);
+        yield return new WaitForSeconds(.2f);
         playerRigidBody.gravityScale = 3;
         playerRigidBody.velocity = Vector2.zero;
         // canMove = true;
@@ -254,7 +257,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator WallClimbUp()
     {
-        
+
         StopCoroutine(DisableMovement(0));
         StartCoroutine(DisableMovement(.1f));
         bool isRight;
@@ -268,7 +271,7 @@ public class PlayerMovement : MonoBehaviour
         }
         isHorizontalLerp = true;
         playerRigidBody.velocity += Vector2.up * 7;
-        
+
 
         yield return new WaitForSeconds(.05f);
         playerRigidBody.velocity += Vector2.up * 3;
@@ -309,7 +312,7 @@ public class PlayerMovement : MonoBehaviour
         if (wallGrab && !isDashing)
         {
             betterJumpEnabled = false;
-            if (playerCollision.onRightWall || playerCollision.onLeftWall )
+            if (playerCollision.onRightWall || playerCollision.onLeftWall)
             {
                 playerRigidBody.gravityScale = 0;
                 float speedModifier = y > 0 ? .5f : 1;
@@ -335,12 +338,14 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        
+
 
         if (playerCollision.onWall && (playerInput.grabPressed || playerInput.grabHeld) && canMove)
         {
             wallGrab = true;
             wallSlide = false;
+
+
         }
 
 
@@ -354,7 +359,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void updateWallSlide(float x, float y)
     {
-        
+
         // START WALL SLIDE
         if (playerCollision.onWall && !playerCollision.onGround)
         {
@@ -388,25 +393,21 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-
-
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         float xRaw = Input.GetAxisRaw("Horizontal");
         float yRaw = Input.GetAxisRaw("Vertical");
         Vector2 dir = new Vector2(x, y);
-        Walk(dir);
-
         if (canMove)
         {
-            animationScript.SetHorizontalMovement(x, y, playerRigidBody.velocity.y);
+            animationScript.SetHorizontalMovement(x, y, playerRigidBody.velocity.y, playerRigidBody.velocity.x);
         }
 
-
+        Walk(dir);
 
         if (playerCollision.onGround && !isDashing)
         {
-            
+
             coyoteTime = Time.time + coyoteDuration;
             isHorizontalLerp = false;
             betterJumpEnabled = true;
@@ -450,13 +451,42 @@ public class PlayerMovement : MonoBehaviour
 
         updateCrouch(x, y);
 
+        if (isFacingRight == true && x < 0 && playerCollision.onGround)
+        {
+
+            animationScript.SetTrigger("flip");
+        }
+        else if (isFacingRight == false && x > 0 && playerCollision.onGround)
+        {
+
+            animationScript.SetTrigger("flip");
+        }
+
+        if (playerRigidBody.velocity.x > 0.01 && isFacingRight == false)
+        {
+            isFacingRight = true;
+        }
+        else if (playerRigidBody.velocity.x < -0.01 && isFacingRight == true)
+        {
+            isFacingRight = false;
+        }
+
         BetterJumping();
         limitVelocityY();
 
     }
 
+    // private void ifOnGroundEntryAnim()
+    // {
+    //     if (playerRigidBody.velocity.y < -verticalVelocityLimit)
+    //     {
+    //         playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, -verticalVelocityLimit);
+    //     }
 
- 
+    // }
+
+
+
     IEnumerator CheckForLanding()
     {
         while (true)
@@ -482,10 +512,10 @@ public class PlayerMovement : MonoBehaviour
         canMove = true;
     }
 
-    IEnumerator ChangeIsHorizontalLerp(float time, bool state ) {
+    IEnumerator ChangeIsHorizontalLerp(float time, bool state)
+    {
         yield return new WaitForSeconds(time);
         isHorizontalLerp = state;
-        Debug.Log("triggered");
     }
 
 

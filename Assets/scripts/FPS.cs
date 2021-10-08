@@ -21,7 +21,7 @@ public class FPS : MonoBehaviour
 	{
 		float msec = deltaTime * 1000.0f;
 		float fps = 1.0f / deltaTime;
-        // Debug.Log(string.Format("FPS: {0:00.} ({1:00.0} ms)", fps, msec));
+        // Debug.Log(string.Format("FPS: {0:00.}", fps));
 
 	}
 }
