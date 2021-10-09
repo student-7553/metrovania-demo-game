@@ -9,42 +9,67 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-     public float horizontal;
-     public bool jumpHeld;
-     public bool jumpPressed;
-     public bool crouchHeld;
-     public bool crouchPressed;
-     public bool grabHeld;
-     public bool grabPressed;
-     
-     public bool dashPressed;
-
-     public bool attackPressed;
-
+    public float horizontal;
+    public bool jumpHeld;
+    public bool jumpPressed;
+    public bool simJumpPressed;
+    public bool crouchHeld;
+    public bool crouchPressed;
+    public bool grabHeld;
+    public bool grabPressed;
+    public bool dashPressed;
+    public bool attackPressed;
     bool readyToClear;
-    // Update is called once per frame
+
+    public float jumpPressedAllowanceTime = .5f;
+
+    private float remainingAllowedTime = 0f;
+
+
     void Update()
     {
-        
+
         ClearInput();
         ProcessInputs();
-        
+
         // horizontal = Mathf.Clamp(horizontal, -1f, 1f);
 
     }
 
-    void FixedUpdate(){
+    void FixedUpdate()
+    {
         readyToClear = true;
     }
 
-    void ClearInput(){
-        if(!readyToClear){
+    void ClearInput()
+    {
+        if (!readyToClear)
+        {
             return;
         }
 
         horizontal = 0f;
+
         
-        jumpPressed = false;
+
+        if(remainingAllowedTime > jumpPressedAllowanceTime){
+
+            jumpPressed = false;
+            remainingAllowedTime = 0f;
+        }
+
+        if(remainingAllowedTime != 0) {
+
+            remainingAllowedTime = remainingAllowedTime + Time.deltaTime;
+        }
+        
+        if(jumpPressed && remainingAllowedTime == 0f){
+
+            remainingAllowedTime = Time.deltaTime;
+
+        } 
+        // jumpPressed = false;
+        
         jumpHeld = false;
         crouchPressed = false;
         crouchHeld = false;
@@ -56,25 +81,27 @@ public class PlayerInput : MonoBehaviour
     }
 
     void ProcessInputs()
-	{
+    {
 
-		horizontal		= Input.GetAxis("Horizontal");
+        horizontal = Input.GetAxis("Horizontal");
 
-		jumpPressed		= jumpPressed || Input.GetButtonDown("Jump");
-    
-		jumpHeld		= jumpHeld || Input.GetButton("Jump");
+        jumpPressed = jumpPressed || Input.GetButtonDown("Jump");
 
-		crouchPressed	= crouchPressed || Input.GetButtonDown("Crouch");
+        // simJumpPressed = jumpPressed;
 
-		crouchHeld		= crouchHeld || Input.GetButton("Crouch");
+        jumpHeld = jumpHeld || Input.GetButton("Jump");
 
-        grabPressed =  grabPressed || Input.GetButtonDown("Grab");;
+        crouchPressed = crouchPressed || Input.GetButtonDown("Crouch");
+
+        crouchHeld = crouchHeld || Input.GetButton("Crouch");
+
+        grabPressed = grabPressed || Input.GetButtonDown("Grab"); ;
 
         grabHeld = grabHeld || Input.GetButton("Grab");
 
         dashPressed = dashPressed || Input.GetButtonDown("Fire1");
 
         attackPressed = attackPressed || Input.GetButtonDown("Fire2");
-	}
+    }
 
 }
