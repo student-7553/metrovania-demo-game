@@ -22,6 +22,9 @@ public class PlayerCollision : MonoBehaviour
     public bool onRightBottomWall;
     public bool onLeftBottomWall;
 
+    public bool onRightTopWall;
+    public bool onLeftTopWall;
+
 
     [Space]
     [Header("CollisionData")]
@@ -35,6 +38,9 @@ public class PlayerCollision : MonoBehaviour
 
     private Vector2 leftWallOffsetBottom;
     private Vector2 rightWallOffsetBottom;
+
+    private Vector2 leftWallOffsetTop;
+    private Vector2 rightWallOffsetTop;
 
 
     public bool drawDebugRay = false;
@@ -64,12 +70,14 @@ public class PlayerCollision : MonoBehaviour
         leftLegOffset = new Vector2(-(boxColliderSize.x / 2 ) , 0);
         rightLegOffset = new Vector2((boxColliderSize.x / 2 ) , 0);
 
-        leftWallOffset = new Vector2(-(boxColliderSize.x / 2) , boxColliderSize.y/2);
-        rightWallOffset = new Vector2((boxColliderSize.x / 2) ,  boxColliderSize.y/2);
+        leftWallOffset = new Vector2(-(boxColliderSize.x / 2) , boxColliderSize.y/4);
+        rightWallOffset = new Vector2((boxColliderSize.x / 2) ,  boxColliderSize.y/4);
 
         leftWallOffsetBottom = new Vector2(-(boxColliderSize.x / 2) , 0);
         rightWallOffsetBottom = new Vector2((boxColliderSize.x / 2) , 0);
-        // rightWallOffset = new Vector2((scale.x / 2 - 0.1f) ,  -(scale.y / 2) );
+        
+        leftWallOffsetTop = new Vector2(-(boxColliderSize.x / 2) , boxColliderSize.y);
+        rightWallOffsetTop = new Vector2((boxColliderSize.x / 2) , boxColliderSize.y);
 
 
         RaycastHit2D leftLegHit = Raycast( leftLegOffset, Vector2.down, groundDistance,collisionLayerValue);
@@ -91,10 +99,17 @@ public class PlayerCollision : MonoBehaviour
         onLeftBottomWall = leftWallBottomHit;
         onRightBottomWall = rightWallBottomHit;
 
+        RaycastHit2D leftWallTopHit = Raycast( leftWallOffsetTop, Vector2.left, groundDistance, collisionLayerValue);
+        RaycastHit2D rightWallTopHit = Raycast( rightWallOffsetTop, Vector2.right, groundDistance, collisionLayerValue);  
+
+        onLeftTopWall = leftWallTopHit;
+        onRightTopWall = rightWallTopHit;
+
+
         onWall = false;
 
         // if((leftWallHit || rightWallHit) ){
-        if((leftWallHit || rightWallHit) ||  (onLeftBottomWall || onRightBottomWall )){
+        if((leftWallHit || rightWallHit) ||  (onLeftBottomWall || onRightBottomWall ) || ( onLeftTopWall || onRightTopWall )){
             onWall = true;
         }
 
