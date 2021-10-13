@@ -70,8 +70,10 @@ public class PlayerCollision : MonoBehaviour
         leftLegOffset = new Vector2(-(boxColliderSize.x / 2 ) , 0);
         rightLegOffset = new Vector2((boxColliderSize.x / 2 ) , 0);
 
-        leftWallOffset = new Vector2(-(boxColliderSize.x / 2) , boxColliderSize.y/4);
-        rightWallOffset = new Vector2((boxColliderSize.x / 2) ,  boxColliderSize.y/4);
+
+        leftWallOffset = new Vector2(-(boxColliderSize.x / 2) , boxColliderSize.y / 4);
+        rightWallOffset = new Vector2((boxColliderSize.x / 2) ,  boxColliderSize.y / 4);
+
 
         leftWallOffsetBottom = new Vector2(-(boxColliderSize.x / 2) , 0);
         rightWallOffsetBottom = new Vector2((boxColliderSize.x / 2) , 0);

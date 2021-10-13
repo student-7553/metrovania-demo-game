@@ -69,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool dashFixed = false;
 
+    private bool jumpFixCoroutineRunning = false;
+
 
 
     void Start()
@@ -146,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
         isJumping = true;
         playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 0);
         playerRigidBody.velocity += dir * jumpForce;
+        Debug.Log(playerRigidBody.velocity);
         animationScript.SetTrigger("jump");
 
         StartCoroutine(JumpFinishHandler());
@@ -155,6 +158,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator JumpFinishHandler()
     {
+        Debug.Log("are we here?");
         DOVirtual.Float(13, 0, .6f, RigidbodyDrag);
         yield return new WaitForSeconds(0.1f);
         yield return StartCoroutine(CheckForLanding());
@@ -238,6 +242,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         playerRigidBody.drag = x;
+        Debug.Log(playerRigidBody.drag);
     }
 
     IEnumerator GroundDash()
@@ -343,25 +348,23 @@ public class PlayerMovement : MonoBehaviour
         // yield return DashVelWaitCounter();
 
 
-        // playerRigidBody.velocity = Vector2.zero;
 
         playerRigidBody.gravityScale = 3;
         canMove = true;
         isHorizontalLerp = false;
+        isDashing = false;
         yield return new WaitForSeconds(.2f);
 
         betterJumpEnabled = true;
         
-        isDashing = false;
+        
 
     }
     // IEnumerator DashVelWaitCounter()
     // {
 
     //     playerRigidBody.drag = 0;
-    //     Debug.Log(playerRigidBody.velocity.y);
     //     yield return new WaitForSeconds(.1f);
-    //     Debug.Log(playerRigidBody.velocity.y);
 
 
     // }
@@ -373,32 +376,23 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(.1f);
         playerRigidBody.drag = 3;
-        // Debug.Log(playerRigidBody.velocity.y);
 
         yield return new WaitForSeconds(.07f);
-        // Debug.Log(playerRigidBody.velocity.y);
         playerRigidBody.drag = 9;
 
         yield return new WaitForSeconds(.07f);
-        // Debug.Log(playerRigidBody.velocity.y);
         playerRigidBody.drag = 27;
 
         yield return new WaitForSeconds(.02f);
 
         playerRigidBody.drag = 0;
         
-        // Debug.Log(playerRigidBody.velocity.y);
-        // playerRigidBody.drag = 80;
-        // yield return new WaitForSeconds(.01f);
-        // playerRigidBody.drag = 0;
     }
 
 
     IEnumerator WallClimbUp()
     {
 
-        StopCoroutine(DisableMovement(0));
-        StartCoroutine(DisableMovement(.1f));
         bool isRight;
         if (playerCollision.onRightBottomWall)
         {
@@ -408,24 +402,28 @@ public class PlayerMovement : MonoBehaviour
         {
             isRight = false;
         }
+
+        playerRigidBody.gravityScale = 0;
+        betterJumpEnabled = false;
+        canMove = false;
         isHorizontalLerp = true;
-        playerRigidBody.velocity += Vector2.up * 10;
+        playerRigidBody.velocity = Vector2.zero;
+        playerRigidBody.velocity += Vector2.up * 15;
         yield return new WaitForSeconds(.07f);
-        // playerRigidBody.velocity += Vector2.up * 3;
-        // yield return new WaitForSeconds(.1f);
         playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 0f);
         if (isRight)
         {
             playerRigidBody.velocity += Vector2.right * 8;
-            // playerRigidBody.velocity = new Vector2(normalSpeed, 0);
         }
         else
         {
             playerRigidBody.velocity += Vector2.left * 8;
-            // playerRigidBody.velocity = new Vector2(-normalSpeed, 0);
         }
         yield return new WaitForSeconds(.1f);
         isHorizontalLerp = false;
+        canMove = true;
+        playerRigidBody.gravityScale = 3;
+        betterJumpEnabled = true;
     }
 
 
@@ -488,20 +486,16 @@ public class PlayerMovement : MonoBehaviour
         // START WALL SLIDE
         if (playerCollision.onWall && !playerCollision.onGround && !isDashing)
         {
+            // if user is moving towards wall
             if (x != 0f && !wallGrab)
             {
-
-                // if (!playerCollision.onRightWall && !playerCollision.onLeftWall && (playerCollision.onRightBottomWall || playerCollision.onLeftBottomWall) && !isHorizontalLerp)
-                // {
-                //     // jumpOverLedge
-                //     Debug.Log("we are getting triggered");
-                //     StartCoroutine(WallClimbUp());
-
-
-
-                // }
-                // else
-                // {
+                if (!playerCollision.onRightWall && !playerCollision.onLeftWall && (playerCollision.onRightBottomWall || playerCollision.onLeftBottomWall) && isJumping && !jumpFixCoroutineRunning)
+                {
+                    // jumpOverLedge
+                    // StartCoroutine(JumpFix());
+                }
+                else
+                {
                     if ((playerCollision.onRightWall && x >= 1f) || (playerCollision.onLeftWall && x <= -1f))
                     {
                         if (isJumping)
@@ -517,7 +511,7 @@ public class PlayerMovement : MonoBehaviour
                         }
 
                     }
-                // }
+                }
 
                 // check if x is directed towards the correct wall
 
@@ -528,6 +522,20 @@ public class PlayerMovement : MonoBehaviour
             wallSlide = false;
         }
         // END WALL SLIDE
+    }
+
+    IEnumerator JumpFix()
+    {
+        jumpFixCoroutineRunning = true;
+        while(playerCollision.onLeftBottomWall || playerCollision.onRightBottomWall){
+            playerRigidBody.velocity += Vector2.up * 20;
+            yield return null;
+        }
+        // playerRigidBody.velocity += Vector2.up * 20;
+        // yield return new WaitForSeconds(.03f);
+        playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 0f);
+        jumpFixCoroutineRunning = false;
+
     }
 
     private void updateCrouch(float x, float y)
@@ -637,6 +645,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isDashing)
         {
+            dashFixed = false;
             return;
         }
         if (dashFixed && (!playerCollision.onRightWall && !playerCollision.onLeftWall))
@@ -646,16 +655,13 @@ public class PlayerMovement : MonoBehaviour
         }
         if (playerRigidBody.velocity.x > 0.1f && playerCollision.onRightWall)
         {
-
             // right dash
-            Debug.Log("we are getting triggered");
             playerRigidBody.velocity = new Vector2(0, playerRigidBody.velocity.y);
             dashFixed = true;
 
         }
         else if (playerRigidBody.velocity.x < 0.1f && playerCollision.onLeftWall)
         {
-
             // left dash
             playerRigidBody.velocity = new Vector2(0, playerRigidBody.velocity.y);
             dashFixed = true;
