@@ -24,6 +24,8 @@ public class PlayerAttack : MonoBehaviour
     private AnimationScript animationScript;
     public int attackFrameCounter = 0;
 
+    // private int hitLayer;	
+
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
@@ -31,6 +33,7 @@ public class PlayerAttack : MonoBehaviour
         playerCollision = GetComponent<PlayerCollision>();
         animationScript = GetComponentInChildren<AnimationScript>();
         movement = GetComponent<PlayerMovement>();
+        // hitLayer = LayerMask.NameToLayer("hitInteractable");
     }
 
     // Update is called once per frame

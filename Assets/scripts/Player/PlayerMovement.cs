@@ -148,7 +148,6 @@ public class PlayerMovement : MonoBehaviour
         isJumping = true;
         playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 0);
         playerRigidBody.velocity += dir * jumpForce;
-        Debug.Log(playerRigidBody.velocity);
         animationScript.SetTrigger("jump");
 
         StartCoroutine(JumpFinishHandler());
@@ -158,7 +157,6 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator JumpFinishHandler()
     {
-        Debug.Log("are we here?");
         DOVirtual.Float(13, 0, .6f, RigidbodyDrag);
         yield return new WaitForSeconds(0.1f);
         yield return StartCoroutine(CheckForLanding());
@@ -242,7 +240,6 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         playerRigidBody.drag = x;
-        Debug.Log(playerRigidBody.drag);
     }
 
     IEnumerator GroundDash()
@@ -392,7 +389,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator WallClimbUp()
     {
-
+        Debug.Log("WallClimbUp trig");
         bool isRight;
         if (playerCollision.onRightBottomWall)
         {
@@ -441,8 +438,9 @@ public class PlayerMovement : MonoBehaviour
                 playerRigidBody.velocity = new Vector2(0, y * (currentSpeed * speedModifier));
 
             }
-            else
+            else if (playerCollision.onRightBottomWall || playerCollision.onLeftBottomWall)
             {
+                Debug.Log("Triggering Start WallClimbUp");
                 StartCoroutine(WallClimbUp());
 
             }
@@ -489,13 +487,16 @@ public class PlayerMovement : MonoBehaviour
             // if user is moving towards wall
             if (x != 0f && !wallGrab)
             {
-                if (!playerCollision.onRightWall && !playerCollision.onLeftWall && (playerCollision.onRightBottomWall || playerCollision.onLeftBottomWall) && isJumping && !jumpFixCoroutineRunning)
+                if (!playerCollision.onRightWall && !playerCollision.onLeftWall && (playerCollision.onRightBottomWall || playerCollision.onLeftBottomWall) && isJumping && !isHorizontalLerp )
                 {
-                    // jumpOverLedge
-                    // StartCoroutine(JumpFix());
-                }
-                else
-                {
+                    if(playerRigidBody.velocity.y > 0 && playerRigidBody.velocity.y < 5){
+                        StartCoroutine(WallClimbUp());
+                    } else if (playerRigidBody.velocity.y < 0) {
+                         WallSlide();
+                    }
+
+                    
+                } else {
                     if ((playerCollision.onRightWall && x >= 1f) || (playerCollision.onLeftWall && x <= -1f))
                     {
                         if (isJumping)
