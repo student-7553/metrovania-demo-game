@@ -16,7 +16,6 @@ public class AnimationScript : MonoBehaviour
     [HideInInspector]
     public SpriteRenderer sr;
 
-    private bool isFacingRight = true;
 
     
 
@@ -67,11 +66,6 @@ public class AnimationScript : MonoBehaviour
         //     isFacingRight = false;
         // }
 
-
-        
-
-        
-
         anim.SetFloat("HorizontalAxis", x);
         anim.SetFloat("VerticalAxis", y);
 
@@ -101,21 +95,10 @@ public class AnimationScript : MonoBehaviour
         anim.SetTrigger(trigger);
     }
 
-    // public void Flip(int side)
-    // {
+    public void SetFloat(string key,  float givenNumber){
+        anim.SetFloat(key,givenNumber);
+    }
 
-    //     if (move.wallGrab || move.wallSlide)
-    //     {
-    //         if (side == -1 && sr.flipX)
-    //             return;
 
-    //         if (side == 1 && !sr.flipX)
-    //         {
-    //             return;
-    //         }
-    //     }
 
-    //     bool state = (side == 1) ? false : true;
-    //     sr.flipX = state;
-    // }
 }

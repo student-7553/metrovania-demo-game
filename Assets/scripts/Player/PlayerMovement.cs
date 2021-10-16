@@ -65,10 +65,6 @@ public class PlayerMovement : MonoBehaviour
     private float coyoteTime;
     private float currentSpeed;
 
-    // dw
-
-    private float dashWaitTimer = .3f;
-
     private bool dashFixed = false;
 
     private bool jumpFixCoroutineRunning = false;
@@ -403,7 +399,6 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator WallClimbUp()
     {
-        Debug.Log("WallClimbUp trig");
         bool isRight;
         if (playerCollision.onRightBottomWall)
         {
@@ -454,7 +449,6 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (playerCollision.onRightBottomWall || playerCollision.onLeftBottomWall)
             {
-                Debug.Log("Triggering Start WallClimbUp");
                 StartCoroutine(WallClimbUp());
 
             }
@@ -629,12 +623,12 @@ public class PlayerMovement : MonoBehaviour
 
         updateCrouch(x, y);
 
-        if (isFacingRight == true && x < 0 && playerCollision.onGround)
+        if (isFacingRight == true && x < 0 && playerCollision.onGround && canMove)
         {
 
             animationScript.SetTrigger("flip");
         }
-        else if (isFacingRight == false && x > 0 && playerCollision.onGround)
+        else if (isFacingRight == false && x > 0 && playerCollision.onGround && canMove)
         {
 
             animationScript.SetTrigger("flip");
@@ -712,7 +706,8 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRigidBody.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (playerRigidBody.velocity.y > 0 && !Input.GetButton("Jump"))
+        // else if (playerRigidBody.velocity.y > 0 && !Input.GetButton("Jump"))
+        else if (playerRigidBody.velocity.y > 0 && !playerInput.jumpHeld)
         {
             playerRigidBody.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }

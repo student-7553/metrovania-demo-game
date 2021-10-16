@@ -17,28 +17,21 @@ public class SmearScript : MonoBehaviour
         attack = GetComponentInParent<PlayerAttack>();
         move = GetComponentInParent<PlayerMovement>();
     }
-
-    private void handlePosition(Vector3 position, bool isRight){
-        if(isRight){
-            transform.position += new Vector3( 2,0,0 );
-        } else {
-            transform.position += new Vector3( -2,0,0 );
-        }
-        
-    }
     void Update()
     {
         float x = Input.GetAxis("Horizontal");
-        if(x > 0.001 && !isRight){
+        if(move.isFacingRight && !isRight){
             isRight = true;
             anim.SetFloat("isRightFloat", 1);
-            handlePosition(transform.position,isRight);
-        } else if (x < -0.001 && isRight){
+            transform.localPosition = new Vector2( transform.localPosition.x > 0 ? transform.localPosition.x : -transform.localPosition.x , transform.localPosition.y );
+        } else if (!move.isFacingRight && isRight){
             isRight = false;
             anim.SetFloat("isRightFloat", -1);
-            handlePosition(transform.position,isRight);
-
+            transform.localPosition = new Vector2( transform.localPosition.x > 0 ? -transform.localPosition.x : transform.localPosition.x, transform.localPosition.y );
         }
+    
+        anim.SetFloat("attackCounter", attack.attackAnimationCounter);
+
         if(attack.isAttacking){
             if(!counter){
                 counter = true;

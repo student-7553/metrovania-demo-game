@@ -15,14 +15,15 @@ public class PlayerAttack : MonoBehaviour
     [Header("Booleans")]
     public bool isAttacking = false;
 
-
-
     private Rigidbody2D playerRigidBody;
     private PlayerMovement movement;
     private PlayerInput playerInput;
     private PlayerCollision playerCollision;
     private AnimationScript animationScript;
-    public int attackFrameCounter = 0;
+    
+    [HideInInspector]
+    public float attackAnimationCounter;
+
 
     // private int hitLayer;	
 
@@ -33,6 +34,7 @@ public class PlayerAttack : MonoBehaviour
         playerCollision = GetComponent<PlayerCollision>();
         animationScript = GetComponentInChildren<AnimationScript>();
         movement = GetComponent<PlayerMovement>();
+        attackAnimationCounter = 1;
         // hitLayer = LayerMask.NameToLayer("hitInteractable");
     }
 
@@ -51,9 +53,15 @@ public class PlayerAttack : MonoBehaviour
     private void BasicAttack()
     {
 
+        if(attackAnimationCounter > 0){
+            attackAnimationCounter = -1;
+        } else {
+            attackAnimationCounter = 1;
+        }
+
+        animationScript.SetFloat("attackCounter",attackAnimationCounter);
         animationScript.SetTrigger("attack");
         isAttacking = true;
-        attackFrameCounter = 0;
 
         movement.canMove = false;
         
