@@ -54,11 +54,11 @@ TagManager:
   - name: BackgroundGrid
     uniqueID: 128752973
     locked: 0
-  - name: Platforms
-    uniqueID: 2449985067
-    locked: 0
   - name: Player
     uniqueID: 2806702771
+    locked: 0
+  - name: Platforms
+    uniqueID: 2449985067
     locked: 0
   - name: Foreground
     uniqueID: 1248651275

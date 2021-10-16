@@ -38,7 +38,6 @@ public class CollapsingPlatform : MonoBehaviour
         childPlatform.SetActive(false);
 
         yield return new WaitForSeconds(4f);
-        Debug.Log("we are here");
         childPlatform.SetActive(true);
         initiated = false;
     }

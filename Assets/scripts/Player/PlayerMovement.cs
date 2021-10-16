@@ -65,6 +65,8 @@ public class PlayerMovement : MonoBehaviour
     private float coyoteTime;
     private float currentSpeed;
 
+    // dw
+
     private float dashWaitTimer = .3f;
 
     private bool dashFixed = false;
@@ -151,7 +153,19 @@ public class PlayerMovement : MonoBehaviour
         animationScript.SetTrigger("jump");
 
         StartCoroutine(JumpFinishHandler());
-        jumpParticle.Play();
+
+        int particleSide = playerCollision.onRightWall ? 1 : -1;
+        slideParticle.transform.parent.localScale = new Vector3(particleSide, 1, 1);
+        
+        if(wall){
+            int particleRotation = playerCollision.onRightWall ? 90 : -90;
+            var em = wallJumpParticle.shape;
+            em.rotation = new Vector3(em.rotation.x, em.rotation.y, particleRotation);
+            wallJumpParticle.Play();
+        } else {
+            jumpParticle.Play();
+        }
+        
 
     }
 
@@ -262,8 +276,8 @@ public class PlayerMovement : MonoBehaviour
         Vector2 dir = new Vector2(0, 0);
         float midfloat = 0.8f;
         float mid2float = 0.6f;
-        float mid3float = 0.4f;
-        float highFloat = 1.2f;
+        // float mid3float = 0.4f;
+        // float highFloat = 1.2f;
 
         float value = (float)((Mathf.Atan2(x, y) / Math.PI) * 180f);
         if (value < 0) value += 360f;
@@ -635,11 +649,28 @@ public class PlayerMovement : MonoBehaviour
             isFacingRight = false;
         }
 
+        WallParticle(y);
         DashFix();
         BetterJumping();
         limitVelocityY();
 
 
+    }
+
+    void WallParticle(float vertical)
+    {
+        var main = slideParticle.main;
+
+        if (wallSlide || (wallGrab && vertical < 0))
+        {
+            int particleSide = playerCollision.onRightWall ? 1 : -1;
+            slideParticle.transform.parent.localScale = new Vector3(particleSide, 1, 1);
+            main.startColor = Color.white;
+        }
+        else
+        {
+            main.startColor = Color.clear;
+        }
     }
 
     private void DashFix()
