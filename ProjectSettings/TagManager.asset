@@ -42,12 +42,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: BackGroundFixed
-    uniqueID: 1616926397
-    locked: 0
-  - name: BackGroundFixedGrid
-    uniqueID: 479255471
-    locked: 0
   - name: Background
     uniqueID: 1590490979
     locked: 0

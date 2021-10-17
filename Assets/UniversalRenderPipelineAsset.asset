@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf2edee5c58d82540a51f03df9d42094, type: 3}
   m_Name: UniversalRenderPipelineAsset
   m_EditorClassIdentifier: 
-  k_AssetVersion: 5
+  k_AssetVersion: 6
   k_AssetPreviousVersion: 5
   m_RendererType: 1
   m_RendererData: {fileID: 0}
   m_RendererDataList:
-  - {fileID: 11400000, guid: e57271a8e91049a4e8b7b92c0413273b, type: 2}
+  - {fileID: 11400000, guid: f7df8b75e83ecef4080877d1d8d9025a, type: 2}
   m_DefaultRendererIndex: 0
   m_RequireDepthTexture: 0
   m_RequireOpaqueTexture: 0

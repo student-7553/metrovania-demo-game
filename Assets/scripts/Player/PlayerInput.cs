@@ -19,8 +19,10 @@ public class PlayerInput : MonoBehaviour
     public bool grabPressed;
     public bool dashPressed;
     public bool attackPressed;
+    public bool interactPressed;
+
     public bool m_logInput;
-    bool readyToClear;
+    private bool readyToClear;
 
     public float jumpPressedAllowanceTime;
     private float jumpPressedRemainingAllowedTime = 0f;
@@ -36,8 +38,6 @@ public class PlayerInput : MonoBehaviour
 
         ClearInput();
         ProcessInputs();
-
-        // horizontal = Mathf.Clamp(horizontal, -1f, 1f);
 
         if (m_logInput){
             foreach(KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
@@ -89,7 +89,6 @@ public class PlayerInput : MonoBehaviour
         grabHeld = false;
         readyToClear = false;
         dashPressed = false;
-        // attackPressed = false;
 
         if(attackPressedRemainingAllowedTime > attackPressedAllowanceTime){
 
@@ -107,6 +106,8 @@ public class PlayerInput : MonoBehaviour
             attackPressedRemainingAllowedTime = Time.deltaTime;
 
         } 
+
+        interactPressed = false;
     }
 
     void ProcessInputs()
@@ -116,8 +117,6 @@ public class PlayerInput : MonoBehaviour
 
         jumpPressed = jumpPressed || Input.GetButtonDown("Jump");
 
-        // simJumpPressed = jumpPressed;
-
         jumpHeld = jumpHeld || Input.GetButton("Jump");
 
         crouchPressed = crouchPressed || Input.GetButtonDown("Crouch");
@@ -125,12 +124,14 @@ public class PlayerInput : MonoBehaviour
         crouchHeld = crouchHeld || Input.GetButton("Crouch");
 
         grabPressed = grabPressed || Input.GetButtonDown("Grab"); ;
-
+    
         grabHeld = grabHeld || Input.GetButton("Grab");
 
         dashPressed = dashPressed || Input.GetButtonDown("Dash");
 
         attackPressed = attackPressed || Input.GetButtonDown("Attack_Basic");
+
+        interactPressed = interactPressed || Input.GetButtonDown("Interact");
     }
 
 }
