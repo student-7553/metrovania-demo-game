@@ -27,7 +27,33 @@ public class PlayerCameraAchor : MonoBehaviour
     public float followHeight
     {
         get {return m_followHeight; }
-        set {m_followHeight = value; }
+        set {
+            // m_followHeight = value; 
+            float oldHeight = m_followHeight;
+            float newHeight = value;
+            DOTween.Kill("setNewHeight");
+
+            DOVirtual.Float(oldHeight, newHeight, 2f, (float x) => {
+                m_followHeight = x;
+            }).SetId("setNewHeight");
+            
+        }
+    }
+
+    public float setHeight
+    {
+        get {return m_setHeight; }
+        set {
+            float oldHeight = m_setHeight;
+            float newHeight = value;
+            DOTween.Kill("setNewHeight");
+
+            DOVirtual.Float(oldHeight, newHeight, 2f, (float x) => {
+                m_setHeight = x;
+            }).SetId("setNewHeight");
+
+        }
+
     }
     void Start()
     {
@@ -49,16 +75,13 @@ public class PlayerCameraAchor : MonoBehaviour
 
 
 
-    public void setNewHeight(float height){
-        float oldHeight = m_setHeight;
-        float newHeight = height;
-        DOTween.Kill("setNewHeight");
+    // public void setNewHeight(float height){
+    //     float oldHeight = m_setHeight;
+    //     float newHeight = height;
+    //     DOTween.Kill("setNewHeight");
 
-        DOVirtual.Float(oldHeight, newHeight, 2f, (float x) => {
-            Debug.Log(x);
-            m_setHeight = x;
-        }).SetId("setNewHeight");
-        
-        Debug.Log("we got triggered");
-    }
+    //     DOVirtual.Float(oldHeight, newHeight, 2f, (float x) => {
+    //         m_setHeight = x;
+    //     }).SetId("setNewHeight");
+    // }
 }

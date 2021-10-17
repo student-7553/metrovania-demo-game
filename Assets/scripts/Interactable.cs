@@ -18,8 +18,6 @@ public class Interactable : MonoBehaviour
 
     private void onHit() {
 
-       Debug.Log( "Interactable triggered" );
-
        gameObject.SetActive(false);
 
         

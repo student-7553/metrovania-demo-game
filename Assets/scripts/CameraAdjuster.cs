@@ -21,13 +21,13 @@ public class CameraAdjuster : MonoBehaviour
     public GameObject playerCameraAnchorObject;
     private PlayerCameraAchor playerCameraAnchor;
 
-    private bool flipped;
+    public bool flipped;
 
     void Start()
     {
         playerCameraAnchor = playerCameraAnchorObject.gameObject.GetComponent<PlayerCameraAchor>();
         playerLayer = LayerMask.NameToLayer("Player");
-        flipped = false;
+        // flipped = false;
     }
 
     void Update()
@@ -53,16 +53,30 @@ public class CameraAdjuster : MonoBehaviour
                 setHeight = secondHeight;
             }
             playerCameraAnchor.anchorState = "SetHeight";
-            playerCameraAnchor.setNewHeight(setHeight);
+            playerCameraAnchor.setHeight = setHeight;
             flipped = !flipped;
         }
         else if (firstToSecondTransition == "FollowToFixed")
         {
-
+            
         }
         else if (firstToSecondTransition == "FixedToFollow")
         {
 
+            if (flipped)
+            {
+                playerCameraAnchor.anchorState = "SetHeight";
+                playerCameraAnchor.setHeight = firstHeight;
+            }
+            else
+            {
+                // setHeight = secondHeight;
+                playerCameraAnchor.anchorState = "Follow";
+                playerCameraAnchor.followHeight = secondHeight;
+            }
+            
+
+            flipped = !flipped;
         }
 
 
