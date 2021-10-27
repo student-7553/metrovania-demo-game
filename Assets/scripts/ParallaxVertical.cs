@@ -6,7 +6,7 @@ public class ParallaxVertical : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private float length, startpos, startCameraPos;
+    private float startpos, startCameraPos;
     public GameObject cam;
     public float parallaxEffect;
     // public bool isInfinite;
@@ -17,7 +17,7 @@ public class ParallaxVertical : MonoBehaviour
         
         startCameraPos = cam.transform.position.y;
         
-        length = GetComponent<SpriteRenderer>().bounds.size.x;
+        // length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
     // Update is called once per frame
