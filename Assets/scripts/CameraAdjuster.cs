@@ -37,10 +37,23 @@ public class CameraAdjuster : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
+
+        
         if (collision.gameObject.layer != playerLayer)
         {
             return;
         }
+        
+        Vector2 diffrenceTransform =  transform.position - collision.gameObject.transform.position;
+        Debug.Log(diffrenceTransform.x);
+
+        if(diffrenceTransform.x > 0.5f){
+            flipped = true;
+        } else {
+            flipped = false;
+        }
+        
+
         if (firstToSecondTransition == "FixedToFixed")
         {
             float setHeight;
@@ -54,7 +67,7 @@ public class CameraAdjuster : MonoBehaviour
             }
             playerCameraAnchor.anchorState = "SetHeight";
             playerCameraAnchor.setHeight = setHeight;
-            flipped = !flipped;
+
         }
         else if (firstToSecondTransition == "FollowToFixed")
         {
@@ -70,13 +83,13 @@ public class CameraAdjuster : MonoBehaviour
             }
             else
             {
-                // setHeight = secondHeight;
+                
                 playerCameraAnchor.anchorState = "Follow";
                 playerCameraAnchor.followHeight = secondHeight;
             }
             
 
-            flipped = !flipped;
+
         }
 
 
