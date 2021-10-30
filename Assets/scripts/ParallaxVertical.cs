@@ -2,48 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ParallaxVertical : MonoBehaviour
 {
-    // Start is called before the first frame update
 
     private float startpos, startCameraPos;
     public GameObject cam;
     public float parallaxEffect;
-    // public bool isInfinite;
+    
 
     void Start()
     {
-        startpos = transform.position.y;
+        startpos = (float)Mathf.Round(transform.position.y * 1000f) / 1000f;
         
         startCameraPos = cam.transform.position.y;
-        
-        // length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
+    
         float dist = ((cam.transform.position.y - startCameraPos) * parallaxEffect);
-        float temp = ((cam.transform.position.y - startCameraPos) * (1 - parallaxEffect));
-        transform.position = new Vector3(transform.position.x , startpos + dist, transform.position.z);
         
-
-        // if (isInfinite)
-        // {
-
-
-        //     if (temp > (startpos - startCameraPos) + length)
-        //     {
-        //         startpos = startpos + length;
-        //     }
-        //     else if (temp < (startpos - startCameraPos) - length)
-        //     {
-        //         startpos = startpos - length;
-        //     }
-        // }
-
-
-
-
+        float newHeight = startpos + dist;
+        newHeight = (float)Mathf.Round(newHeight * 1000f) / 1000f;
+        // float newFixedHeight = ((int)(newHeight / 0.125f)) * 0.125f;
+        
+        // Debug.Log(startpos);
+        // startpos is 3.5f
+        // newFixedHeight - startpos;
+        float tempHeight =  newHeight - (float)Mathf.Round(cam.transform.position.y * 1000f) / 1000f;
+        float newFixedHeight = ((int)(tempHeight / 0.125f)) * 0.125f;
+        Debug.Log(newFixedHeight);
+        transform.localPosition = new Vector2(transform.localPosition.x , newFixedHeight );
+        // transform.position = new Vector2(transform.position.x , newFixedHeight);
+        
+        
+        
+    
     }
 }

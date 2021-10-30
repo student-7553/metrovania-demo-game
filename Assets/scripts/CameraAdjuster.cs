@@ -45,7 +45,6 @@ public class CameraAdjuster : MonoBehaviour
         }
         
         Vector2 diffrenceTransform =  transform.position - collision.gameObject.transform.position;
-        Debug.Log(diffrenceTransform.x);
 
         if(diffrenceTransform.x > 0.5f){
             flipped = true;
