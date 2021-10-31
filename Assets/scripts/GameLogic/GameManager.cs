@@ -13,21 +13,29 @@ public class GameManager : MonoBehaviour
     //This class holds a static reference to itself to ensure that there will only be
     //one in existence. This is often referred to as a "singleton" design pattern. Other
     //scripts access this one through its public static methods
+    public class respawnLocation {
+        public Vector2 playerlocation; 
+        public Vector2 cameraLocation;
+        public string cameraAnchorState;
+        public float stateHeight;
+    }   
+
     static GameManager current;
     int numberOfDeaths;                         //Number of times player has died
     float totalGameTime;                        //Length of the total game time
     bool m_isGameOver;                            //Is the game currently over?
     List<Collectable> collectableList;	
-    Vector2 m_playerSpikeRespawnLocation;
 
-    public static Vector2 playerSpikeRespawnLocation
+    respawnLocation m_playerSpikeRespawnData;
+
+    public static respawnLocation playerSpikeRespawnLocation
     {
-        get {return current.m_playerSpikeRespawnLocation; }
+        get {return current.m_playerSpikeRespawnData; }
         set {
             if (current == null)
 			    return;
 
-            current.m_playerSpikeRespawnLocation = value;
+            current.m_playerSpikeRespawnData = value;
         }
     }
 
@@ -52,10 +60,17 @@ public class GameManager : MonoBehaviour
 
     private void awakeGameLogic(){
         collectableList = new List<Collectable>();
+        m_playerSpikeRespawnData = new respawnLocation();
+
 
         
         PlayerMovement playerMovement = (PlayerMovement)FindObjectOfType(typeof(PlayerMovement));
-        m_playerSpikeRespawnLocation = playerMovement.transform.position;
+        m_playerSpikeRespawnData.playerlocation = playerMovement.transform.position;
+
+        PlayerCameraAchor playerCameraAchor = (PlayerCameraAchor)FindObjectOfType(typeof(PlayerCameraAchor));
+        m_playerSpikeRespawnData.cameraLocation = playerCameraAchor.transform.position;
+        m_playerSpikeRespawnData.cameraAnchorState = playerCameraAchor.anchorState;
+        m_playerSpikeRespawnData.stateHeight = playerCameraAchor.customHeight;
 
     }
 

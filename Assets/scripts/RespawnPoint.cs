@@ -6,13 +6,15 @@ public class RespawnPoint : MonoBehaviour
 {
     int playerLayer;
     public Vector2 respawnPoint;
+    public GameObject playerCameraAnchor;
+
+    private PlayerCameraAchor playerCameraAnchorSript;
 
     void Start()
     {
         
         playerLayer = LayerMask.NameToLayer("Player");
-
-
+        playerCameraAnchorSript = playerCameraAnchor.GetComponent<PlayerCameraAchor>();
     }
 
     void Update()
@@ -31,7 +33,12 @@ public class RespawnPoint : MonoBehaviour
         
         Vector2 diffrenceTransform =  transform.position - collision.gameObject.transform.position;
 
-        GameManager.playerSpikeRespawnLocation = respawnPoint ;
+        GameManager.playerSpikeRespawnLocation.playerlocation = respawnPoint;
+        GameManager.playerSpikeRespawnLocation.cameraLocation = playerCameraAnchorSript.transform.position;
+        GameManager.playerSpikeRespawnLocation.cameraAnchorState = playerCameraAnchorSript.anchorState;
+        GameManager.playerSpikeRespawnLocation.stateHeight = playerCameraAnchorSript.customHeight;
+
+        Debug.Log(GameManager.playerSpikeRespawnLocation.cameraLocation);
 
     }
 

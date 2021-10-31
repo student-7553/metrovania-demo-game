@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-[DefaultExecutionOrder(100)]
+// [DefaultExecutionOrder(100)]
 public class PlayerCameraAchor : MonoBehaviour
 {
 
@@ -13,10 +13,12 @@ public class PlayerCameraAchor : MonoBehaviour
     [Tooltip("Follow,SetHeight")]
     private string m_anchorState;
 
+    // [SerializeField]
+    // private float m_followHeight;
+    // [SerializeField]
+    // private float m_setHeight;
     [SerializeField]
-    private float m_followHeight;
-    [SerializeField]
-    private float m_setHeight;
+    private float m_customHeight;
 
 
 
@@ -25,44 +27,47 @@ public class PlayerCameraAchor : MonoBehaviour
         get {return m_anchorState; }
         set {m_anchorState = value; }
     }
-    public float followHeight
+    public float customHeight
     {
-        get {return m_followHeight; }
+        get {return m_customHeight; }
         set {
-            // m_followHeight = value; 
-            float oldHeight = m_followHeight;
+            
+            float oldHeight = m_customHeight;
             float newHeight = value;
             DOTween.Kill("setNewHeight");
 
             DOVirtual.Float(oldHeight, newHeight, 2f, (float x) => {
-                m_followHeight = x;
+                m_customHeight = x;
             }).SetId("setNewHeight");
             
         }
     }
 
-    public float setHeight
-    {
-        get {return m_setHeight; }
-        set {
-            float oldHeight = m_setHeight;
-            float newHeight = value;
-            DOTween.Kill("setNewHeight");
+    // public float setHeight
+    // {
+    //     get {return m_setHeight; }
+    //     set {
+    //         float oldHeight = m_setHeight;
+    //         float newHeight = value;
+    //         DOTween.Kill("setNewHeight");
 
-            DOVirtual.Float(oldHeight, newHeight, 2f, (float x) => {
-                m_setHeight = x;
-            }).SetId("setNewHeight");
+    //         DOVirtual.Float(oldHeight, newHeight, 2f, (float x) => {
+    //             m_setHeight = x;
+    //         }).SetId("setNewHeight");
 
-        }
+    //     }
 
-    }
+    // }
     void Start()
     {
         if(m_anchorState == ""){
             m_anchorState = "Follow";
         }
-        Debug.Log("PlayerCameraAchor Starting");
-        transform.position = new Vector2( player.transform.position.x, player.transform.position.y + m_followHeight);
+        Debug.Log("PlayerCameraAchor Starting/"+GameManager.playerSpikeRespawnLocation.cameraLocation);
+
+        transform.position = GameManager.playerSpikeRespawnLocation.cameraLocation;
+        m_anchorState = GameManager.playerSpikeRespawnLocation.cameraAnchorState;
+        m_customHeight = GameManager.playerSpikeRespawnLocation.stateHeight;
 
     }
 
@@ -70,10 +75,11 @@ public class PlayerCameraAchor : MonoBehaviour
     void Update()
     {
         if(m_anchorState == "SetHeight"){
-            transform.position = new Vector2( player.transform.position.x, m_setHeight);
+            transform.position = new Vector2( player.transform.position.x, m_customHeight);
         } else if (m_anchorState == "Follow"){
-            transform.position = new Vector2( player.transform.position.x, player.transform.position.y + m_followHeight);
+            transform.position = new Vector2( player.transform.position.x, player.transform.position.y + m_customHeight);
         }   
+        
         
     }
 

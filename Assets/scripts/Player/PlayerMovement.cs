@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
     private float coyoteTime;
     private float currentSpeed;
     private bool dashFixed = false;
+    private bool dashFixRightSide = false;
     private bool jumpFixCoroutineRunning = false;
 
 
@@ -673,20 +674,27 @@ public class PlayerMovement : MonoBehaviour
             dashFixed = false;
             return;
         }
-        if (dashFixed && (!playerCollision.onRightWall && !playerCollision.onLeftWall))
+        if (dashFixed && !playerCollision.onRightBottomWall && !playerCollision.onLeftBottomWall)
         {
             dashFixed = false;
-            playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.y * 1.1f, playerRigidBody.velocity.y);
+            if(dashFixRightSide){
+                playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.y , playerRigidBody.velocity.y);
+            } else  {
+                playerRigidBody.velocity = new Vector2(-playerRigidBody.velocity.y , playerRigidBody.velocity.y);
+            }
+            
         }
-        if (playerRigidBody.velocity.x > 0.1f && playerCollision.onRightWall)
+        if (playerRigidBody.velocity.x > 0.1f && playerCollision.onRightBottomWall)
         {
+            dashFixRightSide = true;
             // right dash
             playerRigidBody.velocity = new Vector2(0, playerRigidBody.velocity.y);
             dashFixed = true;
 
         }
-        else if (playerRigidBody.velocity.x < 0.1f && playerCollision.onLeftWall)
+        else if (playerRigidBody.velocity.x < 0.1f && playerCollision.onLeftBottomWall)
         {
+            dashFixRightSide = false;
             // left dash
             playerRigidBody.velocity = new Vector2(0, playerRigidBody.velocity.y);
             dashFixed = true;

@@ -65,7 +65,7 @@ public class CameraAdjuster : MonoBehaviour
                 setHeight = secondHeight;
             }
             playerCameraAnchor.anchorState = "SetHeight";
-            playerCameraAnchor.setHeight = setHeight;
+            playerCameraAnchor.customHeight = setHeight;
 
         }
         else if (firstToSecondTransition == "FollowToFixed")
@@ -78,13 +78,13 @@ public class CameraAdjuster : MonoBehaviour
             if (flipped)
             {
                 playerCameraAnchor.anchorState = "SetHeight";
-                playerCameraAnchor.setHeight = firstHeight;
+                playerCameraAnchor.customHeight = firstHeight;
             }
             else
             {
                 
                 playerCameraAnchor.anchorState = "Follow";
-                playerCameraAnchor.followHeight = secondHeight;
+                playerCameraAnchor.customHeight = secondHeight;
             }
             
 
