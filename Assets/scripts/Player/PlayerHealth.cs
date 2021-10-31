@@ -19,22 +19,18 @@ public class PlayerHealth : MonoBehaviour
 	{
 		//If the collided object isn't on the Traps layer OR if the player isn't currently
 		//alive, exit. This is more efficient than string comparisons using Tags
-		if (collision.gameObject.layer != trapsLayer || !isAlive)
+		if (collision.gameObject.layer == trapsLayer || !isAlive){
+			
+			PlayerHitTrap();
+		} else {
 			return;
+		}
+	}
 
-		//Trap was hit, so set the player's alive state to false
+	void PlayerHitTrap(){
 		isAlive = false;
-
-        
-		//Instantiate the death particle effects prefab at player's location
-		// Instantiate(deathVFXPrefab, transform.position, transform.rotation);
-
-		// //Disable player game object
 		gameObject.SetActive(false);
-
-		// //Tell the Game Manager that the player died and tell the Audio Manager to play
-		// //the death audio
-		GameManager.PlayerDied();
+		GameManager.PlayerHitTrap();
 		AudioManager.PlayDeathAudio();
 	}
 }

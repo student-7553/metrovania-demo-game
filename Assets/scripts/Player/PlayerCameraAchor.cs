@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+[DefaultExecutionOrder(100)]
 public class PlayerCameraAchor : MonoBehaviour
 {
 
@@ -60,6 +61,9 @@ public class PlayerCameraAchor : MonoBehaviour
         if(m_anchorState == ""){
             m_anchorState = "Follow";
         }
+        Debug.Log("PlayerCameraAchor Starting");
+        transform.position = new Vector2( player.transform.position.x, player.transform.position.y + m_followHeight);
+
     }
 
     // Update is called once per frame

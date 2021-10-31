@@ -6,12 +6,13 @@ public class BackGroundCommet : MonoBehaviour
 {
     // Start is called before the first frame update
     private Animator anim;
+    public int eachTime;
     private bool running;
     void Start()
     {
         anim = GetComponent<Animator>();
         running = true;
-        StartCoroutine(DoWork(60));
+        StartCoroutine(DoWork(eachTime));
     }
 
     IEnumerator DoWork(int time) 

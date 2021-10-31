@@ -25,16 +25,12 @@ public class ParallaxVertical : MonoBehaviour
         
         float newHeight = startpos + dist;
         newHeight = (float)Mathf.Round(newHeight * 1000f) / 1000f;
-        // float newFixedHeight = ((int)(newHeight / 0.125f)) * 0.125f;
-        
-        // Debug.Log(startpos);
-        // startpos is 3.5f
-        // newFixedHeight - startpos;
+ 
         float tempHeight =  newHeight - (float)Mathf.Round(cam.transform.position.y * 1000f) / 1000f;
         float newFixedHeight = ((int)(tempHeight / 0.125f)) * 0.125f;
-        Debug.Log(newFixedHeight);
+
         transform.localPosition = new Vector2(transform.localPosition.x , newFixedHeight );
-        // transform.position = new Vector2(transform.position.x , newFixedHeight);
+  
         
         
         

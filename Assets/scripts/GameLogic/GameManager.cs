@@ -7,17 +7,31 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
+[DefaultExecutionOrder(-100)]
 public class GameManager : MonoBehaviour
 {
     //This class holds a static reference to itself to ensure that there will only be
     //one in existence. This is often referred to as a "singleton" design pattern. Other
     //scripts access this one through its public static methods
     static GameManager current;
-
     int numberOfDeaths;                         //Number of times player has died
     float totalGameTime;                        //Length of the total game time
-    bool isGameOver;                            //Is the game currently over?
+    bool m_isGameOver;                            //Is the game currently over?
     List<Collectable> collectableList;	
+    Vector2 m_playerSpikeRespawnLocation;
+
+    public static Vector2 playerSpikeRespawnLocation
+    {
+        get {return current.m_playerSpikeRespawnLocation; }
+        set {
+            if (current == null)
+			    return;
+
+            current.m_playerSpikeRespawnLocation = value;
+        }
+    }
+
+    // public void 
 
   
 
@@ -30,19 +44,28 @@ public class GameManager : MonoBehaviour
         }
         current = this;
         DontDestroyOnLoad(gameObject);
-        Application.targetFrameRate = 60;
-        awakeGameLogic();
-        
 
+        gameSettings();
+        awakeGameLogic();        
+        
     }
 
     private void awakeGameLogic(){
         collectableList = new List<Collectable>();
+
+        
+        PlayerMovement playerMovement = (PlayerMovement)FindObjectOfType(typeof(PlayerMovement));
+        m_playerSpikeRespawnLocation = playerMovement.transform.position;
+
+    }
+
+    private void gameSettings(){
+        Application.targetFrameRate = 60;
     }
 
     void Update()
     {
-        if (isGameOver)
+        if (m_isGameOver)
             return;
 
         totalGameTime += Time.deltaTime;
@@ -67,7 +90,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         current.collectableList.Remove(collectable);
-        Debug.Log("Collected one collectable");
+
         collectableUpdateLogic();
 
     }
@@ -76,7 +99,14 @@ public class GameManager : MonoBehaviour
     {
 		if (current == null)
 			return;
-        Debug.Log("Player died");
+        current.StartCoroutine(RestartScene());
+
+    }
+
+    public static void PlayerHitTrap()
+    {
+		if (current == null)
+			return;
         current.StartCoroutine(RestartScene());
 
     }
@@ -92,13 +122,7 @@ public class GameManager : MonoBehaviour
     {
 
         yield return new WaitForSeconds(1.5f);
-        // //Clear the current list of orbs
-        // orbs.Clear();
-
-        // //Play the scene restart audio
-        // AudioManager.PlaySceneRestartAudio();
-
-        //Reload the current scene
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -110,6 +134,11 @@ public class GameManager : MonoBehaviour
 			
 
     }
+
+    // public static void PlayerHitRespawnPoint( Vector2 newPoint){
+        
+
+    // }
 
 }
 

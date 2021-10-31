@@ -61,14 +61,11 @@ public class PlayerMovement : MonoBehaviour
     private PlayerCollision playerCollision;
     private AnimationScript animationScript;
     private BoxCollider2D boxCollider;
-    public bool betterJumpEnabled = true;
+    private bool betterJumpEnabled = true;
     private float coyoteTime;
     private float currentSpeed;
-
     private bool dashFixed = false;
-
     private bool jumpFixCoroutineRunning = false;
-
 
 
     void Start()
@@ -80,6 +77,8 @@ public class PlayerMovement : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
 
         currentSpeed = normalSpeed;
+
+
     }
 
     private void Walk(Vector2 dir)

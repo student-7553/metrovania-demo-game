@@ -5,7 +5,10 @@ using UnityEngine;
 public class CollapsingPlatform : MonoBehaviour
 {
     private int playerLayer;
-    public bool initiated;
+    private bool initiated;
+
+    public float destoyTime;
+    public float restoreTime;
     private GameObject childPlatform;
     void Start()
     {
@@ -25,19 +28,17 @@ public class CollapsingPlatform : MonoBehaviour
             return;
         }
         initiated = true;
-        // if(!isSquished){
-        //     Debug.Log("we are here");
-        //     isSquished = true;
+        childPlatform.BroadcastMessage("signalShake");
         StartCoroutine(breakDown());
-        // transform.position = new Vector2(transform.position.x, transform.position.y - 0.125f);
-        // }
+        
     }
     IEnumerator breakDown(){
-        yield return new WaitForSeconds(1.5f);
-
+        yield return new WaitForSeconds(destoyTime);
+        // childPlatform.BroadcastMessage("signalDestroy");
         childPlatform.SetActive(false);
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(restoreTime);
+        // childPlatform.BroadcastMessage("signalRestore");
         childPlatform.SetActive(true);
         initiated = false;
     }
