@@ -64,8 +64,9 @@ public class CameraAdjuster : MonoBehaviour
             {
                 setHeight = secondHeight;
             }
-            playerCameraAnchor.anchorState = "SetHeight";
-            playerCameraAnchor.customHeight = setHeight;
+            playerCameraAnchor.updateStateAndHeight("SetHeight",setHeight);
+            // playerCameraAnchor.anchorState = "SetHeight";
+            // playerCameraAnchor.customHeight = setHeight;
 
         }
         else if (firstToSecondTransition == "FollowToFixed")
@@ -77,14 +78,17 @@ public class CameraAdjuster : MonoBehaviour
 
             if (flipped)
             {
-                playerCameraAnchor.anchorState = "SetHeight";
-                playerCameraAnchor.customHeight = firstHeight;
+                playerCameraAnchor.updateStateAndHeight("SetHeight",firstHeight);
+                // playerCameraAnchor.customHeight = firstHeight;
+                // playerCameraAnchor.anchorState = "SetHeight";
+                
             }
             else
             {
+                playerCameraAnchor.updateStateAndHeight("Follow",secondHeight);
+                // playerCameraAnchor.customHeight = secondHeight;
+                // playerCameraAnchor.anchorState = "Follow";
                 
-                playerCameraAnchor.anchorState = "Follow";
-                playerCameraAnchor.customHeight = secondHeight;
             }
             
 
