@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Polish")]
     public ParticleSystem dashParticle;
     public ParticleSystem jumpParticle;
+    public ParticleSystem[] groundEntryParticles;
     public ParticleSystem wallJumpParticle;
     public ParticleSystem slideParticle;
 
@@ -241,7 +242,10 @@ public class PlayerMovement : MonoBehaviour
         hasDashed = false;
         isDashing = false;
 
-        jumpParticle.Play();
+        // jumpParticle.Play();
+        foreach(var single in groundEntryParticles){
+            single.Play();
+        }
     }
     void RigidbodyDrag(float x)
     {

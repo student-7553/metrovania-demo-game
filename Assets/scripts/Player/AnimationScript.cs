@@ -45,6 +45,9 @@ public class AnimationScript : MonoBehaviour
 
 
         anim.SetBool("onGround", coll.onGround);
+        
+        anim.SetFloat("onGroudFloat", coll.onGround ? 1f : -1f);
+
         anim.SetBool("onWall", coll.onWall);
         anim.SetBool("onRightWall", coll.onRightWall);
         anim.SetBool("isWallGrabing", move.wallGrab);

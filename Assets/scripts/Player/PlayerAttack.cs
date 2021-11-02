@@ -43,7 +43,8 @@ public class PlayerAttack : MonoBehaviour
     {
         if (playerInput.attackPressed && !isAttacking)
         {
-            if (playerCollision.onGround)
+            if (movement.canMove)
+            // if (playerCollision.onGround)
             {
                 BasicAttack();
             }
@@ -52,7 +53,7 @@ public class PlayerAttack : MonoBehaviour
     }
     private void BasicAttack()
     {
-
+        
         if(attackAnimationCounter > 0){
             attackAnimationCounter = -1;
         } else {
@@ -63,7 +64,9 @@ public class PlayerAttack : MonoBehaviour
         animationScript.SetTrigger("attack");
         isAttacking = true;
 
-        movement.canMove = false;
+        if(playerCollision.onGround){
+            movement.canMove = false;
+        }
         
         playerRigidBody.velocity = new Vector2(0, playerRigidBody.velocity.y);
 
@@ -73,6 +76,8 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator BasicAttackWait()
     {
+
+
 
         yield return WaitForFrames(2);
 
