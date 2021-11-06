@@ -36,10 +36,12 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isDashing;
 
+    public bool isTailEndDashing;
+
     public bool isJumping;
     public bool isCrouching;
 
-    public bool hasDashed;
+    public int allowedDashes;
 
     public bool groundTouch;
 
@@ -68,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
     private bool dashFixed = false;
     private bool dashFixRightSide = false;
     private bool jumpFixCoroutineRunning = false;
+    public int remainingDashes;
 
 
     void Start()
@@ -79,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
 
         currentSpeed = normalSpeed;
+        remainingDashes = allowedDashes;
 
 
     }
@@ -239,7 +243,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void GroundTouch()
     {
-        hasDashed = false;
+        // hasDashed = false;
+        remainingDashes = allowedDashes;
         isDashing = false;
 
         // jumpParticle.Play();
@@ -258,10 +263,11 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator GroundDash()
     {
-        yield return new WaitForSeconds(.15f);
+        yield return new WaitForSeconds(.4f);
         if (playerCollision.onGround)
         {
-            hasDashed = false;
+            // hasDashed = false;
+            remainingDashes = allowedDashes;
         }
 
     }
@@ -272,7 +278,8 @@ public class PlayerMovement : MonoBehaviour
         // Camera.main.transform.DOShakePosition(.2f, .5f, 14, 90, false, true);
         // FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
 
-        hasDashed = true;
+        // hasDashed = true;
+        remainingDashes--;
         Vector2 dir = new Vector2(0, 0);
         float midfloat = 0.8f;
         float mid2float = 0.6f;
@@ -348,7 +355,9 @@ public class PlayerMovement : MonoBehaviour
         canMove = false;
         betterJumpEnabled = false;
         isHorizontalLerp = true;
+
         isDashing = true;
+        isTailEndDashing = true;
 
         // Tween mytween = DOVirtual.Float(0, 20, .3f, (float x) =>
         // {
@@ -360,13 +369,18 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        playerRigidBody.gravityScale = 3;
+        // playerRigidBody.gravityScale = 3;
         canMove = true;
         isHorizontalLerp = false;
         isDashing = false;
-        yield return new WaitForSeconds(.2f);
+        playerRigidBody.gravityScale = 2f;
 
-        betterJumpEnabled = true;
+        yield return new WaitForSeconds(.1f);
+        playerRigidBody.gravityScale = 3;
+        isTailEndDashing = false;
+        // isDashing = false;
+        // playerRigidBody.gravityScale = 3;
+        
         
         
 
@@ -460,15 +474,11 @@ public class PlayerMovement : MonoBehaviour
 
 
         }
-        else
-        {
-            // betterJumpEnabled = true;
-            if (!isDashing)
-            {
-                betterJumpEnabled = true;
-                playerRigidBody.gravityScale = 3;
-            }
 
+        if (!wallGrab && !wallSlide && !isTailEndDashing)
+        {
+            betterJumpEnabled = true;
+            playerRigidBody.gravityScale = 3;
         }
 
 
@@ -569,6 +579,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         float xRaw = Input.GetAxisRaw("Horizontal");
@@ -595,7 +606,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        if (playerInput.jumpPressed && !isJumping)
+        if (playerInput.jumpPressed && !isJumping && !isDashing)
         {
             if (playerCollision.onGround || (coyoteTime > Time.time))
             {
@@ -606,8 +617,8 @@ public class PlayerMovement : MonoBehaviour
                 WallJump();
             }
         }
-
-        if (playerInput.dashPressed && !hasDashed)
+        //  if (playerInput.dashPressed)
+        if (playerInput.dashPressed && remainingDashes > 0 && !isDashing)
         {
             if (xRaw != 0 || yRaw != 0)
             {

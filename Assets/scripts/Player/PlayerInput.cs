@@ -10,6 +10,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     public float horizontal;
+    public float vertical;
     public bool jumpHeld;
     public bool jumpPressed;
     public bool simJumpPressed;
@@ -63,6 +64,7 @@ public class PlayerInput : MonoBehaviour
 
         horizontal = 0f;
 
+        vertical = 0f;
         
 
         if(jumpPressedRemainingAllowedTime > jumpPressedAllowanceTime){
@@ -114,6 +116,8 @@ public class PlayerInput : MonoBehaviour
     {
 
         horizontal = Input.GetAxis("Horizontal");
+
+        vertical = Input.GetAxis("Vertical");
 
         jumpPressed = jumpPressed || Input.GetButtonDown("Jump");
 
