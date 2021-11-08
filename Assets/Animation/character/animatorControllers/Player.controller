@@ -349,7 +349,7 @@ AnimatorStateMachine:
     m_Position: {x: 660, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4110645224499733803}
-    m_Position: {x: 340, y: -130, z: 0}
+    m_Position: {x: 330, y: -140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6929708773256192447}
     m_Position: {x: 310, y: 130, z: 0}
@@ -358,7 +358,7 @@ AnimatorStateMachine:
     m_Position: {x: 260, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1813149517369322260}
-    m_Position: {x: 330, y: -50, z: 0}
+    m_Position: {x: 270, y: -70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1292159613935022015}
     m_Position: {x: 340, y: -210, z: 0}
@@ -387,7 +387,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 60, y: -190, z: 0}
+  m_AnyStatePosition: {x: 20, y: -230, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 670, y: -200, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -1092,6 +1092,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: isDashing
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: isAttacking
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1813149517369322260}
   m_Solo: 0
@@ -1308,6 +1311,37 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!206 &1310505748676518807
+BlendTree:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: attack_down
+  m_Childs:
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 3a91e1cc6e823484f8227ed1605998b6, type: 2}
+    m_Threshold: -1
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: HorizontalAxis
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: f90c10b6cc5fb3a4cb735ab2d976dce1, type: 2}
+    m_Threshold: 1
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: HorizontalAxis
+    m_Mirror: 0
+  m_BlendParameter: isFacingRight
+  m_BlendParameterY: HorizontalAxis
+  m_MinThreshold: -1
+  m_MaxThreshold: 1
+  m_UseAutomaticThresholds: 0
+  m_NormalizedBlendValues: 0
+  m_BlendType: 0
 --- !u!206 &1766277161345758143
 BlendTree:
   m_ObjectHideFlags: 1
@@ -1587,7 +1621,7 @@ BlendTree:
   m_Name: attack_leftOrRight
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 0f358e08ab2d515479582e0294a32a90, type: 2}
+    m_Motion: {fileID: 7400000, guid: 54ce85081dc0ca1429467284f243e30b, type: 2}
     m_Threshold: -1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1595,7 +1629,7 @@ BlendTree:
     m_DirectBlendParameter: HorizontalAxis
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: e6a0f5c10e6ccf64b91d5eb7daf1b454, type: 2}
+    m_Motion: {fileID: 7400000, guid: 67c18974bac209c48b376dc6739f68ff, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1671,6 +1705,14 @@ BlendTree:
   m_Name: onAirAttack
   m_Childs:
   - serializedVersion: 2
+    m_Motion: {fileID: 1310505748676518807}
+    m_Threshold: -1
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: HorizontalAxis
+    m_Mirror: 0
+  - serializedVersion: 2
     m_Motion: {fileID: 3290802844610201483}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
@@ -1688,7 +1730,7 @@ BlendTree:
     m_Mirror: 0
   m_BlendParameter: VerticalAxis
   m_BlendParameterY: HorizontalAxis
-  m_MinThreshold: 0
+  m_MinThreshold: -1
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
@@ -1918,7 +1960,7 @@ BlendTree:
   m_Name: attack_up
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: f2f04ae7910c1b74eb1bef8c59bcd13e, type: 2}
+    m_Motion: {fileID: 7400000, guid: a969489e86f73de49b16903cf89906db, type: 2}
     m_Threshold: -1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1926,7 +1968,7 @@ BlendTree:
     m_DirectBlendParameter: HorizontalAxis
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: e7638a70c07647049a28eca92a563f50, type: 2}
+    m_Motion: {fileID: 7400000, guid: 7ecc092a95fddd44ea5503da6f15e029, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1

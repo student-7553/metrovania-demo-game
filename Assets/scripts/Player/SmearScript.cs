@@ -24,7 +24,9 @@ public class SmearScript : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
-        // float y = 
+
+        anim.SetFloat("xAxis", x);
+        anim.SetFloat("yAxis", y);
 
         if (y > 0.5f || y < -0.5f)
         {

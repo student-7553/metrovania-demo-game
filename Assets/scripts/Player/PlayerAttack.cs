@@ -60,6 +60,10 @@ public class PlayerAttack : MonoBehaviour
             attackAnimationCounter = 1;
         }
 
+        if( !playerCollision.onGround ){
+            attackAnimationCounter = -1;
+        }
+
         animationScript.SetFloat("attackCounter",attackAnimationCounter);
         animationScript.SetTrigger("attack");
         isAttacking = true;
