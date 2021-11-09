@@ -9,10 +9,10 @@ public class SmearScript : MonoBehaviour
     private PlayerAttack attack;
 
     private bool counter = false;
-    private string direction = "right";
 
     public float defaultX;
     public float defaultY;
+    public float scaleY;
 
     void Start()
     {
@@ -22,70 +22,31 @@ public class SmearScript : MonoBehaviour
     }
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
+        // float x = Input.GetAxis("Horizontal");
+        // float y = Input.GetAxis("Vertical");
+        float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+        // Debug.Log(y);
+        // if (y > 0.5f || y < -0.5f)
+        // {
+        //     // transform.localPosition = new Vector2(0, y > 0 ? scaleY : -scaleY);
+        // }
+        // else
+        // {
+        //     if (move.isFacingRight)
+        //     {
+        //         // anim.SetFloat("isRightFloat", 1);
+        //         transform.localPosition = new Vector2(defaultX, defaultY);
+        //     }
+        //     else if (!move.isFacingRight)
+        //     {
+        //         // anim.SetFloat("isRightFloat", -1);
+        //         transform.localPosition = new Vector2(-defaultX, defaultY);
+        //     }
 
-        anim.SetFloat("xAxis", x);
-        anim.SetFloat("yAxis", y);
-
-        if (y > 0.5f || y < -0.5f)
-        {
-
-            transform.localPosition = new Vector2(0 , defaultY);
-
-            // Vertical Attack
-
-            if (move.isFacingRight )
-            {
-                // direction = "right";
-                anim.SetFloat("isRightFloat", 1);
-                // transform.localPosition = new Vector2(transform.localPosition.x > 0 ? transform.localPosition.x : -transform.localPosition.x, transform.localPosition.y);
-            }
-            else if (!move.isFacingRight )
-            {
-                // direction = "left";
-                anim.SetFloat("isRightFloat", -1);
-                // transform.localPosition = new Vector2(transform.localPosition.x > 0 ? -transform.localPosition.x : transform.localPosition.x, transform.localPosition.y);
-            }
+        // }
 
 
-        }
-        else
-        {
-            // if(){
-
-            // }
-            // transform.localPosition = new Vector2( defaultX , defaultY);
-
-            // Horizontal attack
-            // if (move.isFacingRight && direction == "left")
-            // {
-            //     direction = "right";
-            //     anim.SetFloat("isRightFloat", 1);
-            //     transform.localPosition = new Vector2( defaultX , defaultY);
-            // }
-            // else if (!move.isFacingRight && direction == "right")
-            // {
-            //     direction = "left";
-            //     anim.SetFloat("isRightFloat", -1);
-            //     transform.localPosition = new Vector2( -defaultX  , defaultY);
-            // }
-            if ( move.isFacingRight )
-            {
-                direction = "right";
-                anim.SetFloat("isRightFloat", 1);
-                transform.localPosition = new Vector2( defaultX , defaultY);
-            }
-            else if (!move.isFacingRight)
-            {
-                direction = "left";
-                anim.SetFloat("isRightFloat", -1);
-                transform.localPosition = new Vector2( -defaultX  , defaultY);
-            }
-
-        }
-
-        anim.SetFloat("attackCounter", attack.attackAnimationCounter);
 
         if (attack.isAttacking)
         {
@@ -100,9 +61,45 @@ public class SmearScript : MonoBehaviour
             if (counter)
             {
                 counter = false;
-                // anim.SetTrigger("triggered");
             }
         }
+
+        if (!attack.isAttacking)
+        {
+
+            if ( (y > 0.5f || y < -0.5f ) )
+            {
+                transform.localPosition = new Vector2(0, y > 0 ? scaleY : -scaleY);
+                if (move.isFacingRight)
+                {
+                    anim.SetFloat("isRightFloat", 1);
+                }
+                else if (!move.isFacingRight)
+                {
+                    anim.SetFloat("isRightFloat", -1);
+                }
+            }
+            else
+            {
+                if (move.isFacingRight)
+                {
+                    transform.localPosition = new Vector2(defaultX, defaultY);
+                    anim.SetFloat("isRightFloat", 1);
+                }
+                else if (!move.isFacingRight)
+                {
+                    transform.localPosition = new Vector2(-defaultX, defaultY);
+                    anim.SetFloat("isRightFloat", -1);
+                }
+
+            }
+
+            anim.SetFloat("xAxis", x);
+            anim.SetFloat("yAxis", y);
+            anim.SetFloat("attackCounter", attack.attackAnimationCounter);
+        }
+
+
 
 
     }

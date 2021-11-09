@@ -41,6 +41,13 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // if(isAttacking){
+        //     if( playerCollision.onGround){
+        //         movement.canMove = false;
+        //     }
+            
+        // } 
+
         if (playerInput.attackPressed && !isAttacking)
         {
             if (movement.canMove)
@@ -68,30 +75,37 @@ public class PlayerAttack : MonoBehaviour
         animationScript.SetTrigger("attack");
         isAttacking = true;
 
-        if(playerCollision.onGround){
-            movement.canMove = false;
-        }
-        
         playerRigidBody.velocity = new Vector2(0, playerRigidBody.velocity.y);
 
         StartCoroutine(BasicAttackWait());
+        StartCoroutine(BasicAttackGroundWait());
 
+    }
+
+    IEnumerator BasicAttackGroundWait(){
+        while (isAttacking)
+        {
+            if( playerCollision.onGround){
+                movement.canMove = false;
+            } else {
+                movement.canMove = true;
+            }
+            
+            yield return null;
+        }
+        movement.canMove = true;
     }
 
     IEnumerator BasicAttackWait()
     {
-
-
 
         yield return WaitForFrames(2);
 
         Vector2 pos = transform.position;
 		RaycastHit2D[] hits = Physics2D.RaycastAll(pos + new Vector2(1f , 0), Vector2.right, 1f);
 
-        // Debug.DrawRay(pos + offset, rayDirection * length, debugCollisionColor);
-
         foreach (RaycastHit2D hit in hits) {
-            // 
+
             if(hit.collider.gameObject.tag == "hitInteractable"){
                 Debug.Log("Hit interactable");
                 // hit.collider.gameObject.GetComponent<Interactable>
@@ -99,11 +113,6 @@ public class PlayerAttack : MonoBehaviour
                 hit.collider.gameObject.SendMessage("onHit");
             }
         }
-
-
-
-
-
 
         yield return WaitForFrames(3);
 
