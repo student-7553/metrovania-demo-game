@@ -12,7 +12,8 @@ public class SmearScript : MonoBehaviour
 
     public float defaultX;
     public float defaultY;
-    public float scaleY;
+    public float downScaleY;
+    public float upScaleY;
 
     void Start()
     {
@@ -69,7 +70,7 @@ public class SmearScript : MonoBehaviour
 
             if ( (y > 0.5f || y < -0.5f ) )
             {
-                transform.localPosition = new Vector2(0, y > 0 ? scaleY : -scaleY);
+                transform.localPosition = new Vector2(0, y > 0 ? upScaleY : downScaleY);
                 if (move.isFacingRight)
                 {
                     anim.SetFloat("isRightFloat", 1);
