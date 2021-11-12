@@ -54,6 +54,7 @@ public class PlayerCollision : MonoBehaviour
 
     void Start()
     {
+        Debug.Log(collisionLayerValue);
         collisionLayerValue = groundLayer.value;
         // layer_mask = LayerMask.GetMask("Platform");
         BoxCollider2D tempBox = GetComponent<BoxCollider2D>();

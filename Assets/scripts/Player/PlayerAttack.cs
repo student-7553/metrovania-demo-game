@@ -8,59 +8,77 @@ public class PlayerAttack : MonoBehaviour
     [Header("Stats")]
 
 
-    public int baseAttackDamage = 10;
-    public int baseAttackFrameCount = 25;
+    
+    public int baseAttackFrameCount;
 
     [Space]
     [Header("Booleans")]
-    public bool isAttacking = false;
+    public bool isAttacking;
 
     private Rigidbody2D playerRigidBody;
     private PlayerMovement movement;
     private PlayerInput playerInput;
     private PlayerCollision playerCollision;
     private AnimationScript animationScript;
+    private PlayerStat playerStat;
     
     [HideInInspector]
     public float attackAnimationCounter;
+
+    public bool drawDebugRay;
+    private Color debugCollisionColor = Color.red;
+
+    public LayerMask attackAbleLayer;	
+
+    private int attackAbleLayerValue;
 
 
     // private int hitLayer;	
 
     void Start()
     {
+        attackAbleLayerValue = attackAbleLayer.value;
+
         playerRigidBody = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
         playerCollision = GetComponent<PlayerCollision>();
         animationScript = GetComponentInChildren<AnimationScript>();
         movement = GetComponent<PlayerMovement>();
+        playerStat = GetComponent<PlayerStat>();
         attackAnimationCounter = 1;
+
+        isAttacking = false;
         // hitLayer = LayerMask.NameToLayer("hitInteractable");
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if(isAttacking){
-        //     if( playerCollision.onGround){
-        //         movement.canMove = false;
-        //     }
-            
-        // } 
+
 
         if (playerInput.attackPressed && !isAttacking)
         {
             if (movement.canMove)
-            // if (playerCollision.onGround)
             {
                 BasicAttack();
             }
 
         }
+
+        if (drawDebugRay)
+		{
+            Debug.DrawRay( (Vector2) transform.position + new Vector2(1f , 2.5f), Vector2.right * 2, debugCollisionColor);
+
+            Debug.DrawRay( (Vector2) transform.position + new Vector2(1f , 1.7f), Vector2.right * 3, debugCollisionColor);
+			Debug.DrawRay( (Vector2) transform.position + new Vector2(1f , 1f), Vector2.right * 3.2f, debugCollisionColor);
+            Debug.DrawRay( (Vector2) transform.position + new Vector2(1f , 0.3f), Vector2.right * 3, debugCollisionColor);
+
+            Debug.DrawRay( (Vector2) transform.position + new Vector2(1f , -0.5f), Vector2.right * 2, debugCollisionColor);
+		}
     }
     private void BasicAttack()
     {
-        
+        // Debug.Log("we are trigger");
         if(attackAnimationCounter > 0){
             attackAnimationCounter = -1;
         } else {
@@ -71,9 +89,11 @@ public class PlayerAttack : MonoBehaviour
             attackAnimationCounter = -1;
         }
 
+        isAttacking = true;
+
         animationScript.SetFloat("attackCounter",attackAnimationCounter);
         animationScript.SetTrigger("attack");
-        isAttacking = true;
+        
 
         playerRigidBody.velocity = new Vector2(0, playerRigidBody.velocity.y);
 
@@ -102,16 +122,18 @@ public class PlayerAttack : MonoBehaviour
         yield return WaitForFrames(2);
 
         Vector2 pos = transform.position;
-		RaycastHit2D[] hits = Physics2D.RaycastAll(pos + new Vector2(1f , 0), Vector2.right, 1f);
 
+        RaycastHit2D[] hits=  Physics2D.CircleCastAll(pos +  new Vector2(2f , 1f) ,3f, Vector2.right, 0.5f, attackAbleLayerValue);
+
+        // Debug.Log("Triggering/"+hits.Length);
         foreach (RaycastHit2D hit in hits) {
 
-            if(hit.collider.gameObject.tag == "hitInteractable"){
-                Debug.Log("Hit interactable");
+            // if(hit.collider.gameObject.tag == "Enemies"){
+                // Debug.Log("----------------Hit Enemies/"+hit.collider.name);
                 // hit.collider.gameObject.GetComponent<Interactable>
                 // gameObject.SendMessage("ApplyDamage", 5.0);
-                hit.collider.gameObject.SendMessage("onHit");
-            }
+                hit.collider.gameObject.SendMessage("onHit",playerStat.baseAttackDamage);
+            // }
         }
 
         yield return WaitForFrames(3);

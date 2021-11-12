@@ -7,7 +7,9 @@ public class PlayerInit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("PlayerInit Start/" + GameManager.playerSpikeRespawnLocation.playerlocation);
+        // Debug.Log("PlayerInit Start/" + GameManager.playerSpikeRespawnLocation.playerlocation);
+        // if
+        // Debug.Log(GameManager.respawnLocation);
         transform.position =  GameManager.playerSpikeRespawnLocation.playerlocation;
     }
 

@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     //one in existence. This is often referred to as a "singleton" design pattern. Other
     //scripts access this one through its public static methods
     public class respawnLocation {
-        public Vector2 playerlocation; 
-        public Vector2 cameraLocation;
+        public Vector2 playerlocation = new Vector2(0,0); 
+        public Vector2 cameraLocation = new Vector2(0,0);
         public string cameraAnchorState;
         public float stateHeight;
     }   
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     bool m_isGameOver;                            //Is the game currently over?
     List<Collectable> collectableList;	
 
-    respawnLocation m_playerSpikeRespawnData;
+    respawnLocation m_playerSpikeRespawnData ;
 
     public static respawnLocation playerSpikeRespawnLocation
     {
@@ -37,13 +37,13 @@ public class GameManager : MonoBehaviour
 
             current.m_playerSpikeRespawnData = value;
         }
-    }
+    } 
 
     // public void 
 
   
 
-    void Awake()
+    void Start()
     {
         if (current != null && current != this)
         {
@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour
         m_playerSpikeRespawnData.cameraLocation = playerCameraAchor.transform.position;
         m_playerSpikeRespawnData.cameraAnchorState = playerCameraAchor.anchorState;
         m_playerSpikeRespawnData.stateHeight = playerCameraAchor.customHeight;
+
+        
 
     }
 
