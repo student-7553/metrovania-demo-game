@@ -101,13 +101,17 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 newVel = new Vector2(dir.x * currentSpeed, playerRigidBody.velocity.y);
 
-        if(playerCollision.onWall){
-            if( !playerCollision.onLeftWall && playerCollision.onLeftTopWall){
-                newVel.x = 0f;
-            } else if ( !playerCollision.onRightWall  && playerCollision.onRightTopWall) {
+        if (playerCollision.onWall)
+        {
+            if (!playerCollision.onLeftWall && playerCollision.onLeftTopWall)
+            {
                 newVel.x = 0f;
             }
-        } 
+            else if (!playerCollision.onRightWall && playerCollision.onRightTopWall)
+            {
+                newVel.x = 0f;
+            }
+        }
 
         if (isJumping && playerRigidBody.velocity.y > 3)
         {
@@ -157,16 +161,19 @@ public class PlayerMovement : MonoBehaviour
 
         int particleSide = playerCollision.onRightWall ? 1 : -1;
         slideParticle.transform.parent.localScale = new Vector3(particleSide, 1, 1);
-        
-        if(wall){
+
+        if (wall)
+        {
             int particleRotation = playerCollision.onRightWall ? 90 : -90;
             var em = wallJumpParticle.shape;
             em.rotation = new Vector3(em.rotation.x, em.rotation.y, particleRotation);
             wallJumpParticle.Play();
-        } else {
+        }
+        else
+        {
             jumpParticle.Play();
         }
-        
+
 
     }
 
@@ -182,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
     private void WallJump()
     {
 
-       
+
         StartCoroutine(ChangeIsHorizontalLerp(.1f, false));
 
         Vector2 wallDir = playerCollision.onRightWall ? Vector2.left : Vector2.right;
@@ -248,7 +255,8 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
 
         // jumpParticle.Play();
-        foreach(var single in groundEntryParticles){
+        foreach (var single in groundEntryParticles)
+        {
             single.Play();
         }
     }
@@ -360,9 +368,9 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         playerRigidBody.gravityScale = 3;
         isTailEndDashing = false;
-        
-        
-        
+
+
+
 
     }
 
@@ -384,7 +392,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(.02f);
 
         playerRigidBody.drag = 0;
-        
+
     }
 
 
@@ -482,16 +490,21 @@ public class PlayerMovement : MonoBehaviour
             // if user is moving towards wall
             if (x != 0f && !wallGrab)
             {
-                if (!playerCollision.onRightWall && !playerCollision.onLeftWall && (playerCollision.onRightBottomWall || playerCollision.onLeftBottomWall) && isJumping && !isHorizontalLerp )
+                if (!playerCollision.onRightWall && !playerCollision.onLeftWall && (playerCollision.onRightBottomWall || playerCollision.onLeftBottomWall) && isJumping && !isHorizontalLerp)
                 {
-                    if(playerRigidBody.velocity.y > 0 && playerRigidBody.velocity.y < 5){
+                    if (playerRigidBody.velocity.y > 0 && playerRigidBody.velocity.y < 5)
+                    {
                         StartCoroutine(WallClimbUp());
-                    } else if (playerRigidBody.velocity.y < 0) {
-                         WallSlide();
+                    }
+                    else if (playerRigidBody.velocity.y < 0)
+                    {
+                        WallSlide();
                     }
 
-                    
-                } else {
+
+                }
+                else
+                {
                     if ((playerCollision.onRightWall && x >= 1f) || (playerCollision.onLeftWall && x <= -1f))
                     {
                         if (isJumping)
@@ -523,7 +536,8 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator JumpFix()
     {
         jumpFixCoroutineRunning = true;
-        while(playerCollision.onLeftBottomWall || playerCollision.onRightBottomWall){
+        while (playerCollision.onLeftBottomWall || playerCollision.onRightBottomWall)
+        {
             playerRigidBody.velocity += Vector2.up * 20;
             yield return null;
         }
@@ -665,12 +679,15 @@ public class PlayerMovement : MonoBehaviour
         if (dashFixed && !playerCollision.onRightBottomWall && !playerCollision.onLeftBottomWall)
         {
             dashFixed = false;
-            if(dashFixRightSide){
-                playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.y , playerRigidBody.velocity.y);
-            } else  {
-                playerRigidBody.velocity = new Vector2(-playerRigidBody.velocity.y , playerRigidBody.velocity.y);
+            if (dashFixRightSide)
+            {
+                playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.y, playerRigidBody.velocity.y);
             }
-            
+            else
+            {
+                playerRigidBody.velocity = new Vector2(-playerRigidBody.velocity.y, playerRigidBody.velocity.y);
+            }
+
         }
         if (playerRigidBody.velocity.x > 0.1f && playerCollision.onRightBottomWall)
         {
@@ -711,7 +728,8 @@ public class PlayerMovement : MonoBehaviour
     {
 
         // START limit verticalVelocity
-        if(isDashing){
+        if (isDashing)
+        {
             return;
         }
         if (playerRigidBody.velocity.y < -verticalVelocityLimit)
@@ -725,33 +743,16 @@ public class PlayerMovement : MonoBehaviour
         // END limit verticalVelocity
     }
 
-    public void knockBacked(Vector2 direction, float impactValue){
-        Debug.Log("are we here?");
+    public IEnumerator knockBackPlayer(Vector2 direction, float impactValue)
+    {
+
         canMove = false;
         isHorizontalLerp = true;
-        playerRigidBody.velocity = (direction + new Vector2(0f,2f)) * impactValue;
-
-        StartCoroutine(knockBackedAfter());
-        // yield return new WaitForSeconds(1f);
-        // canMove = true;
-        // isHorizontalLerp = false;
-        
-        
-    }
-    
-    IEnumerator knockBackedAfter()
-    {
+        playerRigidBody.velocity = (direction + new Vector2(0f, 2f)) * impactValue;
         yield return new WaitForSeconds(0.5f);
         canMove = true;
         isHorizontalLerp = false;
     }
-
-
-    
-
-
-
-
 
 
     IEnumerator CheckForLanding()

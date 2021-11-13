@@ -14,7 +14,7 @@ public class PlayerAttack : MonoBehaviour
 
     public bool drawDebugRay;
 
-    public float attackAnimationCounter;
+    public float attackAnimationCounter = 1;
      public LayerMask attackAbleLayer;	
 
     private Rigidbody2D playerRigidBody;
@@ -40,7 +40,6 @@ public class PlayerAttack : MonoBehaviour
         playerCollision = GetComponent<PlayerCollision>();
         animationScript = GetComponentInChildren<AnimationScript>();
         movement = GetComponent<PlayerMovement>();
-        attackAnimationCounter = 1;
 
         isAttacking = false;
         // hitLayer = LayerMask.NameToLayer("hitInteractable");
@@ -120,11 +119,12 @@ public class PlayerAttack : MonoBehaviour
 
         RaycastHit2D[] hits=  Physics2D.CircleCastAll(pos +  new Vector2(2f , 1f) ,3f, Vector2.right, 0.5f, attackAbleLayerValue);
 
-
+        
         foreach (RaycastHit2D hit in hits) {
-
-            hit.collider.gameObject.SendMessage("onHit",PlayerData.playerFloatResources.currentBaseAttackDamage);
-
+            if(!hit.collider.isTrigger){    
+                
+                hit.collider.gameObject.SendMessage("onHit",PlayerData.playerFloatResources.currentBaseAttackDamage);
+            }
         }
 
         yield return WaitForFrames(3);

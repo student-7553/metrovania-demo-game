@@ -7,11 +7,12 @@ public class Slime : BaseEnemy
 
     public float firstLocalXposition;
     public float secondLocalXposition;
-    
-    private bool isGoingToFirst;
+    private bool isGoingToFirst = true;
+    private Rigidbody2D thisRigidBody;
     void Start()
     {
-        isGoingToFirst = true;
+        thisRigidBody = GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
@@ -19,9 +20,9 @@ public class Slime : BaseEnemy
     {
         if(isGoingToFirst){
             if(transform.localPosition.x < firstLocalXposition){
-                transform.localPosition = new Vector2(transform.localPosition.x + (speed * Time.deltaTime), transform.localPosition.y);
+                thisRigidBody.velocity = new Vector2(speed,0f);
             } else {
-                transform.localPosition = new Vector2(transform.localPosition.x - (speed * Time.deltaTime), transform.localPosition.y);
+                thisRigidBody.velocity = new Vector2(-speed,0f);
             }
 
             if((transform.localPosition.x + 0.3f) > firstLocalXposition && (transform.localPosition.x - 0.3f) < firstLocalXposition){
@@ -31,9 +32,9 @@ public class Slime : BaseEnemy
             
         } else {
              if(transform.localPosition.x < secondLocalXposition){
-                transform.localPosition = new Vector2(transform.localPosition.x + (speed * Time.deltaTime), transform.localPosition.y);
+                 thisRigidBody.velocity = new Vector2(speed,0f);
             } else {
-                transform.localPosition = new Vector2(transform.localPosition.x - (speed * Time.deltaTime), transform.localPosition.y);
+                thisRigidBody.velocity = new Vector2(-speed,0f);
             }
             if((transform.localPosition.x + 0.3f) > secondLocalXposition && (transform.localPosition.x - 0.3f) < secondLocalXposition){
 
@@ -42,10 +43,12 @@ public class Slime : BaseEnemy
         }  
     }
 
-    private void onHit(float incomingDamage) {
-        Debug.Log(incomingDamage);
-    //    gameObject.SetActive(false);
+    // public void onHit(float incomingDamage) {
+    //     Debug.Log("are we here SLime inside?" + incomingDamage);
+    // //    gameObject.SetActive(false);
 
         
-    }
+    // }
+
+    
 }

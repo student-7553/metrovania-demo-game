@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if (current != null && current != this)
+        if (current != null)
         {
             Destroy(gameObject);
             return;
@@ -106,6 +106,10 @@ public class GameManager : MonoBehaviour
     {
 		if (current == null)
 			return;
+
+        // m_playerFloatResources.currentHealth
+        PlayerData.playerFloatResources.currentHealth = PlayerData.playerFloatResources.maximumHealth;
+        // PlayerData.enabledCollision;
         current.StartCoroutine(RestartScene());
 
     }
@@ -127,8 +131,7 @@ public class GameManager : MonoBehaviour
 
 	private static IEnumerator RestartScene()
     {
-
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
         
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

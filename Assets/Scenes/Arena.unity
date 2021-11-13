@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 997f3309adcdce644bd1a545033c9b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 20
   damage: 5
   speed: 3
   firstLocalXposition: -20
@@ -17169,6 +17169,7 @@ MonoBehaviour:
   onLeftTopWall: 0
   groundDistance: 0.2
   drawDebugRay: 0
+  enabledCollision: 1
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 4096

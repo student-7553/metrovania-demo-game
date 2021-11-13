@@ -9,13 +9,10 @@ public class PlayerCollision : MonoBehaviour
     [Header("State")]
     public bool onGround;
     public bool onWall;
-
     public bool onRightWall;
     public bool onLeftWall;
-
     public bool onRightBottomWall;
     public bool onLeftBottomWall;
-
     public bool onRightTopWall;
     public bool onLeftTopWall;
 
@@ -23,9 +20,9 @@ public class PlayerCollision : MonoBehaviour
     [Space]
     [Header("CollisionData")]
     public float groundDistance;
-
     public bool drawDebugRay = false;
-    private Color debugCollisionColor = Color.red;
+    public bool enabledCollision = true;
+
 
     private Vector2 boxColliderSize;
     private Vector2 boxColliderOffset;
@@ -43,9 +40,9 @@ public class PlayerCollision : MonoBehaviour
 
     void Start()
     {
- 
+
         groundLayer = groundLayerMask.value;
-      
+
         BoxCollider2D tempBox = GetComponent<BoxCollider2D>();
         boxColliderSize = tempBox.size;
         boxColliderOffset = tempBox.offset;
@@ -54,6 +51,8 @@ public class PlayerCollision : MonoBehaviour
         enemyLayer = LayerMask.NameToLayer("Enemies");
 
         playerMovement = GetComponent<PlayerMovement>();
+
+        enabledCollision=  true;
 
     }
     // Update is called once per frame
@@ -116,19 +115,26 @@ public class PlayerCollision : MonoBehaviour
             onWall = true;
         }
     }
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
+   
+        if (!enabledCollision || !PlayerData.isAlive)
+        {
+            return;
+        }
 
-        if (collision.gameObject.layer == trapsLayer || !PlayerData.isAlive)
+        
+
+        if (collision.gameObject.layer == trapsLayer )
         {
             // Trap layer
             PlayerCollidedWithTrap();
         }
-        else if (collision.gameObject.layer == enemyLayer || !PlayerData.isAlive)
+        else if (collision.gameObject.layer == enemyLayer )
         {
             // Enemy layer
             BaseEnemy tempBaseEnemy = collision.gameObject.GetComponent<BaseEnemy>();
-            Debug.Log(tempBaseEnemy.damage);
+            // Debug.Log(tempBaseEnemy.damage);
             PlayerCollidedWithEnemy(tempBaseEnemy);
         }
         else
@@ -142,16 +148,20 @@ public class PlayerCollision : MonoBehaviour
 
         PlayerData.playerFloatResources.currentHealth = PlayerData.playerFloatResources.currentHealth - enemy.damage;
         Vector2 directionOfKnockBack = new Vector2();
-        if(enemy.gameObject.transform.position.x > transform.position.x){
+        if (enemy.gameObject.transform.position.x > transform.position.x)
+        {
             // left
             directionOfKnockBack = Vector2.left;
-        } else {
+        }
+        else
+        {
             // right
             directionOfKnockBack = Vector2.right;
         }
-        
-        playerMovement.knockBacked(directionOfKnockBack, 10f);
-        //take knock back
+        // Debug.Log(directionOfKnockBack);
+        StartCoroutine(playerMovement.knockBackPlayer(directionOfKnockBack, 10f));
+
+        StartCoroutine(disableCollisionForTime(1.3f));
 
 
     }
@@ -173,8 +183,16 @@ public class PlayerCollision : MonoBehaviour
         if (drawDebugRay)
         {
 
-            Debug.DrawRay(pos + offset, rayDirection * length, debugCollisionColor);
+            Debug.DrawRay(pos + offset, rayDirection * length, Color.red);
         }
         return hit;
+    }
+
+    public IEnumerator disableCollisionForTime(float time)
+    {
+        enabledCollision = false;
+        yield return new WaitForSeconds(time);
+        enabledCollision = true;
+
     }
 }
