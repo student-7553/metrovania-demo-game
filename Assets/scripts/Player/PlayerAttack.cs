@@ -4,32 +4,28 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [Space]
-    [Header("Stats")]
-
-
+    // [Space]
+    // [Header("Stats")]
     
-    public int baseAttackFrameCount;
 
     [Space]
     [Header("Booleans")]
     public bool isAttacking;
+
+    public bool drawDebugRay;
+
+    public float attackAnimationCounter;
+     public LayerMask attackAbleLayer;	
 
     private Rigidbody2D playerRigidBody;
     private PlayerMovement movement;
     private PlayerInput playerInput;
     private PlayerCollision playerCollision;
     private AnimationScript animationScript;
-    private PlayerStat playerStat;
+    private int baseAttackFrameCount = 21;
     
     [HideInInspector]
-    public float attackAnimationCounter;
-
-    public bool drawDebugRay;
     private Color debugCollisionColor = Color.red;
-
-    public LayerMask attackAbleLayer;	
-
     private int attackAbleLayerValue;
 
 
@@ -44,7 +40,6 @@ public class PlayerAttack : MonoBehaviour
         playerCollision = GetComponent<PlayerCollision>();
         animationScript = GetComponentInChildren<AnimationScript>();
         movement = GetComponent<PlayerMovement>();
-        playerStat = GetComponent<PlayerStat>();
         attackAnimationCounter = 1;
 
         isAttacking = false;
@@ -125,15 +120,11 @@ public class PlayerAttack : MonoBehaviour
 
         RaycastHit2D[] hits=  Physics2D.CircleCastAll(pos +  new Vector2(2f , 1f) ,3f, Vector2.right, 0.5f, attackAbleLayerValue);
 
-        // Debug.Log("Triggering/"+hits.Length);
+
         foreach (RaycastHit2D hit in hits) {
 
-            // if(hit.collider.gameObject.tag == "Enemies"){
-                // Debug.Log("----------------Hit Enemies/"+hit.collider.name);
-                // hit.collider.gameObject.GetComponent<Interactable>
-                // gameObject.SendMessage("ApplyDamage", 5.0);
-                hit.collider.gameObject.SendMessage("onHit",playerStat.baseAttackDamage);
-            // }
+            hit.collider.gameObject.SendMessage("onHit",PlayerData.playerFloatResources.currentBaseAttackDamage);
+
         }
 
         yield return WaitForFrames(3);

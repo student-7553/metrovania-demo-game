@@ -210,34 +210,34 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void Crouch()
-    {
-        if (!canMove)
-        {
-            return;
-        }
-        isCrouching = true;
-        Vector3 scale = transform.localScale;
-        boxCollider.offset = new Vector2(boxCollider.offset.x, -(boxCollider.size.y / 4));
-        boxCollider.size = new Vector2(boxCollider.size.x, boxCollider.size.y / 2);
+    // private void Crouch()
+    // {
+    //     if (!canMove)
+    //     {
+    //         return;
+    //     }
+    //     isCrouching = true;
+    //     Vector3 scale = transform.localScale;
+    //     boxCollider.offset = new Vector2(boxCollider.offset.x, -(boxCollider.size.y / 4));
+    //     boxCollider.size = new Vector2(boxCollider.size.x, boxCollider.size.y / 2);
 
 
-        currentSpeed = crouchSpeed;
+    //     currentSpeed = crouchSpeed;
 
-    }
-    private void stopCrouch()
-    {
-        if (!canMove)
-        {
-            return;
-        }
-        isCrouching = false;
-        boxCollider.size = new Vector2(boxCollider.size.x, boxCollider.size.y * 2);
-        boxCollider.offset = new Vector2(boxCollider.offset.x, 0);
+    // }
+    // private void stopCrouch()
+    // {
+    //     if (!canMove)
+    //     {
+    //         return;
+    //     }
+    //     isCrouching = false;
+    //     boxCollider.size = new Vector2(boxCollider.size.x, boxCollider.size.y * 2);
+    //     boxCollider.offset = new Vector2(boxCollider.offset.x, 0);
 
-        currentSpeed = normalSpeed;
+    //     currentSpeed = normalSpeed;
 
-    }
+    // }
 
 
 
@@ -274,17 +274,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Dash(float x, float y)
     {
-        // Camera.main.transform.DOComplete();
-        // Camera.main.transform.DOShakePosition(.2f, .5f, 14, 90, false, true);
-        // FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
 
-        // hasDashed = true;
         remainingDashes--;
         Vector2 dir = new Vector2(0, 0);
         float midfloat = 0.8f;
         float mid2float = 0.6f;
-        // float mid3float = 0.4f;
-        // float highFloat = 1.2f;
 
         float value = (float)((Mathf.Atan2(x, y) / Math.PI) * 180f);
         if (value < 0) value += 360f;
@@ -347,52 +341,31 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator DashWait()
     {
 
-        // FindObjectOfType<GhostTrail>().ShowGhost();
         StartCoroutine(GroundDash());
 
-        // dashParticle.Play();
         playerRigidBody.gravityScale = 0;
         canMove = false;
         betterJumpEnabled = false;
-        isHorizontalLerp = true;
-
+        // isHorizontalLerp = true;
         isDashing = true;
         isTailEndDashing = true;
 
-        // Tween mytween = DOVirtual.Float(0, 20, .3f, (float x) =>
-        // {
-        // });
-        // yield return mytween.WaitForCompletion();
-
         yield return DashWaitCounter();
-        // yield return DashVelWaitCounter();
 
-
-
-        // playerRigidBody.gravityScale = 3;
         canMove = true;
-        isHorizontalLerp = false;
+        // isHorizontalLerp = false;
         isDashing = false;
         playerRigidBody.gravityScale = 2f;
 
         yield return new WaitForSeconds(.1f);
         playerRigidBody.gravityScale = 3;
         isTailEndDashing = false;
-        // isDashing = false;
-        // playerRigidBody.gravityScale = 3;
         
         
         
 
     }
-    // IEnumerator DashVelWaitCounter()
-    // {
 
-    //     playerRigidBody.drag = 0;
-    //     yield return new WaitForSeconds(.1f);
-
-
-    // }
 
     IEnumerator DashWaitCounter()
     {
@@ -430,7 +403,7 @@ public class PlayerMovement : MonoBehaviour
         playerRigidBody.gravityScale = 0;
         betterJumpEnabled = false;
         canMove = false;
-        isHorizontalLerp = true;
+        // isHorizontalLerp = true;
         playerRigidBody.velocity = Vector2.zero;
         playerRigidBody.velocity += Vector2.up * 15;
         yield return new WaitForSeconds(.07f);
@@ -444,7 +417,7 @@ public class PlayerMovement : MonoBehaviour
             playerRigidBody.velocity += Vector2.left * 8;
         }
         yield return new WaitForSeconds(.1f);
-        isHorizontalLerp = false;
+        // isHorizontalLerp = false;
         canMove = true;
         playerRigidBody.gravityScale = 3;
         betterJumpEnabled = true;
@@ -561,22 +534,22 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void updateCrouch(float x, float y)
-    {
-        // START CROUCH
+    // private void updateCrouch(float x, float y)
+    // {
+    //     // START CROUCH
 
 
-        if (isCrouching && (!playerInput.crouchHeld))
-        {
-            stopCrouch();
-        }
-        if ((playerInput.crouchPressed || playerInput.crouchHeld) && playerCollision.onGround && !isCrouching)
-        {
-            Crouch();
-        }
+    //     if (isCrouching && (!playerInput.crouchHeld))
+    //     {
+    //         stopCrouch();
+    //     }
+    //     if ((playerInput.crouchPressed || playerInput.crouchHeld) && playerCollision.onGround && !isCrouching)
+    //     {
+    //         Crouch();
+    //     }
 
-        // END CROUCH
-    }
+    //     // END CROUCH
+    // }
     void Update()
     {
 
@@ -636,7 +609,7 @@ public class PlayerMovement : MonoBehaviour
             groundTouch = false;
         }
 
-        updateCrouch(x, y);
+        // updateCrouch(x, y);
 
         if (isFacingRight == true && x < 0 && playerCollision.onGround && canMove)
         {
@@ -738,6 +711,9 @@ public class PlayerMovement : MonoBehaviour
     {
 
         // START limit verticalVelocity
+        if(isDashing){
+            return;
+        }
         if (playerRigidBody.velocity.y < -verticalVelocityLimit)
         {
             playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, -verticalVelocityLimit);
@@ -748,6 +724,33 @@ public class PlayerMovement : MonoBehaviour
         // }
         // END limit verticalVelocity
     }
+
+    public void knockBacked(Vector2 direction, float impactValue){
+        Debug.Log("are we here?");
+        canMove = false;
+        isHorizontalLerp = true;
+        playerRigidBody.velocity = (direction + new Vector2(0f,2f)) * impactValue;
+
+        StartCoroutine(knockBackedAfter());
+        // yield return new WaitForSeconds(1f);
+        // canMove = true;
+        // isHorizontalLerp = false;
+        
+        
+    }
+    
+    IEnumerator knockBackedAfter()
+    {
+        yield return new WaitForSeconds(0.5f);
+        canMove = true;
+        isHorizontalLerp = false;
+    }
+
+
+    
+
+
+
 
 
 

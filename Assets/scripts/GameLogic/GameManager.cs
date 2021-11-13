@@ -10,23 +10,21 @@ using System.Collections.Generic;
 [DefaultExecutionOrder(-100)]
 public class GameManager : MonoBehaviour
 {
-    //This class holds a static reference to itself to ensure that there will only be
-    //one in existence. This is often referred to as a "singleton" design pattern. Other
-    //scripts access this one through its public static methods
+
+    static GameManager current;
+    int numberOfDeaths;                         //Number of times player has died
+    float totalGameTimeThisSession;                        //Length of the total game time
+    bool m_isGameOver;                            //Is the game currently over?
+
+
     public class respawnLocation {
         public Vector2 playerlocation = new Vector2(0,0); 
         public Vector2 cameraLocation = new Vector2(0,0);
         public string cameraAnchorState;
         public float stateHeight;
-    }   
+    }
 
-    static GameManager current;
-    int numberOfDeaths;                         //Number of times player has died
-    float totalGameTime;                        //Length of the total game time
-    bool m_isGameOver;                            //Is the game currently over?
-    List<Collectable> collectableList;	
-
-    respawnLocation m_playerSpikeRespawnData ;
+    respawnLocation m_playerSpikeRespawnData;
 
     public static respawnLocation playerSpikeRespawnLocation
     {
@@ -39,7 +37,22 @@ public class GameManager : MonoBehaviour
         }
     } 
 
-    // public void 
+
+    respawnLocation m_playerDeathRespawnData ;
+
+    public static respawnLocation playerDeathRespawnData
+    {
+        get {return current.m_playerDeathRespawnData; }
+        set {
+            if (current == null)
+			    return;
+
+            current.m_playerDeathRespawnData = value;
+        }
+    } 
+
+    
+
 
   
 
@@ -59,7 +72,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void awakeGameLogic(){
-        collectableList = new List<Collectable>();
+        // collectableList = new List<Collectable>();
         m_playerSpikeRespawnData = new respawnLocation();
 
 
@@ -85,32 +98,9 @@ public class GameManager : MonoBehaviour
         if (m_isGameOver)
             return;
 
-        totalGameTime += Time.deltaTime;
+        totalGameTimeThisSession += Time.deltaTime;
     }
 
-    public static void RegisterCollectable( Collectable collectable){
-        if(current == null){
-            return;
-        }
-        if(!current.collectableList.Contains(collectable)){
-            current.collectableList.Add(collectable);
-        }
-
-        // other stuff
-    }
-
-    public static void PlayerGrabbedCollectable(Collectable collectable){
-        if(current == null){
-            return;
-        }
-        if(!current.collectableList.Contains(collectable)){
-            return;
-        }
-        current.collectableList.Remove(collectable);
-
-        collectableUpdateLogic();
-
-    }
 
     public static void PlayerDied()
     {
@@ -143,19 +133,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    private static void collectableUpdateLogic(){
-
-        if (current.collectableList.Count == 0){
-            Debug.Log("There is 0 collectable left");
-        }
-			
-
-    }
-
-    // public static void PlayerHitRespawnPoint( Vector2 newPoint){
-        
-
-    // }
 
 }
 

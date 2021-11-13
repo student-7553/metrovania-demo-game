@@ -6,22 +6,22 @@ public class Collectable : MonoBehaviour
 {
     int playerLayer;
     // Start is called before the first frame update
-    void Start()
-    {
-        playerLayer = LayerMask.NameToLayer("Player");
-        GameManager.RegisterCollectable(this);
-    }
+    // void Start()
+    // {
+    //     playerLayer = LayerMask.NameToLayer("Player");
+    //     GameManager.RegisterCollectable(this);
+    // }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
+    // private void OnTriggerEnter2D(Collider2D collision) {
 
-        if(collision.gameObject.layer != playerLayer){
-            return;
-        }
+    //     if(collision.gameObject.layer != playerLayer){
+    //         return;
+    //     }
 
-        // AudioManager.
-        GameManager.PlayerGrabbedCollectable(this);
-        gameObject.SetActive(false);
+    //     // AudioManager.
+    //     GameManager.PlayerGrabbedCollectable(this);
+    //     gameObject.SetActive(false);
 
         
-    }
+    // }
 }

@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 47421972}
   - component: {fileID: 47421974}
   - component: {fileID: 47421975}
+  - component: {fileID: 47421976}
   m_Layer: 16
   m_Name: Slime
   m_TagString: Untagged
@@ -151,7 +152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 47421970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15, y: -1.99, z: 0}
+  m_LocalPosition: {x: -15, y: -4.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1557508761}
@@ -273,6 +274,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &47421976
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47421970}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5}
+  m_EdgeRadius: 0
 --- !u!1 &49627983
 GameObject:
   m_ObjectHideFlags: 0
@@ -17063,7 +17090,6 @@ GameObject:
   - component: {fileID: 1053348684}
   - component: {fileID: 1053348683}
   - component: {fileID: 1053348682}
-  - component: {fileID: 1053348681}
   - component: {fileID: 1053348680}
   m_Layer: 14
   m_Name: Player
@@ -17103,23 +17129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b3f3183fe35e2e428cc7c988c7ac53c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1053348681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053348678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c9b7b92e4849bd47b7d1cd1fb0bb41c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseAttackDamage: 10
-  effectiveAttackDamage: 10
-  totalHealth: 20
-  remainingHealth: 20
-  isAlive: 1
 --- !u!114 &1053348682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17132,10 +17141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155eead1371b1ba47a7bad47e443974b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseAttackFrameCount: 21
   isAttacking: 0
-  attackAnimationCounter: 0
   drawDebugRay: 1
+  attackAnimationCounter: 0
   attackAbleLayer:
     serializedVersion: 2
     m_Bits: 65536
@@ -17151,9 +17159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71673e77d31284e7a915d296fc183fd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 4096
   onGround: 1
   onWall: 0
   onRightWall: 0
@@ -17164,6 +17169,9 @@ MonoBehaviour:
   onLeftTopWall: 0
   groundDistance: 0.2
   drawDebugRay: 0
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!114 &1053348684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33915,6 +33923,49 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1701378251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1701378253}
+  - component: {fileID: 1701378252}
+  m_Layer: 0
+  m_Name: PlayerData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1701378252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701378251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646ff0fbd72782c408ccfc74bdfbc8a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1701378253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701378251}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -17.641533, y: -4.79538, z: -33.52984}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1931235426
 GameObject:
   m_ObjectHideFlags: 0
