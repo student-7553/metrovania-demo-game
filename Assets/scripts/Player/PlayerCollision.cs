@@ -15,6 +15,7 @@ public class PlayerCollision : MonoBehaviour
     public bool onLeftBottomWall;
     public bool onRightTopWall;
     public bool onLeftTopWall;
+    public float eyeFrameLength;
 
 
     [Space]
@@ -29,10 +30,11 @@ public class PlayerCollision : MonoBehaviour
 
 
 
-    public LayerMask groundLayerMask;
     private int groundLayer;
     private int trapsLayer;
     private int enemyLayer;
+    private int playerLayer;
+    
 
     private PlayerMovement playerMovement;
 
@@ -41,14 +43,18 @@ public class PlayerCollision : MonoBehaviour
     void Start()
     {
 
-        groundLayer = groundLayerMask.value;
+        
 
         BoxCollider2D tempBox = GetComponent<BoxCollider2D>();
         boxColliderSize = tempBox.size;
         boxColliderOffset = tempBox.offset;
 
+
+        groundLayer = LayerMask.GetMask("Platform");
         trapsLayer = LayerMask.NameToLayer("Traps");
         enemyLayer = LayerMask.NameToLayer("Enemies");
+        playerLayer = LayerMask.NameToLayer("Player");
+
 
         playerMovement = GetComponent<PlayerMovement>();
 
@@ -115,6 +121,16 @@ public class PlayerCollision : MonoBehaviour
             onWall = true;
         }
     }
+    
+    // void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     if(!enabledCollision){
+    //         if( collision.gameObject.layer == enemyLayer ){
+    //             Debug.Log("are we here?/"+ collision.gameObject.name);
+    //             Physics2D.IgnoreCollision( collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+    //         }
+    //     }
+    // }
     void OnCollisionStay2D(Collision2D collision)
     {
    
@@ -161,7 +177,7 @@ public class PlayerCollision : MonoBehaviour
         // Debug.Log(directionOfKnockBack);
         StartCoroutine(playerMovement.knockBackPlayer(directionOfKnockBack, 10f));
 
-        StartCoroutine(disableCollisionForTime(1.3f));
+        StartCoroutine(disableCollisionForTime(eyeFrameLength));
 
 
     }
@@ -190,8 +206,12 @@ public class PlayerCollision : MonoBehaviour
 
     public IEnumerator disableCollisionForTime(float time)
     {
+        // Physics2D.IgnoreCollision( collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, true);
+        // Physics2D.
         enabledCollision = false;
         yield return new WaitForSeconds(time);
+        Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);
         enabledCollision = true;
 
     }

@@ -119,11 +119,14 @@ public class PlayerAttack : MonoBehaviour
 
         RaycastHit2D[] hits=  Physics2D.CircleCastAll(pos +  new Vector2(2f , 1f) ,3f, Vector2.right, 0.5f, attackAbleLayerValue);
 
-        
+        object[] tempStorage = new object[4];
+        tempStorage[0] = PlayerData.playerFloatResources.currentBaseAttackDamage;
+
+        tempStorage[1] = pos;
         foreach (RaycastHit2D hit in hits) {
             if(!hit.collider.isTrigger){    
-                
-                hit.collider.gameObject.SendMessage("onHit",PlayerData.playerFloatResources.currentBaseAttackDamage);
+                hit.collider.gameObject.SendMessage("onHit",tempStorage);
+                // hit.collider.gameObject.SendMessage("onHit",PlayerData.playerFloatResources.currentBaseAttackDamage, transform.position);
             }
         }
 
