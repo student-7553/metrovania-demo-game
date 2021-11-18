@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
@@ -34,7 +32,7 @@ public class PlayerCollision : MonoBehaviour
     private int trapsLayer;
     private int enemyLayer;
     private int playerLayer;
-    
+
 
     private PlayerMovement playerMovement;
 
@@ -43,7 +41,7 @@ public class PlayerCollision : MonoBehaviour
     void Start()
     {
 
-        
+
 
         BoxCollider2D tempBox = GetComponent<BoxCollider2D>();
         boxColliderSize = tempBox.size;
@@ -58,7 +56,9 @@ public class PlayerCollision : MonoBehaviour
 
         playerMovement = GetComponent<PlayerMovement>();
 
-        enabledCollision=  true;
+        enabledCollision = true;
+
+        Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);
 
     }
     // Update is called once per frame
@@ -121,7 +121,7 @@ public class PlayerCollision : MonoBehaviour
             onWall = true;
         }
     }
-    
+
     // void OnCollisionEnter2D(Collision2D collision)
     // {
     //     if(!enabledCollision){
@@ -133,23 +133,21 @@ public class PlayerCollision : MonoBehaviour
     // }
     void OnCollisionStay2D(Collision2D collision)
     {
-   
+
         if (!enabledCollision || !PlayerData.isAlive)
         {
             return;
         }
 
-        
-
-        if (collision.gameObject.layer == trapsLayer )
+        if (collision.gameObject.layer == trapsLayer)
         {
             // Trap layer
             PlayerCollidedWithTrap();
         }
-        else if (collision.gameObject.layer == enemyLayer )
+        else if (collision.gameObject.layer == enemyLayer)
         {
             // Enemy layer
-            BaseEnemy tempBaseEnemy = collision.gameObject.GetComponent<BaseEnemy>();
+            BaseEnemy tempBaseEnemy = collision.gameObject.GetComponentInParent<BaseEnemy>();
             // Debug.Log(tempBaseEnemy.damage);
             PlayerCollidedWithEnemy(tempBaseEnemy);
         }
@@ -159,7 +157,7 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    void PlayerCollidedWithEnemy(BaseEnemy enemy)
+    public void PlayerCollidedWithEnemy(BaseEnemy enemy)
     {
 
         PlayerData.playerFloatResources.currentHealth = PlayerData.playerFloatResources.currentHealth - enemy.damage;
@@ -174,6 +172,11 @@ public class PlayerCollision : MonoBehaviour
             // right
             directionOfKnockBack = Vector2.right;
         }
+        if (playerMovement.isDashing)
+        {
+            playerMovement.DashEscape();
+        }
+
         // Debug.Log(directionOfKnockBack);
         StartCoroutine(playerMovement.knockBackPlayer(directionOfKnockBack, 10f));
 

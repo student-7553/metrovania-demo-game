@@ -172,7 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 30
   damage: 5
-  speed: 3
+  maxSpeed: 4
+  acceleration: 4
   isAlive: 1
   isAbleToMove: 1
   firstLocalXposition: -20
@@ -275,7 +276,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &47421976
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -283,7 +284,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 47421970}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -447,6 +448,36 @@ PolygonCollider2D:
       - {x: 400, y: 350}
       - {x: 400, y: -9}
       - {x: 125, y: -9}
+--- !u!1 &114235669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 114235670}
+  m_Layer: 0
+  m_Name: Ground charger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &114235670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114235669}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -22.93, y: -4.68, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1557508761}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &144542690
 GameObject:
   m_ObjectHideFlags: 0
@@ -6728,14 +6759,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 385127546}
-  - component: {fileID: 385127551}
   - component: {fileID: 385127550}
   - component: {fileID: 385127549}
   - component: {fileID: 385127548}
   - component: {fileID: 385127547}
-  - component: {fileID: 385127552}
+  - component: {fileID: 385127551}
   m_Layer: 16
-  m_Name: Charger
+  m_Name: AirFollower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6749,11 +6779,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385127545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -43.25, y: 4.66, z: 0}
+  m_LocalPosition: {x: -43.25, y: 5.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1557508761}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &385127547
 BoxCollider2D:
@@ -6779,7 +6809,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 20, y: 20}
   m_EdgeRadius: 0
 --- !u!61 &385127548
 BoxCollider2D:
@@ -6827,7 +6857,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &385127550
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6889,42 +6919,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 385127545}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6bb463fd0f1ee418401d8327c2c891, type: 3}
+  m_Script: {fileID: 11500000, guid: 149d11d063516064499fdc1f88cc2eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 30
   damage: 5
-  speed: 5
+  maxSpeed: 7
+  acceleration: 14
   isAlive: 1
   isAbleToMove: 1
-  arraySentryLocations:
-  - {x: -22.49, y: 4.66}
---- !u!61 &385127552
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 385127545}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 20, y: 20}
-  m_EdgeRadius: 0
+  arraySentryLocations: []
 --- !u!1 &574821261
 GameObject:
   m_ObjectHideFlags: 0
@@ -17251,7 +17255,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1557508761}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1053348678
 GameObject:
@@ -17322,9 +17326,6 @@ MonoBehaviour:
   isAttacking: 0
   drawDebugRay: 1
   attackAnimationCounter: 0
-  attackAbleLayer:
-    serializedVersion: 2
-    m_Bits: 65536
 --- !u!114 &1053348683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17366,10 +17367,10 @@ MonoBehaviour:
   slideSpeed: 4
   crouchSpeed: 5
   wallJumpLerp: 5
-  dashSpeed: 35
+  dashSpeed: 30
   coyoteDuration: 0.1
   verticalVelocityLimit: 19
-  fallMultiplier: 5
+  fallMultiplier: 4
   lowJumpMultiplier: 10
   canMove: 1
   wallGrab: 0
@@ -17379,7 +17380,7 @@ MonoBehaviour:
   isTailEndDashing: 0
   isJumping: 0
   isCrouching: 0
-  allowedDashes: 2
+  allowedDashes: 1
   groundTouch: 1
   isFacingRight: 1
   dashParticle: {fileID: 0}
@@ -17414,6 +17415,7 @@ MonoBehaviour:
   dashPressed: 0
   attackPressed: 0
   interactPressed: 0
+  focusHeld: 0
   m_logInput: 0
   jumpPressedAllowanceTime: 0.1
   attackPressedAllowanceTime: 0.1
@@ -29119,6 +29121,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 47421971}
+  - {fileID: 114235670}
   - {fileID: 385127546}
   - {fileID: 1038474414}
   m_Father: {fileID: 0}

@@ -69,8 +69,11 @@ public class PlayerMovement : MonoBehaviour
     private float currentSpeed;
     private bool dashFixed = false;
     private bool dashFixRightSide = false;
-    private bool jumpFixCoroutineRunning = false;
     public int remainingDashes;
+    private int enemyLayer;
+    private int playerLayer;
+
+    private IEnumerator dashCoroutine;
 
 
     void Start()
@@ -83,6 +86,8 @@ public class PlayerMovement : MonoBehaviour
 
         currentSpeed = normalSpeed;
         remainingDashes = allowedDashes;
+        enemyLayer = LayerMask.NameToLayer("Enemies");
+        playerLayer = LayerMask.NameToLayer("Player");
 
 
     }
@@ -283,70 +288,99 @@ public class PlayerMovement : MonoBehaviour
     private void Dash(float x, float y)
     {
 
+
         remainingDashes--;
-        Vector2 dir = new Vector2(0, 0);
-        float midfloat = 0.8f;
-        float mid2float = 0.6f;
 
-        float value = (float)((Mathf.Atan2(x, y) / Math.PI) * 180f);
-        if (value < 0) value += 360f;
 
-        if (value >= 337.5f || value <= 22.5f)
-        {
-            // up
-            dir.x = 0f;
-            dir.y = midfloat;
-        }
-        else if (value >= 22.5f && value <= 80f)
-        {
-            // upright
-            dir.x = mid2float;
-            dir.y = mid2float;
-        }
-        else if (value >= 80f && value <= 100)
-        {
-            // right
-            dir.x = midfloat;
-            dir.y = 0;
-        }
-        else if (value >= 100 && value <= 157.5f)
-        {
-            // rightDown
-            dir.x = mid2float;
-            dir.y = -mid2float;
-        }
-        else if (value >= 157.5f && value <= 202.5f)
-        {
-            // down
-            dir.x = 0;
-            dir.y = -midfloat;
-        }
-        else if (value >= 202.5f && value <= 260)
-        {
-            // downLeft
-            dir.x = -mid2float;
-            dir.y = -mid2float;
-        }
-        else if (value >= 260 && value <= 280)
-        {
-            // left
-            dir.x = -midfloat;
-            dir.y = 0;
-        }
-        else if (value >= 280 && value <= 337.5f)
-        {
-            // leftUp
-            dir.x = -mid2float;
-            dir.y = mid2float;
-        }
+        // Vector2 dir = new Vector2(x, y);
+        // Vector2 dir = new Vector2(0, 0);
+        // float midfloat = 0.8f;
+        // float mid2float = 0.6f;
+
+
+
+        // float angle = (float)((Mathf.Atan2(x, y) / Math.PI) * 180f);
+        // radian = angle * 0.0174532925
+
+
+        // x = radius *  Mathf.Cos(Mathf.Atan2(x, y));
+        // y = radius *  Mathf.Sin(Mathf.Atan2(x, y));
+        float newX = 1f * Mathf.Sin(Mathf.Atan2(x, y));
+        float newY = 1f * Mathf.Cos(Mathf.Atan2(x, y));
+        Vector2 dir = new Vector2(newX, newY);
+        // if (value < 0) value += 360f;
+
+        // if (value >= 337.5f || value <= 22.5f)
+        // {
+        //     // up
+        //     dir.x = 0f;
+        //     dir.y = midfloat;
+        // }
+        // else if (value >= 22.5f && value <= 80f)
+        // {
+        //     // upright
+        //     dir.x = mid2float;
+        //     dir.y = mid2float;
+        // }
+        // else if (value >= 80f && value <= 100)
+        // {
+        //     // right
+        //     dir.x = midfloat;
+        //     dir.y = 0;
+        // }
+        // else if (value >= 100 && value <= 157.5f)
+        // {
+        //     // rightDown
+        //     dir.x = mid2float;
+        //     dir.y = -mid2float;
+        // }
+        // else if (value >= 157.5f && value <= 202.5f)
+        // {
+        //     // down
+        //     dir.x = 0;
+        //     dir.y = -midfloat;
+        // }
+        // else if (value >= 202.5f && value <= 260)
+        // {
+        //     // downLeft
+        //     dir.x = -mid2float;
+        //     dir.y = -mid2float;
+        // }
+        // else if (value >= 260 && value <= 280)
+        // {
+        //     // left
+        //     dir.x = -midfloat;
+        //     dir.y = 0;
+        // }
+        // else if (value >= 280 && value <= 337.5f)
+        // {
+        //     // leftUp
+        //     dir.x = -mid2float;
+        //     dir.y = mid2float;
+        // }
+
 
         animationScript.SetTrigger("dash");
 
-        playerRigidBody.velocity = dir * dashSpeed;
+        float tempDashSpeed = dashSpeed;
+        bool focused = false;
 
-        StartCoroutine(DashWait());
+        if (playerInput.focusHeld)
+        {
+            tempDashSpeed = tempDashSpeed * 3f;
+            Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, true);
+            focused = true;
+
+        }
+
+
+        playerRigidBody.velocity = dir * tempDashSpeed;
+
+        dashCoroutine = DashWait(focused);
+
+        StartCoroutine(dashCoroutine);
     }
-    IEnumerator DashWait()
+    IEnumerator DashWait(bool focused)
     {
 
         StartCoroutine(GroundDash());
@@ -358,40 +392,67 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         isTailEndDashing = true;
 
-        yield return DashWaitCounter();
+        yield return DashWaitCounter(focused);
 
         canMove = true;
-        // isHorizontalLerp = false;
         isDashing = false;
-        playerRigidBody.gravityScale = 2f;
+        playerRigidBody.gravityScale = 1f;
 
         yield return new WaitForSeconds(.1f);
+
         playerRigidBody.gravityScale = 3;
         isTailEndDashing = false;
-
-
-
+        if (focused)
+        {
+            Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);
+        }
+    }
+    public void DashEscape()
+    {
+        StopCoroutine(dashCoroutine);
+        // StopAllCoroutines();
+        canMove = true;
+        isDashing = false;
+        playerRigidBody.gravityScale = 3;
+        isTailEndDashing = false;
 
     }
 
 
-    IEnumerator DashWaitCounter()
+    IEnumerator DashWaitCounter(bool focused)
     {
+        if (focused)
+        {
+            playerRigidBody.drag = 0;
 
-        playerRigidBody.drag = 0;
+            yield return new WaitForSeconds(.03f);
+            playerRigidBody.drag = 15;
 
-        yield return new WaitForSeconds(.08f);
-        playerRigidBody.drag = 3;
+            yield return new WaitForSeconds(.04f);
 
-        yield return new WaitForSeconds(.06f);
-        playerRigidBody.drag = 9;
+            playerRigidBody.drag = 70;
 
-        yield return new WaitForSeconds(.06f);
-        playerRigidBody.drag = 27;
+            yield return new WaitForSeconds(.04f);
+            playerRigidBody.drag = 0;
+        }
+        else
+        {
+            playerRigidBody.drag = 0;
 
-        yield return new WaitForSeconds(.02f);
+            yield return new WaitForSeconds(.08f);
+            playerRigidBody.drag = 3;
 
-        playerRigidBody.drag = 0;
+            yield return new WaitForSeconds(.06f);
+            playerRigidBody.drag = 9;
+
+            yield return new WaitForSeconds(.06f);
+            playerRigidBody.drag = 27;
+
+            yield return new WaitForSeconds(.02f);
+
+            playerRigidBody.drag = 0;
+        }
+
 
     }
 
@@ -535,7 +596,6 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator JumpFix()
     {
-        jumpFixCoroutineRunning = true;
         while (playerCollision.onLeftBottomWall || playerCollision.onRightBottomWall)
         {
             playerRigidBody.velocity += Vector2.up * 20;
@@ -544,7 +604,7 @@ public class PlayerMovement : MonoBehaviour
         // playerRigidBody.velocity += Vector2.up * 20;
         // yield return new WaitForSeconds(.03f);
         playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 0f);
-        jumpFixCoroutineRunning = false;
+
 
     }
 
@@ -571,6 +631,7 @@ public class PlayerMovement : MonoBehaviour
         float y = Input.GetAxis("Vertical");
         float xRaw = Input.GetAxisRaw("Horizontal");
         float yRaw = Input.GetAxisRaw("Vertical");
+
         Vector2 dir = new Vector2(x, y);
         if (canMove)
         {
@@ -720,6 +781,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (playerRigidBody.velocity.y > 0 && !playerInput.jumpHeld)
         {
+            Debug.Log(Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
             playerRigidBody.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }

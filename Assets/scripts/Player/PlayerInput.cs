@@ -21,17 +21,19 @@ public class PlayerInput : MonoBehaviour
     public bool dashPressed;
     public bool attackPressed;
     public bool interactPressed;
+    public bool focusHeld;
+    // public bool focusPressed;
 
     public bool m_logInput;
     private bool readyToClear;
 
     public float jumpPressedAllowanceTime;
     private float jumpPressedRemainingAllowedTime = 0f;
-    public float attackPressedAllowanceTime ;
+    public float attackPressedAllowanceTime;
 
     private float attackPressedRemainingAllowedTime = 0f;
 
-    
+
 
 
     void Update()
@@ -40,13 +42,14 @@ public class PlayerInput : MonoBehaviour
         ClearInput();
         ProcessInputs();
 
-        if (m_logInput){
-            foreach(KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
+        if (m_logInput)
+        {
+            foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
             {
                 if (Input.GetKeyDown(kcode))
                     Debug.Log("KeyCode down: " + kcode);
             }
-         }
+        }
 
     }
 
@@ -65,25 +68,28 @@ public class PlayerInput : MonoBehaviour
         horizontal = 0f;
 
         vertical = 0f;
-        
 
-        if(jumpPressedRemainingAllowedTime > jumpPressedAllowanceTime){
+
+        if (jumpPressedRemainingAllowedTime > jumpPressedAllowanceTime)
+        {
 
             jumpPressed = false;
             jumpPressedRemainingAllowedTime = 0f;
         }
 
-        if(jumpPressedRemainingAllowedTime != 0) {
+        if (jumpPressedRemainingAllowedTime != 0)
+        {
 
             jumpPressedRemainingAllowedTime = jumpPressedRemainingAllowedTime + Time.deltaTime;
         }
-        
-        if(jumpPressed && jumpPressedRemainingAllowedTime == 0f){
+
+        if (jumpPressed && jumpPressedRemainingAllowedTime == 0f)
+        {
 
             jumpPressedRemainingAllowedTime = Time.deltaTime;
 
-        } 
-        
+        }
+
         jumpHeld = false;
         crouchPressed = false;
         crouchHeld = false;
@@ -91,23 +97,28 @@ public class PlayerInput : MonoBehaviour
         grabHeld = false;
         readyToClear = false;
         dashPressed = false;
+        focusHeld = false;
+        // focusPressed = false;
 
-        if(attackPressedRemainingAllowedTime > attackPressedAllowanceTime){
+        if (attackPressedRemainingAllowedTime > attackPressedAllowanceTime)
+        {
 
             attackPressed = false;
             attackPressedRemainingAllowedTime = 0f;
         }
 
-        if(attackPressedRemainingAllowedTime != 0) {
+        if (attackPressedRemainingAllowedTime != 0)
+        {
 
             attackPressedRemainingAllowedTime = attackPressedRemainingAllowedTime + Time.deltaTime;
         }
-        
-        if(attackPressed && attackPressedRemainingAllowedTime == 0f){
+
+        if (attackPressed && attackPressedRemainingAllowedTime == 0f)
+        {
 
             attackPressedRemainingAllowedTime = Time.deltaTime;
 
-        } 
+        }
 
         interactPressed = false;
     }
@@ -128,7 +139,7 @@ public class PlayerInput : MonoBehaviour
         crouchHeld = crouchHeld || Input.GetButton("Crouch");
 
         grabPressed = grabPressed || Input.GetButtonDown("Grab"); ;
-    
+
         grabHeld = grabHeld || Input.GetButton("Grab");
 
         dashPressed = dashPressed || Input.GetButtonDown("Dash");
@@ -136,6 +147,13 @@ public class PlayerInput : MonoBehaviour
         attackPressed = attackPressed || Input.GetButtonDown("Attack_Basic");
 
         interactPressed = interactPressed || Input.GetButtonDown("Interact");
+
+        focusHeld = focusHeld || (Input.GetAxis("Focus") == 1 ? true : false);
+
+        // focusPressed  = focusPressed || Input.GetButtonDown("Focus");
+
+        // Debug.Log();
+
     }
 
 }
