@@ -9,7 +9,7 @@ public class Slime : BaseEnemy, BaseEnemyKnockBackInterface
     public float secondLocalXposition;
     private bool isGoingToFirst = true;
     // private Rigidbody2D baseRigidbody2D;
-    int knockBackMultiplier = 20;
+    // int knockBackMultiplier = 20;
 
 
     // Update is called once per frame
@@ -40,6 +40,8 @@ public class Slime : BaseEnemy, BaseEnemyKnockBackInterface
 
                 isGoingToFirst = false;
             }
+
+            // baseRigidbody2D.mov
 
         }
         else
@@ -77,32 +79,41 @@ public class Slime : BaseEnemy, BaseEnemyKnockBackInterface
 
             Collider2D playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), playerCollider, true);
-            StartCoroutine(deathKnockBack(direction));
+            if (isKnockable)
+            {
+                StartCoroutine(deathKnockBack(direction));
+            }
+
             // after death animation call baseRigidbody2D.simulated = false;
         }
         else
         {
-            StartCoroutine(normalKnockBack(direction));
+            if (isKnockable)
+            {
+                StartCoroutine(normalKnockBack(direction));
+            }
         }
     }
 
     public IEnumerator normalKnockBack(Vector2 direction)
     {
 
-        baseRigidbody2D.velocity = direction * knockBackMultiplier;
+
+        baseRigidbody2D.velocity = direction * 20;
         isAbleToMove = false;
 
         yield return new WaitForSeconds(0.1f);
 
         baseRigidbody2D.velocity = new Vector2(0f, 0f);
         isAbleToMove = true;
+
     }
 
     public IEnumerator deathKnockBack(Vector2 direction)
     {
 
-        // baseRigidbody2D.velocity = direction * knockBackMultiplier;
-        baseRigidbody2D.velocity = new Vector2(0f, 0f);
+        baseRigidbody2D.velocity = (direction + new Vector2(0f, 2f)) * 5;
+        // baseRigidbody2D.velocity = new Vector2(0f, 0f);
         yield return new WaitForSeconds(2f);
     }
 

@@ -36,7 +36,9 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isDashing;
 
-    public bool isTailEndDashing;
+    public bool overrideBetterJumping = true;
+
+    public bool betterJumpingForceSpaceEnabled = false;
 
     public bool isJumping;
     public bool isCrouching;
@@ -64,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerCollision playerCollision;
     private AnimationScript animationScript;
     private BoxCollider2D boxCollider;
-    private bool betterJumpEnabled = true;
+    public bool betterJumpEnabled;
     private float coyoteTime;
     private float currentSpeed;
     private bool dashFixed = false;
@@ -88,6 +90,9 @@ public class PlayerMovement : MonoBehaviour
         remainingDashes = allowedDashes;
         enemyLayer = LayerMask.NameToLayer("Enemies");
         playerLayer = LayerMask.NameToLayer("Player");
+
+
+        // betterJumpEnabled = true;
 
 
     }
@@ -200,7 +205,6 @@ public class PlayerMovement : MonoBehaviour
         Vector2 wallDir = playerCollision.onRightWall ? Vector2.left : Vector2.right;
         wallGrab = false;
         isHorizontalLerp = true;
-        // betterJumpEnabled = true;
         Jump((Vector2.up / 3f + wallDir), true);
         StopCoroutine(DisableMovement(0));
         StartCoroutine(DisableMovement(.1f));
@@ -388,9 +392,8 @@ public class PlayerMovement : MonoBehaviour
         playerRigidBody.gravityScale = 0;
         canMove = false;
         betterJumpEnabled = false;
-        // isHorizontalLerp = true;
         isDashing = true;
-        isTailEndDashing = true;
+        overrideBetterJumping = true;
 
         yield return DashWaitCounter(focused);
 
@@ -401,7 +404,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(.1f);
 
         playerRigidBody.gravityScale = 3;
-        isTailEndDashing = false;
+        overrideBetterJumping = false;
         if (focused)
         {
             Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);
@@ -414,7 +417,7 @@ public class PlayerMovement : MonoBehaviour
         canMove = true;
         isDashing = false;
         playerRigidBody.gravityScale = 3;
-        isTailEndDashing = false;
+        overrideBetterJumping = false;
 
     }
 
@@ -470,6 +473,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         playerRigidBody.gravityScale = 0;
+
         betterJumpEnabled = false;
         canMove = false;
         // isHorizontalLerp = true;
@@ -512,12 +516,9 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(WallClimbUp());
 
             }
-
-
-
         }
 
-        if (!wallGrab && !wallSlide && !isTailEndDashing)
+        if (!wallGrab && !wallSlide && !overrideBetterJumping)
         {
             betterJumpEnabled = true;
             playerRigidBody.gravityScale = 3;
@@ -604,8 +605,6 @@ public class PlayerMovement : MonoBehaviour
         // playerRigidBody.velocity += Vector2.up * 20;
         // yield return new WaitForSeconds(.03f);
         playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 0f);
-
-
     }
 
     // private void updateCrouch(float x, float y)
@@ -645,7 +644,7 @@ public class PlayerMovement : MonoBehaviour
 
             coyoteTime = Time.time + coyoteDuration;
             isHorizontalLerp = false;
-            betterJumpEnabled = true;
+
         }
 
         updateWallGrab(x, y);
@@ -779,9 +778,8 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRigidBody.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (playerRigidBody.velocity.y > 0 && !playerInput.jumpHeld)
+        else if (playerRigidBody.velocity.y > 0 && !playerInput.jumpHeld )
         {
-            Debug.Log(Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
             playerRigidBody.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }
@@ -840,6 +838,15 @@ public class PlayerMovement : MonoBehaviour
         canMove = false;
         yield return new WaitForSeconds(time);
         canMove = true;
+    }
+
+    public IEnumerator DisableBetterJumpSpace(float time)
+    {
+
+        overrideBetterJumping = true;
+        betterJumpEnabled = false;
+        yield return new WaitForSeconds(time);
+        overrideBetterJumping = false;
     }
 
     IEnumerator ChangeIsHorizontalLerp(float time, bool state)

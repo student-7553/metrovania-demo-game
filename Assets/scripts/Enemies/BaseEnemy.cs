@@ -16,8 +16,9 @@ public class BaseEnemy : MonoBehaviour
     public float damage;
     public float maxSpeed;
     public float acceleration;
-    public bool isAlive;
-    public bool isAbleToMove;
+    public bool isAlive = true;
+    public bool isAbleToMove = true;
+    public bool isKnockable = true;
   
 
     [System.NonSerialized]

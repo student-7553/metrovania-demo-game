@@ -18,7 +18,7 @@ public class PlayerAttack : MonoBehaviour
     //  public LayerMask attackAbleLayer;	
 
     private Rigidbody2D playerRigidBody;
-    private PlayerMovement movement;
+    private PlayerMovement playerMovement;
     private PlayerInput playerInput;
     private PlayerCollision playerCollision;
     private AnimationScript animationScript;
@@ -39,7 +39,7 @@ public class PlayerAttack : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerCollision = GetComponent<PlayerCollision>();
         animationScript = GetComponentInChildren<AnimationScript>();
-        movement = GetComponent<PlayerMovement>();
+        playerMovement = GetComponent<PlayerMovement>();
 
         isAttacking = false;
     }
@@ -51,7 +51,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (playerInput.attackPressed && !isAttacking)
         {
-            if (movement.canMove)
+            if (playerMovement.canMove)
             {
                 BasicAttack();
             }
@@ -96,16 +96,16 @@ public class PlayerAttack : MonoBehaviour
         {
             if (playerCollision.onGround)
             {
-                movement.canMove = false;
+                playerMovement.canMove = false;
             }
             else
             {
-                movement.canMove = true;
+                playerMovement.canMove = true;
             }
 
             yield return null;
         }
-        movement.canMove = true;
+        playerMovement.canMove = true;
     }
 
     IEnumerator BasicAttackWait(Vector2 lockedAxis)
@@ -138,7 +138,7 @@ public class PlayerAttack : MonoBehaviour
             }
             else
             {
-                if (movement.isFacingRight)
+                if (playerMovement.isFacingRight)
                 {
                     direction = Vector2.right;
                 }
@@ -146,13 +146,8 @@ public class PlayerAttack : MonoBehaviour
                 {
                     direction = Vector2.left;
                 }
-
             }
-
         }
-
-
-
 
         RaycastHit2D[] hits = Physics2D.CircleCastAll(pos + new Vector2(0f, 1f), 3f, direction, 2.5f, attackAbleLayerValue);
 
@@ -165,7 +160,9 @@ public class PlayerAttack : MonoBehaviour
 
         if (hits.Length > 0 && direction == Vector2.down)
         {
-            playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, playerRigidBody.velocity.y + 30f);
+            playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 30f);
+            // StartCoroutine(playerMovement.DisableBetterJumpSpace(0.5f));
+
         }
 
         foreach (RaycastHit2D hit in hits)
@@ -183,7 +180,7 @@ public class PlayerAttack : MonoBehaviour
 
         yield return WaitForFrames(baseAttackFrameCount - 5);
         isAttacking = false;
-        movement.canMove = true;
+        playerMovement.canMove = true;
 
 
 
