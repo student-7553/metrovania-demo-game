@@ -148,8 +148,8 @@ public class PlayerCollision : MonoBehaviour
         {
             // Enemy layer
             BaseEnemy tempBaseEnemy = collision.gameObject.GetComponentInParent<BaseEnemy>();
-            // Debug.Log(tempBaseEnemy.damage);
-            PlayerCollidedWithEnemy(tempBaseEnemy);
+
+            // PlayerCollidedWithEnemy(tempBaseEnemy);
         }
         else
         {

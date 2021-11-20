@@ -2,53 +2,132 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GroundCharger : BaseEnemy, BaseEnemyKnockBackInterface
 {
-    public Vector2[] arraySentryLocations;
-    private GameObject targetGameObject = null;
+
+    public float aggroBreakDistance = 15f;
+    public float chargeAnticipationTime = 1.5f;
+    public float chargingVelocity;
+    public float chargeDuration;
+    public float chargeCooldownTime;
+    bool isCharging = false;
     void Update()
     {
         if (targetGameObject != null)
         {
+            if (!isCharging)
+            {
+                Debug.Log(Vector2.Distance(this.transform.position, targetGameObject.transform.position));
+                if (Vector2.Distance(this.transform.position, targetGameObject.transform.position) > aggroBreakDistance)
+                {
+                    Debug.Log("BROKE CHAIN");
+                    targetGameObject = null;
+                    return;
+                }
+            }
 
-            // float step = acceleration * Time.deltaTime;
-            // Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, (Vector2)targetGameObject.transform.position + new Vector2(0f, 2f), step);
+            if (!isCharging)
+            {
+                Debug.Log("CHARGING");
+                StartCoroutine(ChargeToObject(targetGameObject));
+            }
+
+
+
+
+            // float step = 1f;
+
+
+            // charge to the direction
+            // when x field is over certain range stop charging and prep to charge again
+
+            // Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, new Vector2(targetGameObject.transform.position.x, this.transform.position.x), step);
             // Vector2 newPositionDifference = newPosition - (Vector2)this.transform.position;
 
-            // baseRigidbody2D.velocity = baseRigidbody2D.velocity + newPositionDifference;
-            // baseRigidbody2D.velocity = Vector2.ClampMagnitude(baseRigidbody2D.velocity, maxSpeed);
+
+
+
+
+
 
 
 
         }
         else
         {
-            if (arraySentryLocations.Length == 1)
-            {
-                Vector2 newLocation = arraySentryLocations[0];
-
-                Vector2 newVelocity = new Vector2(0f, 0f);
-
-                float step = acceleration * Time.deltaTime;
-
-                Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, (Vector2)newLocation, step);
-                Vector2 newPositionDifference = newPosition - (Vector2)this.transform.position;
-
-                newVelocity = baseRigidbody2D.velocity + newPositionDifference;
-                newVelocity = Vector2.ClampMagnitude(newVelocity, maxSpeed);
-                if ((transform.position.x + 0.3f) > newLocation.x && (transform.position.x - 0.3f) < newLocation.x)
-                {
-                    newVelocity.x = 0;
-                }
-                if ((transform.position.y + 0.3f) > newLocation.y && (transform.position.y - 0.3f) < newLocation.y)
-                {
-                    newVelocity.y = 0;
-                }
-                baseRigidbody2D.velocity = newVelocity;
-
-            }
+            this.sentryLocationUpdate();
 
         }
+    }
+
+
+    public IEnumerator ChargeToObject(GameObject targetObject)
+    {
+        isCharging = true;
+        isKnockable = false;
+        bool chargeRightDirection;
+        if (targetObject.transform.position.x - this.transform.position.x >= 0f)
+        {
+            chargeRightDirection = true;
+        }
+        else
+        {
+            chargeRightDirection = false;
+        }
+
+
+        yield return new WaitForSeconds(chargeAnticipationTime);
+
+        if (!isAlive)
+        {
+            yield break;
+        }
+
+        baseRigidbody2D.gravityScale = 0f;
+
+        baseRigidbody2D.velocity = new Vector2(chargeRightDirection ? chargingVelocity : -chargingVelocity, 0f);
+
+
+        yield return new WaitForSeconds(chargeDuration);
+        if (!isAlive)
+        {
+            yield break;
+        }
+
+        baseRigidbody2D.gravityScale = 3f;
+        baseRigidbody2D.drag = 5;
+        yield return new WaitForSeconds(0.15f);
+        if (!isAlive)
+        {
+            yield break;
+        }
+        baseRigidbody2D.drag = 20;
+        yield return new WaitForSeconds(0.1f);
+        if (!isAlive)
+        {
+            yield break;
+        }
+        baseRigidbody2D.drag = 0;
+        baseRigidbody2D.velocity = new Vector2(0f, 0f);
+
+        yield return new WaitForSeconds(chargeCooldownTime);
+        if (!isAlive)
+        {
+            yield break;
+        }
+        isCharging = false;
+        isKnockable = true;
+
+
+    }
+
+
+
+
+    public override void StartAfter()
+    {
+        isGroundBased = true;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -77,54 +156,5 @@ public class GroundCharger : BaseEnemy, BaseEnemyKnockBackInterface
 
     }
 
-    public IEnumerator normalKnockBack(Vector2 direction)
-    {
 
-        baseRigidbody2D.velocity = direction * 20;
-        isAbleToMove = false;
-
-        yield return new WaitForSeconds(0.1f);
-
-        baseRigidbody2D.velocity = new Vector2(0f, 0f);
-        isAbleToMove = true;
-    }
-
-    public IEnumerator deathKnockBack(Vector2 direction)
-    {
-
-        baseRigidbody2D.velocity = (direction + new Vector2(0f, 2f)) * 5;
-        // baseRigidbody2D.velocity = new Vector2(0f, 0f);
-        yield return new WaitForSeconds(2f);
-    }
-
-
-    public void onHit(object[] tempObject)
-    {
-
-        if (!isAlive)
-        {
-            return;
-        }
-
-        float incomingDamage = (float)tempObject[0];
-
-        Vector2 directionOfForce = (Vector2)tempObject[1];
-
-        health = health - incomingDamage;
-
-        if (health <= 0)
-        {
-
-            isAlive = false;
-            Collider2D playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
-            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), playerCollider, true);
-
-            StartCoroutine(deathKnockBack(directionOfForce));
-
-        }
-        else
-        {
-            StartCoroutine(normalKnockBack(directionOfForce));
-        }
-    }
 }

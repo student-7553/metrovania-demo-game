@@ -294,76 +294,11 @@ public class PlayerMovement : MonoBehaviour
     private void Dash(float x, float y)
     {
 
-
         remainingDashes--;
 
-
-        // Vector2 dir = new Vector2(x, y);
-        // Vector2 dir = new Vector2(0, 0);
-        // float midfloat = 0.8f;
-        // float mid2float = 0.6f;
-
-
-
-        // float angle = (float)((Mathf.Atan2(x, y) / Math.PI) * 180f);
-        // radian = angle * 0.0174532925
-
-
-        // x = radius *  Mathf.Cos(Mathf.Atan2(x, y));
-        // y = radius *  Mathf.Sin(Mathf.Atan2(x, y));
         float newX = 1f * Mathf.Sin(Mathf.Atan2(x, y));
         float newY = 1f * Mathf.Cos(Mathf.Atan2(x, y));
         Vector2 dir = new Vector2(newX, newY);
-        // if (value < 0) value += 360f;
-
-        // if (value >= 337.5f || value <= 22.5f)
-        // {
-        //     // up
-        //     dir.x = 0f;
-        //     dir.y = midfloat;
-        // }
-        // else if (value >= 22.5f && value <= 80f)
-        // {
-        //     // upright
-        //     dir.x = mid2float;
-        //     dir.y = mid2float;
-        // }
-        // else if (value >= 80f && value <= 100)
-        // {
-        //     // right
-        //     dir.x = midfloat;
-        //     dir.y = 0;
-        // }
-        // else if (value >= 100 && value <= 157.5f)
-        // {
-        //     // rightDown
-        //     dir.x = mid2float;
-        //     dir.y = -mid2float;
-        // }
-        // else if (value >= 157.5f && value <= 202.5f)
-        // {
-        //     // down
-        //     dir.x = 0;
-        //     dir.y = -midfloat;
-        // }
-        // else if (value >= 202.5f && value <= 260)
-        // {
-        //     // downLeft
-        //     dir.x = -mid2float;
-        //     dir.y = -mid2float;
-        // }
-        // else if (value >= 260 && value <= 280)
-        // {
-        //     // left
-        //     dir.x = -midfloat;
-        //     dir.y = 0;
-        // }
-        // else if (value >= 280 && value <= 337.5f)
-        // {
-        //     // leftUp
-        //     dir.x = -mid2float;
-        //     dir.y = mid2float;
-        // }
 
 
         animationScript.SetTrigger("dash");
@@ -382,11 +317,11 @@ public class PlayerMovement : MonoBehaviour
 
         playerRigidBody.velocity = dir * tempDashSpeed;
 
-        dashCoroutine = DashWait(focused);
+        dashCoroutine = DashAfter(focused);
 
         StartCoroutine(dashCoroutine);
     }
-    IEnumerator DashWait(bool focused)
+    IEnumerator DashAfter(bool focused)
     {
 
         StartCoroutine(GroundDash());
@@ -441,7 +376,7 @@ public class PlayerMovement : MonoBehaviour
             playerRigidBody.drag = 70;
 
             Vector2 postPosition = transform.position;
-            playerAttack.DashAttack(prePosition,postPosition);
+            playerAttack.DashAttack(prePosition, postPosition);
 
             // RaycastHit2D[] hits = Physics2D.CircleCastAll(prePosition, 3f, direction, Vector2.Distance(prePosition,postPosition), attackAbleLayerValue);
             // object[] tempStorage = new object[4];

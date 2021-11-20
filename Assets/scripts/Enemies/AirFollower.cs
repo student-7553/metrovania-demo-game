@@ -6,10 +6,8 @@ public class AirFollower : BaseEnemy, BaseEnemyKnockBackInterface
 {
     // Start is called before the first frame update
 
-    public Vector2[] arraySentryLocations;
-    int knockBackMultiplier = 20;
+    // public Vector2[] arraySentryLocations;
 
-    private GameObject targetGameObject = null;
 
 
     // Update is called once per frame
@@ -39,66 +37,39 @@ public class AirFollower : BaseEnemy, BaseEnemyKnockBackInterface
         }
         else
         {
-            if (arraySentryLocations.Length == 1)
-            {
-                Vector2 newLocation = arraySentryLocations[0];
+            this.sentryLocationUpdate();
+            // if (arraySentryLocations.Length == 1)
+            // {
+            //     Vector2 newLocation = arraySentryLocations[0];
 
-                Vector2 newVelocity = new Vector2(0f, 0f);
+            //     Vector2 newVelocity = new Vector2(0f, 0f);
 
-                float step = acceleration * Time.deltaTime;
+            //     float step = acceleration * Time.deltaTime;
 
-                Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, (Vector2)newLocation, step);
-                Vector2 newPositionDifference = newPosition - (Vector2)this.transform.position;
+            //     Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, (Vector2)newLocation, step);
+            //     Vector2 newPositionDifference = newPosition - (Vector2)this.transform.position;
 
-                newVelocity = baseRigidbody2D.velocity + newPositionDifference;
-                newVelocity = Vector2.ClampMagnitude(newVelocity, maxSpeed);
-                if ((transform.position.x + 0.3f) > newLocation.x && (transform.position.x - 0.3f) < newLocation.x)
-                {
-                    newVelocity.x = 0;
-                }
-                if ((transform.position.y + 0.3f) > newLocation.y && (transform.position.y - 0.3f) < newLocation.y)
-                {
-                    newVelocity.y = 0;
-                }
-                baseRigidbody2D.velocity = newVelocity;
+            //     newVelocity = baseRigidbody2D.velocity + newPositionDifference;
+            //     newVelocity = Vector2.ClampMagnitude(newVelocity, maxSpeed);
+            //     if ((transform.position.x + 0.3f) > newLocation.x && (transform.position.x - 0.3f) < newLocation.x)
+            //     {
+            //         newVelocity.x = 0;
+            //     }
+            //     if ((transform.position.y + 0.3f) > newLocation.y && (transform.position.y - 0.3f) < newLocation.y)
+            //     {
+            //         newVelocity.y = 0;
+            //     }
+            //     baseRigidbody2D.velocity = newVelocity;
 
-            }
+            // }
 
         }
 
     }
 
-    public void onHit(object[] tempObject)
+    public override void StartAfter()
     {
-
-        if(!isAlive){
-            return;
-        }
-        float incomingDamage = (float)tempObject[0];
-
-        Vector2 directionOfForce = (Vector2)tempObject[1];
-
-        health = health - incomingDamage;
-
-        if (health <= 0)
-        {
-
-            isAlive = false;
-            Collider2D playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
-            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), playerCollider, true);
-            if (isKnockable)
-            {
-                StartCoroutine(deathKnockBack(directionOfForce));
-            }
-
-        }
-        else
-        {
-            if (isKnockable)
-            {
-                StartCoroutine(normalKnockBack(directionOfForce));
-            }
-        }
+        isGroundBased = false;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -123,20 +94,7 @@ public class AirFollower : BaseEnemy, BaseEnemyKnockBackInterface
     }
 
 
-    public IEnumerator normalKnockBack(Vector2 direction)
-    {
-
-        // Debug.Log("normalKnockBack inside slime");
-        baseRigidbody2D.velocity = direction * knockBackMultiplier;
-        isAbleToMove = false;
-
-        yield return new WaitForSeconds(0.1f);
-
-        baseRigidbody2D.velocity = new Vector2(0f, 0f);
-        isAbleToMove = true;
-    }
-
-    public IEnumerator deathKnockBack(Vector2 direction)
+    public override IEnumerator deathKnockBack(Vector2 direction)
     {
         baseRigidbody2D.velocity = new Vector2(0f, 0f);
         baseRigidbody2D.gravityScale = 3f;

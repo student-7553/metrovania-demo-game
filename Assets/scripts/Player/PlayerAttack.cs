@@ -186,7 +186,7 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
-    public void DashAttack( Vector2 prePosition, Vector2 postPosition)
+    public void DashAttack(Vector2 prePosition, Vector2 postPosition)
     {
         Vector2 tempRemainder = postPosition - prePosition;
         float newX = 1f * Mathf.Sin(Mathf.Atan2(tempRemainder.x, tempRemainder.y));
@@ -196,7 +196,7 @@ public class PlayerAttack : MonoBehaviour
         RaycastHit2D[] hits = Physics2D.CircleCastAll(prePosition, 2f, direction, Vector2.Distance(prePosition, postPosition), attackAbleLayerValue);
         object[] tempStorage = new object[2];
         tempStorage[0] = PlayerData.playerFloatResources.currentBaseAttackDamage;
-        tempStorage[1] = new Vector2(0f,0f);
+        tempStorage[1] = new Vector2(0f, 0f);
 
         foreach (RaycastHit2D hit in hits)
         {
