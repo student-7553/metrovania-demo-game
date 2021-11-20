@@ -17,10 +17,7 @@ public class MovingBackGround : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(transform.localPosition);
         
-        
-
         if(transform.localPosition.x >= loopXLocalPosition){
             transform.localPosition = new Vector2(-loopXLocalPosition + (transform.localPosition.x - loopXLocalPosition), transform.localPosition.y );
         } else {

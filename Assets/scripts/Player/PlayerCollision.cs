@@ -32,6 +32,10 @@ public class PlayerCollision : MonoBehaviour
     private int trapsLayer;
     private int enemyLayer;
     private int playerLayer;
+    private int enemyHitBoxLayer;
+
+    [System.NonSerialized]
+    public bool allowEnemyTrigger = true;
 
 
     private PlayerMovement playerMovement;
@@ -51,14 +55,16 @@ public class PlayerCollision : MonoBehaviour
         groundLayer = LayerMask.GetMask("Platform");
         trapsLayer = LayerMask.NameToLayer("Traps");
         enemyLayer = LayerMask.NameToLayer("Enemies");
+        enemyHitBoxLayer = LayerMask.NameToLayer("EnemyHitBox");
         playerLayer = LayerMask.NameToLayer("Player");
 
 
         playerMovement = GetComponent<PlayerMovement>();
 
         enabledCollision = true;
+        allowEnemyTrigger = true;
 
-        Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);
+        // Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);
 
     }
     // Update is called once per frame
@@ -131,7 +137,7 @@ public class PlayerCollision : MonoBehaviour
     //         }
     //     }
     // }
-    void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
 
         if (!enabledCollision || !PlayerData.isAlive)
@@ -144,16 +150,36 @@ public class PlayerCollision : MonoBehaviour
             // Trap layer
             PlayerCollidedWithTrap();
         }
-        else if (collision.gameObject.layer == enemyLayer)
-        {
-            // Enemy layer
-            BaseEnemy tempBaseEnemy = collision.gameObject.GetComponentInParent<BaseEnemy>();
+        // else if (collision.gameObject.layer == enemyLayer)
+        // {
+        //     // Enemy layer
+        //     BaseEnemy tempBaseEnemy = collision.gameObject.GetComponentInParent<BaseEnemy>();
 
-            // PlayerCollidedWithEnemy(tempBaseEnemy);
-        }
+        //     PlayerCollidedWithEnemy(tempBaseEnemy);
+        // }
         else
         {
             return;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (!PlayerData.isAlive)
+        {
+            return;
+        }
+        if (collision.gameObject.layer == enemyHitBoxLayer && allowEnemyTrigger)
+        {
+            BaseEnemy tempBaseEnemy = collision.gameObject.GetComponentInParent<BaseEnemy>();
+            if (tempBaseEnemy.isAlive)
+            {
+                PlayerCollidedWithEnemy(tempBaseEnemy);
+            }
+            else
+            {
+                return;
+            }
         }
     }
 
@@ -210,12 +236,15 @@ public class PlayerCollision : MonoBehaviour
     public IEnumerator disableCollisionForTime(float time)
     {
         // Physics2D.IgnoreCollision( collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, true);
+        // Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, true);
+        allowEnemyTrigger = false;
         // Physics2D.
         enabledCollision = false;
         yield return new WaitForSeconds(time);
-        Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);
+        // Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);
+        allowEnemyTrigger = true;
         enabledCollision = true;
+
 
     }
 }

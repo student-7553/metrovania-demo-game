@@ -45,6 +45,10 @@ public class BaseEnemy : MonoBehaviour
     [System.NonSerialized]
     public GameObject targetGameObject = null;
 
+
+    public virtual void StartAfter() {}
+    public virtual void recieveAggroRange(GameObject target){}
+
     void Start()
     {
         isAlive = true;
@@ -64,7 +68,7 @@ public class BaseEnemy : MonoBehaviour
 
     }
 
-    public virtual void StartAfter() { }
+    
 
     public void sentryLocationUpdate()
     {
@@ -169,9 +173,8 @@ public class BaseEnemy : MonoBehaviour
         {
 
             isAlive = false;
-            Collider2D playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
-            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), playerCollider, true);
-        
+            // Collider2D playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
+            // Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), playerCollider, true);
             StartCoroutine(deathKnockBack(directionOfForce));
 
         }
@@ -184,6 +187,8 @@ public class BaseEnemy : MonoBehaviour
 
         }
     }
+
+    
 
 
 }

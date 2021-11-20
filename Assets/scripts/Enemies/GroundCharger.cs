@@ -12,46 +12,25 @@ public class GroundCharger : BaseEnemy, BaseEnemyKnockBackInterface
     public float chargeDuration;
     public float chargeCooldownTime;
     bool isCharging = false;
+
     void Update()
     {
         if (targetGameObject != null)
         {
             if (!isCharging)
             {
-                Debug.Log(Vector2.Distance(this.transform.position, targetGameObject.transform.position));
                 if (Vector2.Distance(this.transform.position, targetGameObject.transform.position) > aggroBreakDistance)
                 {
-                    Debug.Log("BROKE CHAIN");
                     targetGameObject = null;
                     return;
                 }
             }
 
+
             if (!isCharging)
             {
-                Debug.Log("CHARGING");
                 StartCoroutine(ChargeToObject(targetGameObject));
             }
-
-
-
-
-            // float step = 1f;
-
-
-            // charge to the direction
-            // when x field is over certain range stop charging and prep to charge again
-
-            // Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, new Vector2(targetGameObject.transform.position.x, this.transform.position.x), step);
-            // Vector2 newPositionDifference = newPosition - (Vector2)this.transform.position;
-
-
-
-
-
-
-
-
 
         }
         else
@@ -130,30 +109,12 @@ public class GroundCharger : BaseEnemy, BaseEnemyKnockBackInterface
         isGroundBased = true;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    public override void recieveAggroRange(GameObject target)
     {
-
-        if (collision.gameObject.layer == playerLayer && targetGameObject == null)
+        if (target.layer == playerLayer && targetGameObject == null)
         {
-
-            targetGameObject = collision.gameObject;
-
+            targetGameObject = target;
         }
-
-
-    }
-
-    void OnTriggerExit2D(Collider2D collision)
-    {
-
-        if (collision.gameObject.layer == playerLayer && targetGameObject == null)
-        {
-
-            targetGameObject = null;
-
-        }
-
-
     }
 
 

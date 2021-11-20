@@ -309,7 +309,8 @@ public class PlayerMovement : MonoBehaviour
         if (playerInput.focusHeld)
         {
             tempDashSpeed = tempDashSpeed * 3f;
-            Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, true);
+            // Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, true);
+            playerCollision.allowEnemyTrigger = false;
             focused = true;
 
         }
@@ -344,7 +345,8 @@ public class PlayerMovement : MonoBehaviour
         overrideBetterJumping = false;
         if (focused)
         {
-            Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);
+            // Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);
+            playerCollision.allowEnemyTrigger = true;
         }
     }
     public void DashEscape()

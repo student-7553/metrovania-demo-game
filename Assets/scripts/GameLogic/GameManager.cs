@@ -118,6 +118,9 @@ public class GameManager : MonoBehaviour
     {
 		if (current == null)
 			return;
+        
+
+        PlayerData.isAlive = true;
         current.StartCoroutine(RestartScene());
 
     }
