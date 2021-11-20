@@ -65,7 +65,8 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInput playerInput;
     private PlayerCollision playerCollision;
     private AnimationScript animationScript;
-    private BoxCollider2D boxCollider;
+    // private BoxCollider2D boxCollider;
+    private PlayerAttack playerAttack;
     public bool betterJumpEnabled;
     private float coyoteTime;
     private float currentSpeed;
@@ -84,7 +85,8 @@ public class PlayerMovement : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerCollision = GetComponent<PlayerCollision>();
         animationScript = GetComponentInChildren<AnimationScript>();
-        boxCollider = GetComponent<BoxCollider2D>();
+        playerAttack = GetComponent<PlayerAttack>();
+        // boxCollider = GetComponent<BoxCollider2D>();
 
         currentSpeed = normalSpeed;
         remainingDashes = allowedDashes;
@@ -424,8 +426,11 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator DashWaitCounter(bool focused)
     {
+
         if (focused)
         {
+            Vector2 prePosition = transform.position;
+
             playerRigidBody.drag = 0;
 
             yield return new WaitForSeconds(.03f);
@@ -434,6 +439,35 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForSeconds(.04f);
 
             playerRigidBody.drag = 70;
+
+            Vector2 postPosition = transform.position;
+            playerAttack.DashAttack(prePosition,postPosition);
+
+            // RaycastHit2D[] hits = Physics2D.CircleCastAll(prePosition, 3f, direction, Vector2.Distance(prePosition,postPosition), attackAbleLayerValue);
+            // object[] tempStorage = new object[4];
+            // tempStorage[0] = PlayerData.playerFloatResources.currentBaseAttackDamage;
+            // tempStorage[1] = direction;
+
+            // // Debug.Log(hits.Length);
+
+            // if (hits.Length > 0 && direction == Vector2.down)
+            // {
+            //     playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 30f);
+            //     // StartCoroutine(playerMovement.DisableBetterJumpSpace(0.5f));
+
+            // }
+
+            // foreach (RaycastHit2D hit in hits)
+            // {
+            //     // Debug.Log(hit.collider.name);
+            //     if (!hit.collider.isTrigger)
+            //     {
+
+            //         hit.collider.gameObject.SendMessage("onHit", tempStorage);
+            //         // hit.collider.gameObject.SendMessage("onHit",PlayerData.playerFloatResources.currentBaseAttackDamage, transform.position);
+            //     }
+            // }
+
 
             yield return new WaitForSeconds(.04f);
             playerRigidBody.drag = 0;
@@ -708,7 +742,7 @@ public class PlayerMovement : MonoBehaviour
         WallParticle(y);
         DashFix();
         BetterJumping();
-        limitVelocityY();
+        limitDownwardYVelocity();
 
 
     }
@@ -778,13 +812,13 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRigidBody.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (playerRigidBody.velocity.y > 0 && !playerInput.jumpHeld )
+        else if (playerRigidBody.velocity.y > 0 && !playerInput.jumpHeld)
         {
             playerRigidBody.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }
 
-    private void limitVelocityY()
+    private void limitDownwardYVelocity()
     {
 
         // START limit verticalVelocity

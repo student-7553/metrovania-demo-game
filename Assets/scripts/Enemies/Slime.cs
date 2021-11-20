@@ -65,6 +65,9 @@ public class Slime : BaseEnemy, BaseEnemyKnockBackInterface
 
     public void onHit(object[] tempObject)
     {
+        if(!isAlive){
+            return;
+        }
         // public void onHit(float incomingDamage, Vector2 originLocation) {
         float incomingDamage = (float)tempObject[0];
 
@@ -97,12 +100,13 @@ public class Slime : BaseEnemy, BaseEnemyKnockBackInterface
 
     public IEnumerator normalKnockBack(Vector2 direction)
     {
-
-
-        baseRigidbody2D.velocity = direction * 20;
         isAbleToMove = false;
+        
+        baseRigidbody2D.velocity = direction * 20;
+        Debug.Log("are we here?/"+baseRigidbody2D.velocity);
 
         yield return new WaitForSeconds(0.1f);
+        // yield return new WaitForSeconds(1f);
 
         baseRigidbody2D.velocity = new Vector2(0f, 0f);
         isAbleToMove = true;

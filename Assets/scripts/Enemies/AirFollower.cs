@@ -70,6 +70,10 @@ public class AirFollower : BaseEnemy, BaseEnemyKnockBackInterface
 
     public void onHit(object[] tempObject)
     {
+
+        if(!isAlive){
+            return;
+        }
         float incomingDamage = (float)tempObject[0];
 
         Vector2 directionOfForce = (Vector2)tempObject[1];
