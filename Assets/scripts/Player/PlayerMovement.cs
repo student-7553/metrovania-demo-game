@@ -224,38 +224,8 @@ public class PlayerMovement : MonoBehaviour
         float newX = playerRigidBody.velocity.x > 0 ? 2 : -2;
         playerRigidBody.velocity = new Vector2(newX, -slideSpeed);
         wallSlide = true;
-        // animationScript.SetTrigger("slide");
 
     }
-
-    // private void Crouch()
-    // {
-    //     if (!canMove)
-    //     {
-    //         return;
-    //     }
-    //     isCrouching = true;
-    //     Vector3 scale = transform.localScale;
-    //     boxCollider.offset = new Vector2(boxCollider.offset.x, -(boxCollider.size.y / 4));
-    //     boxCollider.size = new Vector2(boxCollider.size.x, boxCollider.size.y / 2);
-
-
-    //     currentSpeed = crouchSpeed;
-
-    // }
-    // private void stopCrouch()
-    // {
-    //     if (!canMove)
-    //     {
-    //         return;
-    //     }
-    //     isCrouching = false;
-    //     boxCollider.size = new Vector2(boxCollider.size.x, boxCollider.size.y * 2);
-    //     boxCollider.offset = new Vector2(boxCollider.offset.x, 0);
-
-    //     currentSpeed = normalSpeed;
-
-    // }
 
 
 
@@ -335,6 +305,8 @@ public class PlayerMovement : MonoBehaviour
 
         yield return DashWaitCounter(focused);
 
+
+
         canMove = true;
         isDashing = false;
         playerRigidBody.gravityScale = 1f;
@@ -349,17 +321,6 @@ public class PlayerMovement : MonoBehaviour
             playerCollision.allowEnemyTrigger = true;
         }
     }
-    public void DashEscape()
-    {
-        StopCoroutine(dashCoroutine);
-        // StopAllCoroutines();
-        canMove = true;
-        isDashing = false;
-        playerRigidBody.gravityScale = 3;
-        overrideBetterJumping = false;
-
-    }
-
 
     IEnumerator DashWaitCounter(bool focused)
     {
@@ -379,32 +340,6 @@ public class PlayerMovement : MonoBehaviour
 
             Vector2 postPosition = transform.position;
             playerAttack.DashAttack(prePosition, postPosition);
-
-            // RaycastHit2D[] hits = Physics2D.CircleCastAll(prePosition, 3f, direction, Vector2.Distance(prePosition,postPosition), attackAbleLayerValue);
-            // object[] tempStorage = new object[4];
-            // tempStorage[0] = PlayerData.playerFloatResources.currentBaseAttackDamage;
-            // tempStorage[1] = direction;
-
-            // // Debug.Log(hits.Length);
-
-            // if (hits.Length > 0 && direction == Vector2.down)
-            // {
-            //     playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 30f);
-            //     // StartCoroutine(playerMovement.DisableBetterJumpSpace(0.5f));
-
-            // }
-
-            // foreach (RaycastHit2D hit in hits)
-            // {
-            //     // Debug.Log(hit.collider.name);
-            //     if (!hit.collider.isTrigger)
-            //     {
-
-            //         hit.collider.gameObject.SendMessage("onHit", tempStorage);
-            //         // hit.collider.gameObject.SendMessage("onHit",PlayerData.playerFloatResources.currentBaseAttackDamage, transform.position);
-            //     }
-            // }
-
 
             yield return new WaitForSeconds(.04f);
             playerRigidBody.drag = 0;
@@ -429,6 +364,27 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
+
+    public void DashEscape()
+    {
+        StopCoroutine(dashCoroutine);
+        // StopAllCoroutines();
+        canMove = true;
+        isDashing = false;
+        playerRigidBody.gravityScale = 3;
+        overrideBetterJumping = false;
+
+    }
+
+    public void PlayerUpBump()
+    {
+        playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 30f);
+        StartCoroutine(DisableBetterJumpSpace(0.4f));
+        DOVirtual.Float(10, 0, .5f, RigidbodyDrag);
+        // yield return null;
+    }
+
+
 
 
     IEnumerator WallClimbUp()
@@ -578,22 +534,7 @@ public class PlayerMovement : MonoBehaviour
         playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 0f);
     }
 
-    // private void updateCrouch(float x, float y)
-    // {
-    //     // START CROUCH
 
-
-    //     if (isCrouching && (!playerInput.crouchHeld))
-    //     {
-    //         stopCrouch();
-    //     }
-    //     if ((playerInput.crouchPressed || playerInput.crouchHeld) && playerCollision.onGround && !isCrouching)
-    //     {
-    //         Crouch();
-    //     }
-
-    //     // END CROUCH
-    // }
     void Update()
     {
 
@@ -767,10 +708,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, -verticalVelocityLimit);
         }
-        // else if (playerRigidBody.velocity.y > verticalVelocityLimit)
-        // {
-        //     playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, verticalVelocityLimit);
-        // }
+
         // END limit verticalVelocity
     }
 

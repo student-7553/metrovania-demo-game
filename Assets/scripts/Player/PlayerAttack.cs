@@ -160,19 +160,17 @@ public class PlayerAttack : MonoBehaviour
 
         if (hits.Length > 0 && direction == Vector2.down)
         {
-            playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 30f);
-            // StartCoroutine(playerMovement.DisableBetterJumpSpace(0.5f));
+
+            playerMovement.PlayerUpBump();
 
         }
 
         foreach (RaycastHit2D hit in hits)
         {
-            // Debug.Log(hit.collider.name);
             if (!hit.collider.isTrigger)
             {
 
                 hit.collider.gameObject.SendMessage("onHit", tempStorage);
-                // hit.collider.gameObject.SendMessage("onHit",PlayerData.playerFloatResources.currentBaseAttackDamage, transform.position);
             }
         }
 

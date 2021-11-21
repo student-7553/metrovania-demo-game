@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class GroundCharger : BaseEnemy, BaseEnemyKnockBackInterface
+public class GroundCharger : BaseEnemy
 {
 
     public float aggroBreakDistance = 15f;

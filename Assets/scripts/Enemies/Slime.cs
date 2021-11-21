@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime : BaseEnemy, BaseEnemyKnockBackInterface
+public class Slime : BaseEnemy
 {
 
     // Update is called once per frame

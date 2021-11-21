@@ -38,8 +38,6 @@ public class RespawnPoint : MonoBehaviour
         GameManager.playerSpikeRespawnLocation.cameraAnchorState = playerCameraAnchorSript.anchorState;
         GameManager.playerSpikeRespawnLocation.stateHeight = playerCameraAnchorSript.customHeight;
 
-        Debug.Log(GameManager.playerSpikeRespawnLocation.cameraLocation);
-
     }
 
 }

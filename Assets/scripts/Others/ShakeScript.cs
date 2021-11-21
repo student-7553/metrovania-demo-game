@@ -47,7 +47,6 @@ public class ShakeScript : MonoBehaviour
 
             if(eclipsedTime > 1.5f && !falling){
                 falling = true;
-                Debug.Log("are we here?");
                 DOVirtual.Float(1f, 0f, 0.5f, FadeTo);
                 
             }
