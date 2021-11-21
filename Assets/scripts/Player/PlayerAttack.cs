@@ -62,6 +62,9 @@ public class PlayerAttack : MonoBehaviour
     }
     private void BasicAttack()
     {
+        if(!PlayerData.playerBoolUpgrades.isAttackAvailable){
+            return;
+        }
 
         if (attackAnimationCounter > 0)
         {

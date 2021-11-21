@@ -263,6 +263,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Dash(float x, float y)
     {
+        if (!PlayerData.playerBoolUpgrades.isDashAvailable)
+        {
+            return;
+        }
 
         remainingDashes--;
 
@@ -278,10 +282,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (playerInput.focusHeld)
         {
-            tempDashSpeed = tempDashSpeed * 3f;
-            // Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, true);
-            playerCollision.allowEnemyTrigger = false;
-            focused = true;
+            if (PlayerData.playerBoolUpgrades.isSpiritDashAvailable)
+            {
+                tempDashSpeed = tempDashSpeed * 3f;
+                playerCollision.allowEnemyTrigger = false;
+                focused = true;
+            }
+
 
         }
 
