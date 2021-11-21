@@ -95,13 +95,13 @@ public class PlayerData : MonoBehaviour
 
 
         m_playerBoolUpgrades = new playerBoolUpgrades();
-        m_playerBoolUpgrades.isDashAvailable = false;
-        m_playerBoolUpgrades.isAttackAvailable = false;
+        m_playerBoolUpgrades.isDashAvailable = true;
+        m_playerBoolUpgrades.isAttackAvailable = true;
         m_playerBoolUpgrades.isHealAvailable = false;
         m_playerBoolUpgrades.isRangedSpiritAttackAvailable = false;
         m_playerBoolUpgrades.isDeflectAvailable = false;
         m_playerBoolUpgrades.isHeavySpiritAttackAvailable = false;
-        m_playerBoolUpgrades.isSpiritDashAvailable = false;
+        m_playerBoolUpgrades.isSpiritDashAvailable = true;
         m_playerBoolUpgrades.isDrillAvailable = false;
         m_playerBoolUpgrades.isMarkAvailable = false;
         m_playerBoolUpgrades.isDiveAvailable = false;

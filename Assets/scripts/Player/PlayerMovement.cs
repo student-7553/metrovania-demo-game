@@ -355,14 +355,14 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRigidBody.drag = 0;
 
-            yield return new WaitForSeconds(.08f);
+            yield return new WaitForSeconds(.04f);
             playerRigidBody.drag = 3;
 
             yield return new WaitForSeconds(.06f);
             playerRigidBody.drag = 9;
 
             yield return new WaitForSeconds(.06f);
-            playerRigidBody.drag = 27;
+            playerRigidBody.drag = 34;
 
             yield return new WaitForSeconds(.02f);
 
