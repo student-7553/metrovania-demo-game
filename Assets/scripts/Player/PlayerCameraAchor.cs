@@ -11,14 +11,14 @@ public class PlayerCameraAchor : MonoBehaviour
 
     [SerializeField]
     [Tooltip("Follow,SetHeight")]
-    private string m_anchorState;
+    public string m_anchorState;
 
     // [SerializeField]
     // private float m_followHeight;
     // [SerializeField]
     // private float m_setHeight;
     [SerializeField]
-    private float m_customHeight;
+    public float m_customHeight;
     private bool manualOverrideHeight;
 
 
@@ -82,9 +82,13 @@ public class PlayerCameraAchor : MonoBehaviour
         }
 
 
-        transform.position = GameManager.playerSpikeRespawnLocation.cameraLocation;
-        m_anchorState = GameManager.playerSpikeRespawnLocation.cameraAnchorState;
-        m_customHeight = GameManager.playerSpikeRespawnLocation.stateHeight;
+
+
+        if(GameManager.playerSpikeRespawnLocation != null){
+            transform.position = GameManager.playerSpikeRespawnLocation.cameraLocation;
+            m_anchorState = GameManager.playerSpikeRespawnLocation.cameraAnchorState;
+            m_customHeight = GameManager.playerSpikeRespawnLocation.stateHeight;
+        }
 
     }
 

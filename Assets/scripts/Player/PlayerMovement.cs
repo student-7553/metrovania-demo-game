@@ -33,21 +33,20 @@ public class PlayerMovement : MonoBehaviour
     public bool wallGrab;
     public bool isHorizontalLerp;
     public bool wallSlide;
-
     public bool isDashing;
-
     public bool overrideBetterJumping = true;
-
     public bool betterJumpingForceSpaceEnabled = false;
-
     public bool isJumping;
+    public bool isFacingRight;
     public bool isCrouching;
 
     public int allowedDashes;
 
     public bool groundTouch;
 
-    public bool isFacingRight;
+    
+    public int remainingDashes;
+
 
 
 
@@ -67,12 +66,12 @@ public class PlayerMovement : MonoBehaviour
     private AnimationScript animationScript;
     // private BoxCollider2D boxCollider;
     private PlayerAttack playerAttack;
-    public bool betterJumpEnabled;
+    private bool betterJumpEnabled;
     private float coyoteTime;
     private float currentSpeed;
     private bool dashFixed = false;
     private bool dashFixRightSide = false;
-    public int remainingDashes;
+
     private int enemyLayer;
     private int playerLayer;
 
@@ -305,6 +304,7 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(GroundDash());
 
         playerRigidBody.gravityScale = 0;
+        playerRigidBody.drag = 0;
         canMove = false;
         betterJumpEnabled = false;
         isDashing = true;
@@ -336,33 +336,71 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 prePosition = transform.position;
 
-            playerRigidBody.drag = 0;
+            // playerRigidBody.drag = 0;
+
+            // yield return new WaitForSeconds(.03f);
+            // playerRigidBody.drag = 9;
+
+            // yield return new WaitForSeconds(.05f);
+
+            // playerRigidBody.drag = 21;
+
+            // Vector2 postPosition = transform.position;
+            // playerAttack.DashAttack(prePosition, postPosition);
+
+            // // playerRigidBody.velocity = dir * tempDashSpeed;
+
+            // yield return new WaitForSeconds(.02f);
+            // //  playerRigidBody.drag = ;
+            // playerRigidBody.velocity = new Vector2(0f, 0f);
+            // yield return new WaitForSeconds(.01f);
+            // playerRigidBody.drag = 0;
+
 
             yield return new WaitForSeconds(.03f);
-            playerRigidBody.drag = 15;
 
-            yield return new WaitForSeconds(.04f);
+            playerRigidBody.velocity = playerRigidBody.velocity - (playerRigidBody.velocity / 2);
 
-            playerRigidBody.drag = 70;
+            yield return new WaitForSeconds(.05f);
+
+            playerRigidBody.velocity = playerRigidBody.velocity / 4;
 
             Vector2 postPosition = transform.position;
             playerAttack.DashAttack(prePosition, postPosition);
 
-            yield return new WaitForSeconds(.04f);
+            playerRigidBody.drag = 22;
+
+            yield return new WaitForSeconds(.02f);
+
             playerRigidBody.drag = 0;
         }
         else
         {
-            playerRigidBody.drag = 0;
+            // playerRigidBody.drag = 0;
 
-            yield return new WaitForSeconds(.04f);
-            playerRigidBody.drag = 3;
+            // yield return new WaitForSeconds(.04f);
+            // playerRigidBody.drag = 3;
+
+            // yield return new WaitForSeconds(.06f);
+            // playerRigidBody.drag = 9;
+
+            // yield return new WaitForSeconds(.06f);
+            // playerRigidBody.drag = 34;
+
+            // yield return new WaitForSeconds(.02f);
+
+            // playerRigidBody.drag = 0;
+
+            
+
+            yield return new WaitForSeconds(.1f);
+
+            playerRigidBody.velocity = playerRigidBody.velocity - (playerRigidBody.velocity / 2);
 
             yield return new WaitForSeconds(.06f);
-            playerRigidBody.drag = 9;
+            playerRigidBody.velocity = playerRigidBody.velocity / 2;
 
-            yield return new WaitForSeconds(.06f);
-            playerRigidBody.drag = 34;
+            playerRigidBody.drag = 12;
 
             yield return new WaitForSeconds(.02f);
 

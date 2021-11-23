@@ -1,14 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+
+    static PauseMenu current;
     public static bool isGamePaused = false;
     public GameObject pauseMenuUI;
 
 
+    void Start() {
+        //  if (current != null)
+        // {
+        //     Destroy(gameObject);
+        //     return;
+        // }
+        // current = this;
+        // DontDestroyOnLoad(gameObject);
+    }
+
+
     public void Resume(){
+        Debug.Log("Are we getting triggered?");
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isGamePaused = false;
@@ -20,7 +35,7 @@ public class PauseMenu : MonoBehaviour
     public void Quit(){
         
         Debug.Log("Quitting");
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("MainMenu");
         // Application.Quit();
     }
     private void Pause(){

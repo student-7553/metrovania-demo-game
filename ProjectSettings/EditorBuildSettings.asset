@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: fe360a2e7a0665a42b987c99a566f250
   - enabled: 1
-    path: Assets/Scenes/demo.unity
+    path: Assets/Scenes/Demo.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/stormPost.unity
+    path: Assets/Scenes/StormPost.unity
     guid: 191be766c75b01e4f83ca37ee9f5e6ac
+  - enabled: 1
+    path: Assets/Scenes/Core.unity
+    guid: dc7dc8691d624d243a29fdc5bf90dd93
   m_configObjects: {}

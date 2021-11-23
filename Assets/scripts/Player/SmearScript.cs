@@ -7,6 +7,7 @@ public class SmearScript : MonoBehaviour
     private Animator anim;
     private PlayerMovement move;
     private PlayerAttack attack;
+    private PlayerInput input;
 
     private bool counter = false;
 
@@ -20,34 +21,13 @@ public class SmearScript : MonoBehaviour
         anim = GetComponent<Animator>();
         attack = GetComponentInParent<PlayerAttack>();
         move = GetComponentInParent<PlayerMovement>();
+        input = GetComponentInParent<PlayerInput>();
     }
     void Update()
     {
-        // float x = Input.GetAxis("Horizontal");
-        // float y = Input.GetAxis("Vertical");
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
-        // Debug.Log(y);
-        // if (y > 0.5f || y < -0.5f)
-        // {
-        //     // transform.localPosition = new Vector2(0, y > 0 ? scaleY : -scaleY);
-        // }
-        // else
-        // {
-        //     if (move.isFacingRight)
-        //     {
-        //         // anim.SetFloat("isRightFloat", 1);
-        //         transform.localPosition = new Vector2(defaultX, defaultY);
-        //     }
-        //     else if (!move.isFacingRight)
-        //     {
-        //         // anim.SetFloat("isRightFloat", -1);
-        //         transform.localPosition = new Vector2(-defaultX, defaultY);
-        //     }
 
-        // }
-
-
+        float x = input.horizontal;
+        float y = input.vertical;
 
         if (attack.isAttacking)
         {
@@ -68,7 +48,7 @@ public class SmearScript : MonoBehaviour
         if (!attack.isAttacking)
         {
 
-            if ( (y > 0.5f || y < -0.5f ) )
+            if ((y > 0.5f || y < -0.5f))
             {
                 transform.localPosition = new Vector2(0, y > 0 ? upScaleY : downScaleY);
                 if (move.isFacingRight)

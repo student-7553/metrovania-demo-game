@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     } 
 
 
-    respawnLocation m_playerDeathRespawnData ;
+    respawnLocation m_playerDeathRespawnData;
 
     public static respawnLocation playerDeathRespawnData
     {
