@@ -11,10 +11,10 @@ public class AnimationScript : MonoBehaviour
     private PlayerCollision coll;
 
     private PlayerAttack attack;
-    private Rigidbody2D playerRigidBody;
+    // private Rigidbody2D playerRigidBody;
 
     [HideInInspector]
-    public SpriteRenderer sr;
+    // public SpriteRenderer sr;
 
 
     
@@ -25,8 +25,8 @@ public class AnimationScript : MonoBehaviour
         coll = GetComponentInParent<PlayerCollision>();
         move = GetComponentInParent<PlayerMovement>();
         attack = GetComponentInParent<PlayerAttack>();
-        sr = GetComponent<SpriteRenderer>();
-        playerRigidBody = GetComponentInParent<Rigidbody2D>();
+        // sr = GetComponent<SpriteRenderer>();
+        // playerRigidBody = GetComponentInParent<Rigidbody2D>();
 
         anim.SetFloat("isFacingRight", 1);
     }
