@@ -21,8 +21,9 @@ public class PlayerInput : MonoBehaviour
     public bool dashPressed;
     public bool attackPressed;
     public bool interactPressed;
+    public bool rangedPressed;
     public bool focusHeld;
-    // public bool focusPressed;
+
 
     public bool m_logInput;
     private bool readyToClear;
@@ -121,6 +122,8 @@ public class PlayerInput : MonoBehaviour
         }
 
         interactPressed = false;
+
+        rangedPressed = false;
     }
 
     void ProcessInputs()
@@ -147,6 +150,10 @@ public class PlayerInput : MonoBehaviour
         attackPressed = attackPressed || Input.GetButtonDown("Attack_Basic");
 
         interactPressed = interactPressed || Input.GetButtonDown("Interact");
+
+        interactPressed = interactPressed || Input.GetButtonDown("Ranged");
+        
+        rangedPressed = rangedPressed || Input.GetButtonDown("Ranged");
 
         focusHeld = focusHeld || (Input.GetAxis("Focus") == 1 ? true : false);
 

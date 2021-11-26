@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool groundTouch;
 
-    
+
     public int remainingDashes;
 
 
@@ -246,7 +246,11 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        playerRigidBody.drag = x;
+        if (playerRigidBody)
+        {
+            playerRigidBody.drag = x;
+        }
+
     }
 
     IEnumerator GroundDash()
@@ -269,8 +273,39 @@ public class PlayerMovement : MonoBehaviour
 
         remainingDashes--;
 
-        float newX = 1f * Mathf.Sin(Mathf.Atan2(x, y));
-        float newY = 1f * Mathf.Cos(Mathf.Atan2(x, y));
+
+
+
+        float radian = Mathf.Atan2(x, y);
+
+
+        float degree = radian * (180 / Mathf.PI);
+        if (degree < 0)
+        {
+            degree = 360f + degree;
+        }
+        float breakingAngle = 360f / 8f;
+        float breakingAngleDiv = breakingAngle / 2f;
+
+        float newDegree = (int)(degree / breakingAngleDiv);
+        // float remainder = (degree % breakingAngle);
+
+
+        if (newDegree % 2 == 0)
+        {
+            newDegree = (newDegree * breakingAngleDiv);
+        }
+        else
+        {
+            newDegree = ((newDegree + 1) * breakingAngleDiv);
+        }
+
+        float newRadians = newDegree * ((float)Math.PI / 180f);
+
+        float newX = 1f * Mathf.Sin(newRadians);
+        float newY = 1f * Mathf.Cos(newRadians);
+        // float newX = 1f * Mathf.Sin(Mathf.Atan2(x, y));
+        // float newY = 1f * Mathf.Cos(Mathf.Atan2(x, y));
         Vector2 dir = new Vector2(newX, newY);
 
 
@@ -306,9 +341,12 @@ public class PlayerMovement : MonoBehaviour
         playerRigidBody.gravityScale = 0;
         playerRigidBody.drag = 0;
         canMove = false;
+
         betterJumpEnabled = false;
-        isDashing = true;
         overrideBetterJumping = true;
+
+        isDashing = true;
+
 
         yield return DashWaitCounter(focused);
 
@@ -391,7 +429,7 @@ public class PlayerMovement : MonoBehaviour
 
             // playerRigidBody.drag = 0;
 
-            
+
 
             yield return new WaitForSeconds(.1f);
 
@@ -423,10 +461,26 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerUpBump()
     {
+
         playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 30f);
         StartCoroutine(DisableBetterJumpSpace(0.4f));
         DOVirtual.Float(10, 0, .5f, RigidbodyDrag);
         // yield return null;
+    }
+
+    public IEnumerator SpiritRangedAttackShift(Vector2 direction)
+    {
+        canMove = false;
+        playerRigidBody.gravityScale = 0;
+        betterJumpEnabled = false;
+        overrideBetterJumping = true;
+        playerRigidBody.velocity = (-1 * direction) * 30f;
+        Debug.Log(playerRigidBody.velocity);
+        yield return new WaitForSeconds(0.5f);
+        canMove = true;
+        playerRigidBody.gravityScale = 3;
+        overrideBetterJumping = false;
+
     }
 
 
@@ -467,9 +521,6 @@ public class PlayerMovement : MonoBehaviour
         playerRigidBody.gravityScale = 3;
         betterJumpEnabled = true;
     }
-
-
-
 
     private void updateWallGrab(float x, float y)
     {

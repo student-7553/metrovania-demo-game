@@ -199,7 +199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &47421971
 Transform:
   m_ObjectHideFlags: 0
@@ -499,7 +499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &114235670
 Transform:
   m_ObjectHideFlags: 0
@@ -6955,7 +6955,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &385127546
 Transform:
   m_ObjectHideFlags: 0
@@ -7109,7 +7109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &454833109
 Transform:
   m_ObjectHideFlags: 0
@@ -17766,6 +17766,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
+  isBasicAttacking: 0
+  isSpiritRangedAttacking: 0
+  isSpiritMeleeAttacking: 0
   drawDebugRay: 1
   attackAnimationCounter: 0
 --- !u!114 &1053348683
@@ -17822,10 +17825,11 @@ MonoBehaviour:
   overrideBetterJumping: 0
   betterJumpingForceSpaceEnabled: 0
   isJumping: 0
+  isFacingRight: 1
   isCrouching: 0
   allowedDashes: 1
   groundTouch: 1
-  isFacingRight: 1
+  remainingDashes: 0
   dashParticle: {fileID: 0}
   jumpParticle: {fileID: 1931235429}
   groundEntryParticles:
@@ -17833,8 +17837,6 @@ MonoBehaviour:
   - {fileID: 790935545}
   wallJumpParticle: {fileID: 1112427727}
   slideParticle: {fileID: 1356832697}
-  betterJumpEnabled: 0
-  remainingDashes: 0
 --- !u!114 &1053348685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17859,6 +17861,7 @@ MonoBehaviour:
   dashPressed: 0
   attackPressed: 0
   interactPressed: 0
+  rangedPressed: 0
   focusHeld: 0
   m_logInput: 0
   jumpPressedAllowanceTime: 0.1
@@ -22791,7 +22794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1117244671
 Transform:
   m_ObjectHideFlags: 0
@@ -24301,7 +24304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196079384}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -29.136711, y: 3.479999, z: -30}
+  m_LocalPosition: {x: -29.999992, y: 3.479999, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2052520689}
@@ -29644,7 +29647,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9311808e8e06994d8d3a40c81033fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sr: {fileID: 0}
 --- !u!212 &1504639573
 SpriteRenderer:
   m_ObjectHideFlags: 0

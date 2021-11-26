@@ -10,6 +10,9 @@ public class playerFloatResourceClass
     public float currentBaseAttackDamage;
     public float baseAttackDamage;
 
+    public float currentSpiritRangedAttackDamage;
+    public float currentSpiritMeleeAttackDamage;
+
 }
 
 public class playerBoolUpgrades
@@ -91,6 +94,8 @@ public class PlayerData : MonoBehaviour
         m_playerFloatResources.maximumMana = 50;
         m_playerFloatResources.currentBaseAttackDamage = 10;
         m_playerFloatResources.baseAttackDamage = 10;
+        m_playerFloatResources.currentSpiritRangedAttackDamage = 30;
+        m_playerFloatResources.currentSpiritMeleeAttackDamage = 30;
 
 
 

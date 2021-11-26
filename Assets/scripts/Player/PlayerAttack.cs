@@ -11,6 +11,9 @@ public class PlayerAttack : MonoBehaviour
     [Space]
     [Header("Booleans")]
     public bool isAttacking;
+    public bool isBasicAttacking;
+    public bool isSpiritRangedAttacking;
+    public bool isSpiritMeleeAttacking;
 
     public bool drawDebugRay;
 
@@ -33,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
-        // attackAbleLayerValue = attackAbleLayer.value;
+
         attackAbleLayerValue = LayerMask.GetMask("Enemies");
         playerRigidBody = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
@@ -41,19 +44,39 @@ public class PlayerAttack : MonoBehaviour
         animationScript = GetComponentInChildren<AnimationScript>();
         playerMovement = GetComponent<PlayerMovement>();
 
-        isAttacking = false;
+        isBasicAttacking = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (playerInput.focusHeld && playerInput.rangedPressed && !isAttacking)
+        {
+            // ranged spirit attack
+            if (playerMovement.canMove)
+            {
 
+                rangedSpiritAttack(playerInput.horizontal, playerInput.vertical);
+            }
+
+        }
+
+        if (playerInput.focusHeld && playerInput.attackPressed && !isAttacking)
+        {
+            // melee heavy spirit attack
+            if (playerMovement.canMove)
+            {
+
+            }
+
+        }
 
         if (playerInput.attackPressed && !isAttacking)
         {
             if (playerMovement.canMove)
             {
                 BasicAttack();
+
             }
 
         }
@@ -62,7 +85,8 @@ public class PlayerAttack : MonoBehaviour
     }
     private void BasicAttack()
     {
-        if(!PlayerData.playerBoolUpgrades.isAttackAvailable){
+        if (!PlayerData.playerBoolUpgrades.isAttackAvailable)
+        {
             return;
         }
 
@@ -80,6 +104,9 @@ public class PlayerAttack : MonoBehaviour
             attackAnimationCounter = -1;
         }
 
+
+
+        isBasicAttacking = true;
         isAttacking = true;
 
         animationScript.SetFloat("attackCounter", attackAnimationCounter);
@@ -93,9 +120,9 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
-    IEnumerator BasicAttackGroundWait()
+    private IEnumerator BasicAttackGroundWait()
     {
-        while (isAttacking)
+        while (isBasicAttacking)
         {
             if (playerCollision.onGround)
             {
@@ -111,7 +138,7 @@ public class PlayerAttack : MonoBehaviour
         playerMovement.canMove = true;
     }
 
-    IEnumerator BasicAttackWait(Vector2 lockedAxis)
+    private IEnumerator BasicAttackWait(Vector2 lockedAxis)
     {
 
         yield return WaitForFrames(2);
@@ -180,6 +207,7 @@ public class PlayerAttack : MonoBehaviour
         yield return WaitForFrames(3);
 
         yield return WaitForFrames(baseAttackFrameCount - 5);
+        isBasicAttacking = false;
         isAttacking = false;
         playerMovement.canMove = true;
 
@@ -194,7 +222,7 @@ public class PlayerAttack : MonoBehaviour
         float newY = 1f * Mathf.Cos(Mathf.Atan2(tempRemainder.x, tempRemainder.y));
         Vector2 direction = new Vector2(newX, newY);
 
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(prePosition, 2f, direction, Vector2.Distance(prePosition, postPosition), attackAbleLayerValue);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(prePosition, 2f, direction, Vector2.Distance(prePosition, postPosition), (1 << attackAbleLayerValue));
         object[] tempStorage = new object[2];
         tempStorage[0] = PlayerData.playerFloatResources.currentBaseAttackDamage;
         tempStorage[1] = new Vector2(0f, 0f);
@@ -207,7 +235,44 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
-    public static IEnumerator WaitForFrames(int frameCount)
+
+    private void rangedSpiritAttack(float xAxis, float yAxis)
+    {
+        isAttacking = true;
+        isSpiritRangedAttacking = true;
+
+        // playerMovement.canMove = false;
+        
+
+        Vector2 direction = new Vector2(xAxis, yAxis);
+        
+        StartCoroutine(playerMovement.SpiritRangedAttackShift(direction));
+        // animation
+        StartCoroutine(rangedSpiritAttackAfter(direction));
+
+
+    }
+
+    private IEnumerator rangedSpiritAttackAfter(Vector2 direction)
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        RaycastHit2D hit = Physics2D.CircleCast(this.transform.position, 2f, direction, 10f, attackAbleLayerValue);
+
+        object[] tempStorage = new object[2];
+        tempStorage[0] = PlayerData.playerFloatResources.currentSpiritRangedAttackDamage;
+        tempStorage[1] = direction;
+
+        if (hit && !hit.collider.isTrigger)
+        {
+            hit.collider.gameObject.SendMessage("onHit", tempStorage);
+        }
+
+        isAttacking = false;
+        isSpiritRangedAttacking = false;
+        playerMovement.canMove = true;
+    }
+    private static IEnumerator WaitForFrames(int frameCount)
     {
         while (frameCount > 0)
         {

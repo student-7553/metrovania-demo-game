@@ -29,7 +29,7 @@ public class SmearScript : MonoBehaviour
         float x = input.horizontal;
         float y = input.vertical;
 
-        if (attack.isAttacking)
+        if (attack.isBasicAttacking)
         {
             if (!counter)
             {
@@ -45,7 +45,7 @@ public class SmearScript : MonoBehaviour
             }
         }
 
-        if (!attack.isAttacking)
+        if (!attack.isBasicAttacking)
         {
 
             if ((y > 0.5f || y < -0.5f))
