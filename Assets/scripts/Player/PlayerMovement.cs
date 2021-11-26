@@ -474,9 +474,14 @@ public class PlayerMovement : MonoBehaviour
         playerRigidBody.gravityScale = 0;
         betterJumpEnabled = false;
         overrideBetterJumping = true;
+
         playerRigidBody.velocity = (-1 * direction) * 30f;
-        Debug.Log(playerRigidBody.velocity);
-        yield return new WaitForSeconds(0.5f);
+
+        yield return new WaitForSeconds(0.05f);
+        playerRigidBody.velocity = new Vector2(0f,0f);
+
+
+        yield return new WaitForSeconds(0.3f);
         canMove = true;
         playerRigidBody.gravityScale = 3;
         overrideBetterJumping = false;

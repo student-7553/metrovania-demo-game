@@ -22,7 +22,7 @@ public class playerBoolUpgrades
     public bool isHealAvailable;
     public bool isRangedSpiritAttackAvailable;
     public bool isDeflectAvailable;
-    public bool isHeavySpiritAttackAvailable;
+    public bool iSpiritMeleeAttackAvailable;
     public bool isSpiritDashAvailable;
     public bool isDrillAvailable;
     public bool isMarkAvailable;
@@ -87,6 +87,8 @@ public class PlayerData : MonoBehaviour
 
         isAlive = true;
 
+        // change this to read from save file 
+
         m_playerFloatResources = new playerFloatResourceClass();
         m_playerFloatResources.currentHealth = 30;
         m_playerFloatResources.maximumHealth = 30;
@@ -102,17 +104,17 @@ public class PlayerData : MonoBehaviour
         m_playerBoolUpgrades = new playerBoolUpgrades();
         m_playerBoolUpgrades.isDashAvailable = true;
         m_playerBoolUpgrades.isAttackAvailable = true;
-        m_playerBoolUpgrades.isHealAvailable = false;
-        m_playerBoolUpgrades.isRangedSpiritAttackAvailable = false;
-        m_playerBoolUpgrades.isDeflectAvailable = false;
-        m_playerBoolUpgrades.isHeavySpiritAttackAvailable = false;
+        m_playerBoolUpgrades.isHealAvailable = true;
+        m_playerBoolUpgrades.isRangedSpiritAttackAvailable = true;
+        m_playerBoolUpgrades.isDeflectAvailable = true;
+        m_playerBoolUpgrades.iSpiritMeleeAttackAvailable = true;
         m_playerBoolUpgrades.isSpiritDashAvailable = true;
-        m_playerBoolUpgrades.isDrillAvailable = false;
-        m_playerBoolUpgrades.isMarkAvailable = false;
-        m_playerBoolUpgrades.isDiveAvailable = false;
-        
-        
-       
+        m_playerBoolUpgrades.isDrillAvailable = true;
+        m_playerBoolUpgrades.isMarkAvailable = true;
+        m_playerBoolUpgrades.isDiveAvailable = true;
+
+
+
     }
 
     // Update is called once per frame
