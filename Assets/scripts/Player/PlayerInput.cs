@@ -11,6 +11,8 @@ public class PlayerInput : MonoBehaviour
 {
     public float horizontal;
     public float vertical;
+    public float horizontalSoft;
+    public float verticalSoft;
     public bool jumpHeld;
     public bool jumpPressed;
     public bool simJumpPressed;
@@ -30,7 +32,7 @@ public class PlayerInput : MonoBehaviour
 
     public float jumpPressedAllowanceTime;
     private float jumpPressedRemainingAllowedTime = 0f;
-    public float attackPressedAllowanceTime;
+    public float attackPressedAllowanceTime = 0.3f;
 
     private float attackPressedRemainingAllowedTime = 0f;
 
@@ -70,6 +72,10 @@ public class PlayerInput : MonoBehaviour
 
         vertical = 0f;
 
+        horizontalSoft = 0f;
+
+        verticalSoft = 0f;
+
 
         if (jumpPressedRemainingAllowedTime > jumpPressedAllowanceTime)
         {
@@ -108,17 +114,21 @@ public class PlayerInput : MonoBehaviour
             attackPressedRemainingAllowedTime = 0f;
         }
 
-        if (attackPressedRemainingAllowedTime != 0)
+        if (attackPressedRemainingAllowedTime != 0f)
         {
-
             attackPressedRemainingAllowedTime = attackPressedRemainingAllowedTime + Time.deltaTime;
+        }
+
+
+        if (Input.GetButtonDown("Attack_Basic") && attackPressed)
+        {
+            attackPressedRemainingAllowedTime = Time.deltaTime;
+
         }
 
         if (attackPressed && attackPressedRemainingAllowedTime == 0f)
         {
-
             attackPressedRemainingAllowedTime = Time.deltaTime;
-
         }
 
         interactPressed = false;
@@ -133,6 +143,10 @@ public class PlayerInput : MonoBehaviour
 
         vertical = Input.GetAxis("Vertical");
 
+        horizontal = Input.GetAxis("HorizontalSoft");
+
+        vertical = Input.GetAxis("VerticalSoft");
+
         jumpPressed = jumpPressed || Input.GetButtonDown("Jump");
 
         jumpHeld = jumpHeld || Input.GetButton("Jump");
@@ -145,21 +159,17 @@ public class PlayerInput : MonoBehaviour
 
         grabHeld = grabHeld || Input.GetButton("Grab");
 
+
         dashPressed = dashPressed || Input.GetButtonDown("Dash");
 
         attackPressed = attackPressed || Input.GetButtonDown("Attack_Basic");
 
         interactPressed = interactPressed || Input.GetButtonDown("Interact");
 
-        interactPressed = interactPressed || Input.GetButtonDown("Ranged");
-        
         rangedPressed = rangedPressed || Input.GetButtonDown("Ranged");
 
         focusHeld = focusHeld || (Input.GetAxis("Focus") == 1 ? true : false);
 
-        // focusPressed  = focusPressed || Input.GetButtonDown("Focus");
-
-        // Debug.Log();
 
     }
 

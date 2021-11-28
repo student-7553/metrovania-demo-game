@@ -374,75 +374,84 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 prePosition = transform.position;
 
-            // playerRigidBody.drag = 0;
+            playerRigidBody.drag = 0;
 
             // yield return new WaitForSeconds(.03f);
             // playerRigidBody.drag = 9;
-
             // yield return new WaitForSeconds(.05f);
 
-            // playerRigidBody.drag = 21;
+            yield return new WaitForSeconds(.06f);
 
-            // Vector2 postPosition = transform.position;
-            // playerAttack.DashAttack(prePosition, postPosition);
-
-            // // playerRigidBody.velocity = dir * tempDashSpeed;
-
-            // yield return new WaitForSeconds(.02f);
-            // //  playerRigidBody.drag = ;
-            // playerRigidBody.velocity = new Vector2(0f, 0f);
-            // yield return new WaitForSeconds(.01f);
-            // playerRigidBody.drag = 0;
-
-
-            yield return new WaitForSeconds(.03f);
-
-            playerRigidBody.velocity = playerRigidBody.velocity - (playerRigidBody.velocity / 2);
-
-            yield return new WaitForSeconds(.05f);
-
-            playerRigidBody.velocity = playerRigidBody.velocity / 4;
+            playerRigidBody.drag = 42;
 
             Vector2 postPosition = transform.position;
             playerAttack.DashAttack(prePosition, postPosition);
 
-            playerRigidBody.drag = 22;
-
             yield return new WaitForSeconds(.02f);
 
+            playerRigidBody.velocity = new Vector2(0f, 0f);
             playerRigidBody.drag = 0;
+
+
+
+            // yield return new WaitForSeconds(.03f);
+
+            // playerRigidBody.velocity = playerRigidBody.velocity - (playerRigidBody.velocity / 2);
+
+            // yield return new WaitForSeconds(.05f);
+
+            // playerRigidBody.velocity = playerRigidBody.velocity / 4;
+
+            // Vector2 postPosition = transform.position;
+            // playerAttack.DashAttack(prePosition, postPosition);
+
+            // playerRigidBody.drag = 22;
+
+            // yield return new WaitForSeconds(.02f);
+
+            // playerRigidBody.drag = 0;
         }
         else
         {
-            // playerRigidBody.drag = 0;
+            playerRigidBody.drag = 0;
 
             // yield return new WaitForSeconds(.04f);
             // playerRigidBody.drag = 3;
 
             // yield return new WaitForSeconds(.06f);
-            // playerRigidBody.drag = 9;
-
-            // yield return new WaitForSeconds(.06f);
-            // playerRigidBody.drag = 34;
-
-            // yield return new WaitForSeconds(.02f);
-
-            // playerRigidBody.drag = 0;
-
-
 
             yield return new WaitForSeconds(.1f);
 
-            playerRigidBody.velocity = playerRigidBody.velocity - (playerRigidBody.velocity / 2);
+            playerRigidBody.drag = 9;
 
             yield return new WaitForSeconds(.06f);
-            playerRigidBody.velocity = playerRigidBody.velocity / 2;
-
-            playerRigidBody.drag = 12;
+            playerRigidBody.drag = 34;
 
             yield return new WaitForSeconds(.02f);
 
             playerRigidBody.drag = 0;
+
+
+
+            // yield return new WaitForSeconds(.1f);
+
+            // playerRigidBody.velocity = playerRigidBody.velocity - (playerRigidBody.velocity / 2);
+
+            // yield return new WaitForSeconds(.06f);
+            // playerRigidBody.velocity = playerRigidBody.velocity / 2;
+
+            // yield return new WaitForSeconds(.16f);
+
+            // playerRigidBody.drag = 100;
+            // playerRigidBody.velocity = playerRigidBody.velocity / 4;
+
+
+
+            // yield return new WaitForSeconds(.02f);
+            // Debug.Log(playerRigidBody.drag);
+            // Debug.Log(playerRigidBody.velocity);
+
+            // playerRigidBody.drag = 0;
         }
 
 
@@ -478,7 +487,7 @@ public class PlayerMovement : MonoBehaviour
         playerRigidBody.velocity = (-1 * direction) * 30f;
 
         yield return new WaitForSeconds(0.05f);
-        playerRigidBody.velocity = new Vector2(0f,0f);
+        playerRigidBody.velocity = new Vector2(0f, 0f);
 
 
         yield return new WaitForSeconds(0.3f);
@@ -644,13 +653,15 @@ public class PlayerMovement : MonoBehaviour
         float xRaw = Input.GetAxisRaw("Horizontal");
         float yRaw = Input.GetAxisRaw("Vertical");
 
-        Vector2 dir = new Vector2(x, y);
+
+        // Vector2 dir = new Vector2(xRaw, yRaw);
         if (canMove)
         {
             animationScript.SetHorizontalMovement(x, y, playerRigidBody.velocity.y, playerRigidBody.velocity.x);
         }
+        Vector2 walkDir = new Vector2(x, y);
 
-        Walk(dir);
+        Walk(walkDir);
 
         if (playerCollision.onGround && !isDashing)
         {
@@ -787,11 +798,11 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        if (playerRigidBody.velocity.y < 0)
+        if (playerRigidBody.velocity.y < -0.3f)
         {
             playerRigidBody.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (playerRigidBody.velocity.y > 0 && !playerInput.jumpHeld)
+        else if (playerRigidBody.velocity.y > 0.3f && !playerInput.jumpHeld)
         {
             playerRigidBody.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }

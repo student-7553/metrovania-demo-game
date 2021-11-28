@@ -23,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
     private PlayerInput playerInput;
     private PlayerCollision playerCollision;
     private AnimationScript animationScript;
-    private int baseAttackFrameCount = 21;
+    public int baseAttackFrameCount = 25;
 
     [HideInInspector]
     private Color debugCollisionColor = Color.red;
