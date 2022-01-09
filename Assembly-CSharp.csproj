@@ -36,8 +36,10 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Material\extra\tutorial-25d-game-unity-unity-2020\Assets\Common\Scripts\EditableColliderTool.cs" />
      <Compile Include="Assets\Scripts\GameLogic\AudioManager.cs" />
      <Compile Include="Assets\Scripts\Enemies\GroundCharger.cs" />
+     <Compile Include="Assets\Material\extra\tutorial-25d-game-unity-unity-2020\Assets\4 – Hinge\HingeSync.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUtils.cs" />
@@ -50,6 +52,7 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
      <Compile Include="Assets\Scripts\Others\BackGroundCommet.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
+     <Compile Include="Assets\Material\extra\tutorial-25d-game-unity-unity-2020\Assets\Common\Scripts\BasicCharacter.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyAggroRange.cs" />
@@ -58,6 +61,7 @@
      <Compile Include="Assets\DOTween\Modules\DOTweenModulePhysics2D.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
+     <Compile Include="Assets\Material\extra\tutorial-25d-game-unity-unity-2020\Assets\5 – Camera\CamZone.cs" />
      <Compile Include="Assets\Scripts\DashCloneHandler.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
@@ -80,6 +84,7 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
      <Compile Include="Assets\Scripts\Collectable\Collectable.cs" />
      <Compile Include="Assets\Scripts\TriggerPoints\SceneTransitionPoint.cs" />
+     <Compile Include="Assets\Material\extra\tutorial-25d-game-unity-unity-2020\Assets\Common\Scripts\EditableShape.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
      <Compile Include="Assets\Scripts\Enemies\GroundFollower.cs" />
@@ -108,6 +113,7 @@
      <Compile Include="Assets\Scripts\Others\CollapsingPlatform.cs" />
      <Compile Include="Assets\Scripts\Others\ShakeScript.cs" />
      <Compile Include="Assets\Scripts\Player\SmearScript.cs" />
+     <Compile Include="Assets\Material\extra\tutorial-25d-game-unity-unity-2020\Assets\Common\Scripts\GravityAnimation.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleAudio.cs" />
      <Compile Include="Assets\Scripts\Player\AnimationScript.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
@@ -120,30 +126,38 @@
      <Compile Include="Assets\Scripts\GameLogic\PauseMenu.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+     <None Include="Assets\Material\extra\Sprite-Lit-DefaultZ.shader" />
+     <None Include="Assets\Material\extra\tutorial-25d-game-unity-unity-2020\Assets\2 – Depth\UnlitMetaPass.hlsl" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
-     <None Include="Assets\Material\unlit-test.shader" />
+     <None Include="Assets\Material\extra\idk.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-     <None Include="Assets\Material\unity2020Shader\DefaultResourcesExtra\Sprites-Default.shader" />
+     <None Include="Assets\Material\extra\tutorial-25d-game-unity-unity-2020\Assets\2 – Depth\DepthOnlyPass.hlsl" />
+     <None Include="Assets\Material\extra\tutorial-25d-game-unity-unity-2020\Assets\Common\Shaders\Prototype Pattern.shader" />
+     <None Include="Assets\Material\extra\Sprites-DefaultZ.shader" />
      <None Include="Assets\DOTween\readme.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+     <None Include="Assets\Material\extra\tutorial-25d-game-unity-unity-2020\Assets\2 – Depth\SurfaceInput.hlsl" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
-     <None Include="Assets\Material\unity2020Shader\DefaultResourcesExtra\Sprites-Diffuse.shader" />
+     <None Include="Assets\Material\extra\unity2020Shader\DefaultResourcesExtra\Sprites-Diffuse.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+     <None Include="Assets\Material\extra\tutorial-25d-game-unity-unity-2020\Assets\2 – Depth\UnlitSprite.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+     <None Include="Assets\Material\extra\tutorial-25d-game-unity-unity-2020\ProjectSettings\ProjectVersion.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-     <None Include="Assets\Material\unity2020Shader\DefaultResourcesExtra\Sprites-Mask.shader" />
+     <None Include="Assets\Material\extra\unity2020Shader\DefaultResourcesExtra\Sprites-Mask.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+     <None Include="Assets\Material\extra\tutorial-25d-game-unity-unity-2020\Assets\2 – Depth\UnlitInput.hlsl" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
@@ -851,6 +865,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="UnitySpriteShadersEditor.csproj">
+      <Project>{67085c70-dfeb-9c30-a30c-09d69e7d84cc}</Project>
+      <Name>UnitySpriteShadersEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
