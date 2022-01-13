@@ -6,7 +6,7 @@ public class DashCloneHandler : MonoBehaviour
 {
     // Start is called before the first frame update
     public PlayerMovement playerMovement;
-
+    
     private bool locked;
 
     public class singleChild {
@@ -14,6 +14,11 @@ public class DashCloneHandler : MonoBehaviour
         public bool isLocked;
         public Vector2 lockedVector2;
     }   
+
+
+
+
+    
 
     private List<singleChild> childObjects; 
 
