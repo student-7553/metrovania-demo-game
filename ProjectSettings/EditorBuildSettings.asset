@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Demo.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/StormPost.unity
+    path: Assets/Scenes/stormPost/stormPost_0.unity
     guid: 191be766c75b01e4f83ca37ee9f5e6ac
   - enabled: 1
     path: Assets/Scenes/Core.unity
