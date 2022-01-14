@@ -32,10 +32,11 @@ public class playerBoolUpgrades
 public class PlayerData : MonoBehaviour
 {
     static PlayerData current;
-
     static public bool isAlive;
 
 
+    // death,trap
+    static public string lastDeath;
 
     private playerFloatResourceClass m_playerFloatResources;
 
@@ -86,7 +87,7 @@ public class PlayerData : MonoBehaviour
     {
 
         isAlive = true;
-
+        lastDeath = "death";
         // change this to read from save file 
 
         m_playerFloatResources = new playerFloatResourceClass();
@@ -125,6 +126,7 @@ public class PlayerData : MonoBehaviour
         // check if player is alive
         if (m_playerFloatResources.currentHealth <= 0)
         {
+            
             // isAlive = false;
             GameManager.PlayerDied();
 

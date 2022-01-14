@@ -5,7 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionPoint : MonoBehaviour
 {
-    int playerLayer;
+    private int playerLayer;
+    public int sceneIndex;
+    public Vector2 playerlocation;
+    public string cameraAnchorState;
+    public float stateHeight;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +29,11 @@ public class SceneTransitionPoint : MonoBehaviour
             return;
         }
 
-        SceneManager.LoadSceneAsync("StormPost");
+        GameManager.playerDeathRespawnData.playerlocation = playerlocation;
+        GameManager.playerDeathRespawnData.cameraAnchorState = cameraAnchorState;
+        GameManager.playerDeathRespawnData.stateHeight = stateHeight;
+
+
+        SceneManager.LoadSceneAsync(sceneIndex);
     }
 }

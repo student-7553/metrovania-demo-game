@@ -213,7 +213,7 @@ public class PlayerCollision : MonoBehaviour
 
     void PlayerCollidedWithTrap()
     {
-        PlayerData.isAlive = false;
+        
         gameObject.SetActive(false);
         GameManager.PlayerHitTrap();
         AudioManager.PlayDeathAudio();

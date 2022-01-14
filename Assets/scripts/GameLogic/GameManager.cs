@@ -17,9 +17,10 @@ public class GameManager : MonoBehaviour
     bool m_isGameOver;                            //Is the game currently over?
 
 
-    public class respawnLocation {
-        public Vector2 playerlocation = new Vector2(0,0); 
-        public Vector2 cameraLocation = new Vector2(0,0);
+    public class respawnLocation
+    {
+        public Vector2 playerlocation = new Vector2(0, 0);
+        public Vector2 cameraLocation = new Vector2(0, 0);
         public string cameraAnchorState;
         public float stateHeight;
     }
@@ -28,33 +29,35 @@ public class GameManager : MonoBehaviour
 
     public static respawnLocation playerSpikeRespawnLocation
     {
-        get {return current.m_playerSpikeRespawnData; }
-        set {
+        get { return current.m_playerSpikeRespawnData; }
+        set
+        {
             if (current == null)
-			    return;
+                return;
 
             current.m_playerSpikeRespawnData = value;
         }
-    } 
+    }
 
 
     respawnLocation m_playerDeathRespawnData;
 
     public static respawnLocation playerDeathRespawnData
     {
-        get {return current.m_playerDeathRespawnData; }
-        set {
+        get { return current.m_playerDeathRespawnData; }
+        set
+        {
             if (current == null)
-			    return;
+                return;
 
             current.m_playerDeathRespawnData = value;
         }
-    } 
-
-    
+    }
 
 
-  
+
+
+
 
     void Start()
     {
@@ -67,29 +70,36 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         gameSettings();
-        awakeGameLogic();        
-        
+        awakeGameLogic();
+
     }
 
-    private void awakeGameLogic(){
-        // collectableList = new List<Collectable>();
-        m_playerSpikeRespawnData = new respawnLocation();
+    private void awakeGameLogic()
+    {
 
-
-        
         PlayerMovement playerMovement = (PlayerMovement)FindObjectOfType(typeof(PlayerMovement));
-        m_playerSpikeRespawnData.playerlocation = playerMovement.transform.position;
-
         PlayerCameraAchor playerCameraAchor = (PlayerCameraAchor)FindObjectOfType(typeof(PlayerCameraAchor));
+
+        m_playerSpikeRespawnData = new respawnLocation();
+        m_playerSpikeRespawnData.playerlocation = playerMovement.transform.position;
         m_playerSpikeRespawnData.cameraLocation = playerCameraAchor.transform.position;
         m_playerSpikeRespawnData.cameraAnchorState = playerCameraAchor.anchorState;
         m_playerSpikeRespawnData.stateHeight = playerCameraAchor.customHeight;
 
-        
+
+
+        m_playerDeathRespawnData = new respawnLocation();
+        m_playerDeathRespawnData.playerlocation = playerMovement.transform.position;
+        m_playerDeathRespawnData.cameraLocation = playerCameraAchor.transform.position;
+        m_playerDeathRespawnData.cameraAnchorState = playerCameraAchor.anchorState;
+        m_playerDeathRespawnData.stateHeight = playerCameraAchor.customHeight;
+
+
 
     }
 
-    private void gameSettings(){
+    private void gameSettings()
+    {
         Application.targetFrameRate = 60;
     }
 
@@ -104,40 +114,45 @@ public class GameManager : MonoBehaviour
 
     public static void PlayerDied()
     {
-		if (current == null)
-			return;
+        if (current == null)
+            return;
 
-        // m_playerFloatResources.currentHealth
+
+        PlayerData.isAlive = false;
+        PlayerData.lastDeath = "death";
+
         PlayerData.playerFloatResources.currentHealth = PlayerData.playerFloatResources.maximumHealth;
-        // PlayerData.enabledCollision;
+
         current.StartCoroutine(RestartScene());
 
     }
 
     public static void PlayerHitTrap()
     {
-		if (current == null)
-			return;
-        
+        if (current == null)
+            return;
 
-        PlayerData.isAlive = true;
+
+        PlayerData.isAlive = false;
+        PlayerData.lastDeath = "trap";
         current.StartCoroutine(RestartScene());
 
     }
 
-	public static void TriggerUiText(){
-		if (current == null)
-			return;
+    public static void TriggerUiText()
+    {
+        if (current == null)
+            return;
 
-		UiManager.DisplayGameOverText();
-	}	
+        UiManager.DisplayGameOverText();
+    }
 
-	private static IEnumerator RestartScene()
+    private static IEnumerator RestartScene()
     {
         yield return new WaitForSeconds(0.5f);
-        
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
+
     }
 
 
