@@ -39,6 +39,16 @@ MonoBehaviour:
   randomTileSetSize: {x: 1, y: 1, z: 1}
   randomTileSets:
   - randomTiles:
-    - {fileID: 0}
-  pickRandomTiles: 1
+    - {fileID: 11400000, guid: 6dc0b55c3583eec47b5f162f9c3518d5, type: 2}
+  - randomTiles:
+    - {fileID: 11400000, guid: 0460922b1500a2f4483c585f5178af1c, type: 2}
+  - randomTiles:
+    - {fileID: 11400000, guid: 99e43310f5a4c554aa2a9c4bd43447a2, type: 2}
+  - randomTiles:
+    - {fileID: 11400000, guid: f71f1ff35022146458d006df2ac18832, type: 2}
+  - randomTiles:
+    - {fileID: 11400000, guid: c5396602e12cb9346a5fb072c0eadefd, type: 2}
+  - randomTiles:
+    - {fileID: 11400000, guid: f5a13fd71a2ac614aabf847142d64368, type: 2}
+  pickRandomTiles: 0
   addToRandomTiles: 0

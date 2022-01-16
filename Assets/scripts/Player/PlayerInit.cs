@@ -9,8 +9,7 @@ public class PlayerInit : MonoBehaviour
     {
         PlayerData.isAlive = true;
         string checkLastDeath = PlayerData.lastDeath;
-        // PlayerData.lastDeath = "";
-        Debug.Log("checkLastDeath/"+checkLastDeath);
+ 
         if (checkLastDeath == "death")
         {
             if (GameManager.playerDeathRespawnData != null)
@@ -26,11 +25,27 @@ public class PlayerInit : MonoBehaviour
             }
         }
 
-    }
+        initRespawn();
 
-    // Update is called once per frame
-    void Update()
-    {
 
     }
+
+    void initRespawn(){
+
+        PlayerMovement playerMovement = (PlayerMovement)FindObjectOfType(typeof(PlayerMovement));
+        PlayerCameraAchor playerCameraAchor = (PlayerCameraAchor)FindObjectOfType(typeof(PlayerCameraAchor));
+
+    
+        GameManager.playerSpikeRespawnLocation.playerlocation = playerMovement.transform.position;
+        GameManager.playerSpikeRespawnLocation.cameraLocation = playerCameraAchor.transform.position;
+        GameManager.playerSpikeRespawnLocation.cameraAnchorState = playerCameraAchor.anchorState;
+        GameManager.playerSpikeRespawnLocation.stateHeight = playerCameraAchor.customHeight;
+
+        GameManager.playerDeathRespawnData.playerlocation = playerMovement.transform.position;
+        GameManager.playerDeathRespawnData.cameraLocation = playerCameraAchor.transform.position;
+        GameManager.playerDeathRespawnData.cameraAnchorState = playerCameraAchor.anchorState;
+        GameManager.playerDeathRespawnData.stateHeight = playerCameraAchor.customHeight;
+
+    }
+
 }

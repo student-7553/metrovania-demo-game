@@ -115,7 +115,6 @@ public class PlayerData : MonoBehaviour
         m_playerBoolUpgrades.isDiveAvailable = true;
 
 
-
     }
 
     // Update is called once per frame

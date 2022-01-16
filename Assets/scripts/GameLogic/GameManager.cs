@@ -81,22 +81,40 @@ public class GameManager : MonoBehaviour
         PlayerCameraAchor playerCameraAchor = (PlayerCameraAchor)FindObjectOfType(typeof(PlayerCameraAchor));
 
         m_playerSpikeRespawnData = new respawnLocation();
-        m_playerSpikeRespawnData.playerlocation = playerMovement.transform.position;
-        m_playerSpikeRespawnData.cameraLocation = playerCameraAchor.transform.position;
-        m_playerSpikeRespawnData.cameraAnchorState = playerCameraAchor.anchorState;
-        m_playerSpikeRespawnData.stateHeight = playerCameraAchor.customHeight;
-
-
-
         m_playerDeathRespawnData = new respawnLocation();
-        m_playerDeathRespawnData.playerlocation = playerMovement.transform.position;
-        m_playerDeathRespawnData.cameraLocation = playerCameraAchor.transform.position;
-        m_playerDeathRespawnData.cameraAnchorState = playerCameraAchor.anchorState;
-        m_playerDeathRespawnData.stateHeight = playerCameraAchor.customHeight;
 
+        if (playerMovement != null)
+        {
+            m_playerSpikeRespawnData.playerlocation = playerMovement.transform.position;
+            m_playerSpikeRespawnData.cameraLocation = playerCameraAchor.transform.position;
+            m_playerSpikeRespawnData.cameraAnchorState = playerCameraAchor.anchorState;
+            m_playerSpikeRespawnData.stateHeight = playerCameraAchor.customHeight;
 
-
+            m_playerDeathRespawnData.playerlocation = playerMovement.transform.position;
+            m_playerDeathRespawnData.cameraLocation = playerCameraAchor.transform.position;
+            m_playerDeathRespawnData.cameraAnchorState = playerCameraAchor.anchorState;
+            m_playerDeathRespawnData.stateHeight = playerCameraAchor.customHeight;
+        }
     }
+
+    // public void updatePlayerData()
+    // {
+    //     PlayerMovement playerMovement = (PlayerMovement)FindObjectOfType(typeof(PlayerMovement));
+    //     PlayerCameraAchor playerCameraAchor = (PlayerCameraAchor)FindObjectOfType(typeof(PlayerCameraAchor));
+
+    //     if (playerMovement != null)
+    //     {
+    //         m_playerSpikeRespawnData.playerlocation = playerMovement.transform.position;
+    //         m_playerSpikeRespawnData.cameraLocation = playerCameraAchor.transform.position;
+    //         m_playerSpikeRespawnData.cameraAnchorState = playerCameraAchor.anchorState;
+    //         m_playerSpikeRespawnData.stateHeight = playerCameraAchor.customHeight;
+
+    //         m_playerDeathRespawnData.playerlocation = playerMovement.transform.position;
+    //         m_playerDeathRespawnData.cameraLocation = playerCameraAchor.transform.position;
+    //         m_playerDeathRespawnData.cameraAnchorState = playerCameraAchor.anchorState;
+    //         m_playerDeathRespawnData.stateHeight = playerCameraAchor.customHeight;
+    //     }
+    // }
 
     private void gameSettings()
     {
