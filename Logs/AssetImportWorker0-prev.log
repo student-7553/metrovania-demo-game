@@ -1,0 +1,991 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.25f1 (9b9180224418) revision 10195328'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19042) 64bit Core' Language: 'en' Physical Memory: 15776 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.25f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Users/Snoo/Documents/unity/demo
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+49887
+Successfully changed project path to: C:/Users/Snoo/Documents/unity/demo
+C:/Users/Snoo/Documents/unity/demo
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 75.46 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.25f1 (9b9180224418)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.25f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/Snoo/Documents/unity/demo/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3070 Laptop GPU (ID=0x249d)
+    Vendor:   
+    VRAM:     8044 MB
+    Driver:   30.0.14.9729
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.25f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.25f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.25f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56548
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.25f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.25f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001928 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 76.87 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.463 seconds
+Domain Reload Profiling:
+	ReloadAssembly (463ms)
+		BeginReloadAssembly (39ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (372ms)
+			LoadAssemblies (38ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (102ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (19ms)
+			SetupLoadedEditorAssemblies (172ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (4ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (77ms)
+				BeforeProcessingInitializeOnLoad (10ms)
+				ProcessInitializeOnLoadAttributes (62ms)
+				ProcessInitializeOnLoadMethodAttributes (19ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.005681 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 77.45 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.938 seconds
+Domain Reload Profiling:
+	ReloadAssembly (939ms)
+		BeginReloadAssembly (101ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (3ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (17ms)
+		EndReloadAssembly (791ms)
+			LoadAssemblies (73ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (247ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (42ms)
+			SetupLoadedEditorAssemblies (341ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (3ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (78ms)
+				BeforeProcessingInitializeOnLoad (79ms)
+				ProcessInitializeOnLoadAttributes (161ms)
+				ProcessInitializeOnLoadMethodAttributes (15ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 1.07 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3628 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 158.8 MB.
+System memory in use after: 159.0 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 4065.
+Total: 3.498200 ms (FindLiveObjects: 0.337300 ms CreateObjectMapping: 0.148800 ms MarkObjects: 2.933300 ms  DeleteObjects: 0.078000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  path: Assets/Sprites/stormpost/background
+  artifactKey: Guid(22a48b2102e09f84c9a23c5104d2a032) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background using Guid(22a48b2102e09f84c9a23c5104d2a032) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '176729cbcad223304fd40c9408e921a8') in 0.010371 seconds 
+  Import took 0.015153 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000153 seconds.
+  path: Assets/Sprites/stormpost
+  artifactKey: Guid(45bbba673fdc289459b962e6fbae009f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost using Guid(45bbba673fdc289459b962e6fbae009f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03f2dc3603b505a1a9482ef103af97b1') in 0.005561 seconds 
+  Import took 0.010334 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000186 seconds.
+  path: Assets/Sprites/stormpost/background/wall
+  artifactKey: Guid(1b812d069c68f0d4d9ccc3fb02d09d32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall using Guid(1b812d069c68f0d4d9ccc3fb02d09d32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dee676f8ffad9772b55b60582cc79aca') in 0.006131 seconds 
+  Import took 0.011937 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000165 seconds.
+  path: Assets/Sprites/unity
+  artifactKey: Guid(9b1e9c44a43ce2d44a8fff6e04da8ff7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/unity using Guid(9b1e9c44a43ce2d44a8fff6e04da8ff7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ebca0901b0ff42c421ec20002f9f29e') in 0.006676 seconds 
+  Import took 0.012741 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.380709 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured
+  artifactKey: Guid(428da04a94e452e40baf36095d4f2867) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured using Guid(428da04a94e452e40baf36095d4f2867) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b452a249ac1822fbb25368078a42364') in 0.006294 seconds 
+  Import took 0.011963 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.702461 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_moss
+  artifactKey: Guid(15bed4c0e648c24419c832f16915c957) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_moss using Guid(15bed4c0e648c24419c832f16915c957) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '794634c0e194b30a5e085037c63ba945') in 0.006837 seconds 
+  Import took 0.012469 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.069594 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_corners
+  artifactKey: Guid(d424bdcfd399de64e826df15c66bef00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_corners using Guid(d424bdcfd399de64e826df15c66bef00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50a087105be4c84c6664c4ff0326b873') in 0.007226 seconds 
+  Import took 0.012770 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.345965 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges
+  artifactKey: Guid(b08302a57c180834c8505759996a6610) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges using Guid(b08302a57c180834c8505759996a6610) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0879b0710d4c0b2f02f1c233f76f8f43') in 0.007498 seconds 
+  Import took 0.013063 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.044695 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0000_up.png
+  artifactKey: Guid(7a866516375533743ba5cff830793651) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0000_up.png using Guid(7a866516375533743ba5cff830793651) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f87c6a61bfe077c75af0dee4c72124d') in 0.096480 seconds 
+  Import took 0.101938 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000135 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_up.png
+  artifactKey: Guid(f7c722402526980498f20ff104cd379b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_up.png using Guid(f7c722402526980498f20ff104cd379b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c6b4ab417b03a775ef51350f8fc011ec') in 0.030165 seconds 
+  Import took 0.035234 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000165 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0001_down.png
+  artifactKey: Guid(d93510f8fa17f0845893bd3ceaa0121b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0001_down.png using Guid(d93510f8fa17f0845893bd3ceaa0121b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7020f275b0eb7855af0b814a2569964a') in 0.012815 seconds 
+  Import took 0.017975 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000191 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_right.png
+  artifactKey: Guid(516fe467f7f48a245bf8a02d91279ee7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_right.png using Guid(516fe467f7f48a245bf8a02d91279ee7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6e1abbc9c4159e78cb32e9a22422d46') in 0.028501 seconds 
+  Import took 0.034545 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000150 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_down.png
+  artifactKey: Guid(5bce13fdf7d71c64c8defdf8c8929a40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_down.png using Guid(5bce13fdf7d71c64c8defdf8c8929a40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f270a68f30234f797ac0125b32fe54c') in 0.032343 seconds 
+  Import took 0.037249 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000143 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_left.png
+  artifactKey: Guid(9e98d40e52d6ff042ae3548c3be6ef2d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_left.png using Guid(9e98d40e52d6ff042ae3548c3be6ef2d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9557ea21910ce787fba3d563cb9de986') in 0.029583 seconds 
+  Import took 0.035021 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000132 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0002_right.png
+  artifactKey: Guid(cd4e662cf7f357c479ae196153d64ebf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0002_right.png using Guid(cd4e662cf7f357c479ae196153d64ebf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e6a9313f1ff2e8f069efc156aebdf300') in 0.014276 seconds 
+  Import took 0.019476 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000143 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0003_left.png
+  artifactKey: Guid(9a5bf6d53cd1b86479eed531483fe0f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0003_left.png using Guid(9a5bf6d53cd1b86479eed531483fe0f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'adcfbffd986959c86e69e743ae4fb3d3') in 0.014045 seconds 
+  Import took 0.020441 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.922902 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0000_up.png
+  artifactKey: Guid(7a866516375533743ba5cff830793651) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0000_up.png using Guid(7a866516375533743ba5cff830793651) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '86f070d6a38c800a5dd5e7b5fb5b3147') in 0.009539 seconds 
+  Import took 0.014835 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 14.754354 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0000_up.png
+  artifactKey: Guid(7a866516375533743ba5cff830793651) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0000_up.png using Guid(7a866516375533743ba5cff830793651) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '81b1ef82f7fa94276b938f93d6f70403') in 0.044233 seconds 
+  Import took 0.049361 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.781763 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0001_down.png
+  artifactKey: Guid(d93510f8fa17f0845893bd3ceaa0121b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0001_down.png using Guid(d93510f8fa17f0845893bd3ceaa0121b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5f92196052517ab4e732c4ae8958e5bd') in 0.010869 seconds 
+  Import took 0.016457 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000138 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0002_right.png
+  artifactKey: Guid(cd4e662cf7f357c479ae196153d64ebf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0002_right.png using Guid(cd4e662cf7f357c479ae196153d64ebf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '53eb0ee53fcc6a6edc44be084792d7ee') in 0.012703 seconds 
+  Import took 0.018334 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000158 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0003_left.png
+  artifactKey: Guid(9a5bf6d53cd1b86479eed531483fe0f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0003_left.png using Guid(9a5bf6d53cd1b86479eed531483fe0f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63cdd480baa4253170ef569441e47f5d') in 0.016184 seconds 
+  Import took 0.021670 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.630495 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0001_down.png
+  artifactKey: Guid(d93510f8fa17f0845893bd3ceaa0121b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0001_down.png using Guid(d93510f8fa17f0845893bd3ceaa0121b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1141696bf903850a88570d338b379ae6') in 0.075034 seconds 
+  Import took 0.080676 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.331561 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0002_right.png
+  artifactKey: Guid(cd4e662cf7f357c479ae196153d64ebf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0002_right.png using Guid(cd4e662cf7f357c479ae196153d64ebf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3dcf26ab43d2ebf1222fe0381a2c38c9') in 0.084342 seconds 
+  Import took 0.089674 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.060480 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0003_left.png
+  artifactKey: Guid(9a5bf6d53cd1b86479eed531483fe0f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_edges/background_wall_fractured_edges_0003_left.png using Guid(9a5bf6d53cd1b86479eed531483fe0f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ded62dea289dc49800f005a03a527531') in 0.090868 seconds 
+  Import took 0.096428 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 128.114045 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_InnerCorners
+  artifactKey: Guid(a62da3be667e7114f9378c8456dfc58c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_InnerCorners using Guid(a62da3be667e7114f9378c8456dfc58c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af3aa487a7e9d3d64251115b4806be68') in 0.005823 seconds 
+  Import took 0.011780 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.031826 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_InnerCorners/background_wall_fractured_InnerCorners.png
+  artifactKey: Guid(bd970d99002cb1040aa7ed1edeeb660c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_InnerCorners/background_wall_fractured_InnerCorners.png using Guid(bd970d99002cb1040aa7ed1edeeb660c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2163f317a255e11c78918d68e88efc59') in 0.027917 seconds 
+  Import took 0.033155 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.487100 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_InnerCorners/background_wall_fractured_InnerCorners.png
+  artifactKey: Guid(bd970d99002cb1040aa7ed1edeeb660c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_fractured/background_wall_fractured_InnerCorners/background_wall_fractured_InnerCorners.png using Guid(bd970d99002cb1040aa7ed1edeeb660c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d314b9dc63bc589ac9bd259256acde0') in 0.027009 seconds 
+  Import took 0.032228 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006509 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.09 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.950 seconds
+Domain Reload Profiling:
+	ReloadAssembly (951ms)
+		BeginReloadAssembly (104ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (35ms)
+		EndReloadAssembly (796ms)
+			LoadAssemblies (81ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (284ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (40ms)
+			SetupLoadedEditorAssemblies (292ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (4ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (98ms)
+				ProcessInitializeOnLoadAttributes (173ms)
+				ProcessInitializeOnLoadMethodAttributes (10ms)
+				AfterProcessingInitializeOnLoad (5ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (11ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.29 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3484 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 151.3 MB.
+System memory in use after: 151.6 MB.
+
+Unloading 21 unused Assets to reduce memory usage. Loaded Objects now: 4075.
+Total: 3.394800 ms (FindLiveObjects: 0.306200 ms CreateObjectMapping: 0.116900 ms MarkObjects: 2.953800 ms  DeleteObjects: 0.017100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 642.627720 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall
+  artifactKey: Guid(58de0872331b08844b42a66ca1b8cd7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall using Guid(58de0872331b08844b42a66ca1b8cd7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd5bff0d9c2126c57b9ca63a733e7cdae') in 0.010907 seconds 
+  Import took 0.016491 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.036955 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_default.png
+  artifactKey: Guid(e64dd773605c17d408f6182e10431ade) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_default.png using Guid(e64dd773605c17d408f6182e10431ade) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8a5a51445a19cc00c6db6a2ed64ce9e0') in 0.051690 seconds 
+  Import took 0.057381 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000137 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_right.png
+  artifactKey: Guid(19e2ddbfc8606a7418fcbd898c5772e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_right.png using Guid(19e2ddbfc8606a7418fcbd898c5772e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2bbc8eb93559986ba9fdeaed1be00ecc') in 0.033489 seconds 
+  Import took 0.037701 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000139 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_left.png
+  artifactKey: Guid(da27c4a8fb5b0a747a06a9f6207f79c6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_left.png using Guid(da27c4a8fb5b0a747a06a9f6207f79c6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dfe9205af97a2e706aca24bbc044e574') in 0.027572 seconds 
+  Import took 0.033169 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000283 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_down.png
+  artifactKey: Guid(351f226fe6734c84e992921075d4e80a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_down.png using Guid(351f226fe6734c84e992921075d4e80a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d4847c19bf2c23286cb957981721461') in 0.045173 seconds 
+  Import took 0.050549 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000149 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_up.png
+  artifactKey: Guid(deef167a3d7305e498437e58af3e5150) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_up.png using Guid(deef167a3d7305e498437e58af3e5150) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe67474145c231e0c2f44ab00840aa36') in 0.041480 seconds 
+  Import took 0.046343 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 133.938109 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0000_right.png
+  artifactKey: Guid(4f53c69b70545f54cb8356d79e26108f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0000_right.png using Guid(4f53c69b70545f54cb8356d79e26108f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba5f3f6bd24dcf112e871868fa5a6622') in 0.017270 seconds 
+  Import took 0.022527 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000136 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0004_upRight.png
+  artifactKey: Guid(8b5e8d56b343b324cb0672f9b0ede6d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0004_upRight.png using Guid(8b5e8d56b343b324cb0672f9b0ede6d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25af00b0e5c0a56f9fee97be69166d4c') in 0.017767 seconds 
+  Import took 0.023510 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000157 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0008_default.png
+  artifactKey: Guid(ba7029b2559c811468383da367f12ece) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0008_default.png using Guid(ba7029b2559c811468383da367f12ece) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65e276e2ae32c10649a94f79bdf61c81') in 0.022449 seconds 
+  Import took 0.028854 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000161 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0002_down.png
+  artifactKey: Guid(f718518734b9ffa49b6536c243877acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0002_down.png using Guid(f718518734b9ffa49b6536c243877acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be8d68fb250779b4ae0dff6b98e090e0') in 0.020997 seconds 
+  Import took 0.027702 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000151 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0005_downLeft.png
+  artifactKey: Guid(6cfa432c37b7c9c489cacf71853f66c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0005_downLeft.png using Guid(6cfa432c37b7c9c489cacf71853f66c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '117a992dd58fc4a1eb65324f959fc7e4') in 0.023849 seconds 
+  Import took 0.029643 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000166 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0007_up.png
+  artifactKey: Guid(ad195686623c29641919dec7b983ef49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0007_up.png using Guid(ad195686623c29641919dec7b983ef49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e0bd0007bad128412c8462b08ac76ed') in 0.023863 seconds 
+  Import took 0.029460 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000142 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0001_left.png
+  artifactKey: Guid(cf3c349c550e5c24ba6814e488026768) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0001_left.png using Guid(cf3c349c550e5c24ba6814e488026768) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '475cb64fb80f11909eb614e9b3262c51') in 0.015922 seconds 
+  Import took 0.020914 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000147 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0006_upLeft.png
+  artifactKey: Guid(4946aa6a5a1a15d458027065ebd3fe4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0006_upLeft.png using Guid(4946aa6a5a1a15d458027065ebd3fe4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '620d1d33d7df4f6481a7dc297260a3ec') in 0.021183 seconds 
+  Import took 0.026668 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000225 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0003_downRight.png
+  artifactKey: Guid(60fe85175edc83a4dae832b8659eda61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0003_downRight.png using Guid(60fe85175edc83a4dae832b8659eda61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c1a36d677ccb0a45ce9d8b41517aa421') in 0.028769 seconds 
+  Import took 0.033522 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 19.424179 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0000_right.png
+  artifactKey: Guid(4f53c69b70545f54cb8356d79e26108f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0000_right.png using Guid(4f53c69b70545f54cb8356d79e26108f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e162319033896ab731be66af273584c8') in 0.010001 seconds 
+  Import took 0.015304 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000133 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0004_upRight.png
+  artifactKey: Guid(8b5e8d56b343b324cb0672f9b0ede6d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0004_upRight.png using Guid(8b5e8d56b343b324cb0672f9b0ede6d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fa0abd6562ab3d6d07b86be82f018c67') in 0.011543 seconds 
+  Import took 0.016817 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000120 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0008_default.png
+  artifactKey: Guid(ba7029b2559c811468383da367f12ece) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0008_default.png using Guid(ba7029b2559c811468383da367f12ece) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4da34e700f542f46dffd8d0807dffce4') in 0.011010 seconds 
+  Import took 0.016056 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000158 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0002_down.png
+  artifactKey: Guid(f718518734b9ffa49b6536c243877acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0002_down.png using Guid(f718518734b9ffa49b6536c243877acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae803dede64f192037cd3704020f5552') in 0.015827 seconds 
+  Import took 0.021781 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000151 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0005_downLeft.png
+  artifactKey: Guid(6cfa432c37b7c9c489cacf71853f66c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0005_downLeft.png using Guid(6cfa432c37b7c9c489cacf71853f66c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '022e802916c9dc355e095792fa2b4468') in 0.014011 seconds 
+  Import took 0.019635 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000141 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0007_up.png
+  artifactKey: Guid(ad195686623c29641919dec7b983ef49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0007_up.png using Guid(ad195686623c29641919dec7b983ef49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '73aef5a2909279353bc307725ce95825') in 0.012625 seconds 
+  Import took 0.018035 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000159 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0001_left.png
+  artifactKey: Guid(cf3c349c550e5c24ba6814e488026768) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0001_left.png using Guid(cf3c349c550e5c24ba6814e488026768) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4e6daedea4dd5fdf50d2fb118339838') in 0.014848 seconds 
+  Import took 0.020420 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000330 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0006_upLeft.png
+  artifactKey: Guid(4946aa6a5a1a15d458027065ebd3fe4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0006_upLeft.png using Guid(4946aa6a5a1a15d458027065ebd3fe4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '81d20b872c51169564c211ba00386739') in 0.019290 seconds 
+  Import took 0.025896 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000166 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0003_downRight.png
+  artifactKey: Guid(60fe85175edc83a4dae832b8659eda61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0003_downRight.png using Guid(60fe85175edc83a4dae832b8659eda61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '19a47ed9a78ff813fe8964b5d2a1a531') in 0.016313 seconds 
+  Import took 0.020813 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.623956 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0000_right.png
+  artifactKey: Guid(4f53c69b70545f54cb8356d79e26108f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0000_right.png using Guid(4f53c69b70545f54cb8356d79e26108f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8887fe477dbd1525dc90f440fcd2a943') in 0.007121 seconds 
+  Import took 0.012412 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000201 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0004_upRight.png
+  artifactKey: Guid(8b5e8d56b343b324cb0672f9b0ede6d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0004_upRight.png using Guid(8b5e8d56b343b324cb0672f9b0ede6d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7516141c9a1658d6cf1373f4e5c0f4a4') in 0.009424 seconds 
+  Import took 0.015090 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000163 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0008_default.png
+  artifactKey: Guid(ba7029b2559c811468383da367f12ece) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0008_default.png using Guid(ba7029b2559c811468383da367f12ece) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f929b1aa33e8a2b7677f9e645fdd297e') in 0.010299 seconds 
+  Import took 0.015405 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000265 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0002_down.png
+  artifactKey: Guid(f718518734b9ffa49b6536c243877acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0002_down.png using Guid(f718518734b9ffa49b6536c243877acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8e990ade743c81e78ba0865b0f93416') in 0.011851 seconds 
+  Import took 0.017754 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000149 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0005_downLeft.png
+  artifactKey: Guid(6cfa432c37b7c9c489cacf71853f66c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0005_downLeft.png using Guid(6cfa432c37b7c9c489cacf71853f66c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c548530db5c38d12ffa7e1ff2f59c83c') in 0.012420 seconds 
+  Import took 0.019007 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000637 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0007_up.png
+  artifactKey: Guid(ad195686623c29641919dec7b983ef49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0007_up.png using Guid(ad195686623c29641919dec7b983ef49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ffb08578f83eef031d151eeffe71c2dc') in 0.009984 seconds 
+  Import took 0.018688 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000255 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0001_left.png
+  artifactKey: Guid(cf3c349c550e5c24ba6814e488026768) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0001_left.png using Guid(cf3c349c550e5c24ba6814e488026768) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '900b38d6ffad7ec6032331a271fda7bf') in 0.010289 seconds 
+  Import took 0.018261 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000193 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0006_upLeft.png
+  artifactKey: Guid(4946aa6a5a1a15d458027065ebd3fe4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0006_upLeft.png using Guid(4946aa6a5a1a15d458027065ebd3fe4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2eb4b6b8730f9909991d559d78ca6ec7') in 0.010669 seconds 
+  Import took 0.017920 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000152 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0003_downRight.png
+  artifactKey: Guid(60fe85175edc83a4dae832b8659eda61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0003_downRight.png using Guid(60fe85175edc83a4dae832b8659eda61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5c967c91409b59f1a1371736971da3e6') in 0.010346 seconds 
+  Import took 0.015672 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.293453 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0000_right.png
+  artifactKey: Guid(4f53c69b70545f54cb8356d79e26108f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0000_right.png using Guid(4f53c69b70545f54cb8356d79e26108f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c7dc1380eb0193e503d29b86e2b0add') in 0.013029 seconds 
+  Import took 0.018548 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000154 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0004_upRight.png
+  artifactKey: Guid(8b5e8d56b343b324cb0672f9b0ede6d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0004_upRight.png using Guid(8b5e8d56b343b324cb0672f9b0ede6d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1a8fd2857647924eb539723fdc2d147e') in 0.011005 seconds 
+  Import took 0.016259 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000172 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0008_default.png
+  artifactKey: Guid(ba7029b2559c811468383da367f12ece) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0008_default.png using Guid(ba7029b2559c811468383da367f12ece) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '740516a270dc147d9c0b8d3db95c4298') in 0.014998 seconds 
+  Import took 0.020298 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000207 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0002_down.png
+  artifactKey: Guid(f718518734b9ffa49b6536c243877acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0002_down.png using Guid(f718518734b9ffa49b6536c243877acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0dd065fdf30a74a91ca4962b30e9e24a') in 0.017526 seconds 
+  Import took 0.023446 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000143 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0005_downLeft.png
+  artifactKey: Guid(6cfa432c37b7c9c489cacf71853f66c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0005_downLeft.png using Guid(6cfa432c37b7c9c489cacf71853f66c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4fc7b8cfd9d8fc064518bc20801306bd') in 0.012417 seconds 
+  Import took 0.017851 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000143 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0007_up.png
+  artifactKey: Guid(ad195686623c29641919dec7b983ef49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0007_up.png using Guid(ad195686623c29641919dec7b983ef49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '738e35a5c93081e14ad7b5da57eea3eb') in 0.012732 seconds 
+  Import took 0.017761 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000141 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0001_left.png
+  artifactKey: Guid(cf3c349c550e5c24ba6814e488026768) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0001_left.png using Guid(cf3c349c550e5c24ba6814e488026768) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '310404d16688e1f2359ec7bb44caa582') in 0.009033 seconds 
+  Import took 0.014186 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000281 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0006_upLeft.png
+  artifactKey: Guid(4946aa6a5a1a15d458027065ebd3fe4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0006_upLeft.png using Guid(4946aa6a5a1a15d458027065ebd3fe4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e4e3ae86e153e6d5d12e2b16806c4b1') in 0.012836 seconds 
+  Import took 0.018070 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000363 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0003_downRight.png
+  artifactKey: Guid(60fe85175edc83a4dae832b8659eda61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0003_downRight.png using Guid(60fe85175edc83a4dae832b8659eda61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a3ca004b7dcaa12fb1429ad4e5e490e6') in 0.012820 seconds 
+  Import took 0.018776 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 171.956159 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0008_default.png
+  artifactKey: Guid(ba7029b2559c811468383da367f12ece) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0008_default.png using Guid(ba7029b2559c811468383da367f12ece) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7f52ff4af1faeb71a5d3ab077c304741') in 0.025859 seconds 
+  Import took 0.032761 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.507515 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0007_up.png
+  artifactKey: Guid(ad195686623c29641919dec7b983ef49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0007_up.png using Guid(ad195686623c29641919dec7b983ef49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '86b9567e011f79b68a9bdb1d5a1af960') in 0.033042 seconds 
+  Import took 0.038793 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.557923 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0006_upLeft.png
+  artifactKey: Guid(4946aa6a5a1a15d458027065ebd3fe4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0006_upLeft.png using Guid(4946aa6a5a1a15d458027065ebd3fe4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '92cd1c1fe1ffce95b73376f8e44f8506') in 0.031999 seconds 
+  Import took 0.038077 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.304339 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0005_downLeft.png
+  artifactKey: Guid(6cfa432c37b7c9c489cacf71853f66c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0005_downLeft.png using Guid(6cfa432c37b7c9c489cacf71853f66c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1e9c01b21819f944763f8a1400e6d4c') in 0.019599 seconds 
+  Import took 0.026714 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 19.446541 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0004_upRight.png
+  artifactKey: Guid(8b5e8d56b343b324cb0672f9b0ede6d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0004_upRight.png using Guid(8b5e8d56b343b324cb0672f9b0ede6d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3003afe4cbb467ff88f73ee38bbdf06b') in 0.025405 seconds 
+  Import took 0.031549 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.824596 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0003_downRight.png
+  artifactKey: Guid(60fe85175edc83a4dae832b8659eda61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0003_downRight.png using Guid(60fe85175edc83a4dae832b8659eda61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '73b163216f191508e58e0f4fa8eaadb6') in 0.033226 seconds 
+  Import took 0.039315 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.944818 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0002_down.png
+  artifactKey: Guid(f718518734b9ffa49b6536c243877acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0002_down.png using Guid(f718518734b9ffa49b6536c243877acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9fd2a97308b6b76c3df73ffb327bf9f7') in 0.032004 seconds 
+  Import took 0.038316 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.303946 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0001_left.png
+  artifactKey: Guid(cf3c349c550e5c24ba6814e488026768) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0001_left.png using Guid(cf3c349c550e5c24ba6814e488026768) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2ee144f0adc78b468267adac26e07ccf') in 0.033536 seconds 
+  Import took 0.039499 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.979089 seconds.
+  path: Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0000_right.png
+  artifactKey: Guid(4f53c69b70545f54cb8356d79e26108f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/stormpost/background/wall/background_wall_objectWall/background_wall_objectWall_0000_right.png using Guid(4f53c69b70545f54cb8356d79e26108f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f78aa1448b1dfa72fbe10fb35de96b2f') in 0.032714 seconds 
+  Import took 0.038727 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005055 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.02 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.852 seconds
+Domain Reload Profiling:
+	ReloadAssembly (853ms)
+		BeginReloadAssembly (102ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (33ms)
+		EndReloadAssembly (702ms)
+			LoadAssemblies (78ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (243ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (35ms)
+			SetupLoadedEditorAssemblies (258ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (4ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (86ms)
+				ProcessInitializeOnLoadAttributes (153ms)
+				ProcessInitializeOnLoadMethodAttributes (8ms)
+				AfterProcessingInitializeOnLoad (5ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (10ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.39 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3484 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 151.4 MB.
+System memory in use after: 151.7 MB.
+
+Unloading 21 unused Assets to reduce memory usage. Loaded Objects now: 4083.
+Total: 4.103100 ms (FindLiveObjects: 0.379400 ms CreateObjectMapping: 0.118200 ms MarkObjects: 3.585700 ms  DeleteObjects: 0.018900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005308 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.11 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.819 seconds
+Domain Reload Profiling:
+	ReloadAssembly (820ms)
+		BeginReloadAssembly (97ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (35ms)
+		EndReloadAssembly (677ms)
+			LoadAssemblies (73ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (235ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (33ms)
+			SetupLoadedEditorAssemblies (250ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (4ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (86ms)
+				ProcessInitializeOnLoadAttributes (145ms)
+				ProcessInitializeOnLoadMethodAttributes (8ms)
+				AfterProcessingInitializeOnLoad (5ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (9ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.10 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3484 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 151.5 MB.
+System memory in use after: 151.7 MB.
+
+Unloading 21 unused Assets to reduce memory usage. Loaded Objects now: 4085.
+Total: 4.212300 ms (FindLiveObjects: 0.295900 ms CreateObjectMapping: 0.190500 ms MarkObjects: 3.706700 ms  DeleteObjects: 0.018100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004905 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.13 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.825 seconds
+Domain Reload Profiling:
+	ReloadAssembly (826ms)
+		BeginReloadAssembly (102ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (33ms)
+		EndReloadAssembly (677ms)
+			LoadAssemblies (72ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (234ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (34ms)
+			SetupLoadedEditorAssemblies (251ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (4ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (85ms)
+				ProcessInitializeOnLoadAttributes (148ms)
+				ProcessInitializeOnLoadMethodAttributes (8ms)
+				AfterProcessingInitializeOnLoad (5ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (10ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.01 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3484 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 151.5 MB.
+System memory in use after: 151.7 MB.
+
+Unloading 21 unused Assets to reduce memory usage. Loaded Objects now: 4087.
+Total: 2.954400 ms (FindLiveObjects: 0.283600 ms CreateObjectMapping: 0.093400 ms MarkObjects: 2.561400 ms  DeleteObjects: 0.015000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
