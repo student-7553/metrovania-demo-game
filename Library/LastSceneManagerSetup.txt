@@ -3,7 +3,7 @@ sceneSetups:
   isLoaded: 1
   isActive: 1
   isSubScene: 0
-- path: Assets/Scenes/stormPost/stormPost_0.unity
+- path: Assets/Scenes/demo.unity
   isLoaded: 1
   isActive: 0
   isSubScene: 0

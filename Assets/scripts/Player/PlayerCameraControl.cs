@@ -28,90 +28,90 @@ public class PlayerCameraControl : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
-        if (!isLooking)
-        {
-            if ((Vector2)playerRigidBody.velocity == new Vector2(0f, 0f) && playerCollision.onGround)
-            {
-                if (playerInput.vertical > 0.3f)
-                {
+//     void Update()
+//     {
+//         if (!isLooking)
+//         {
+//             if ((Vector2)playerRigidBody.velocity == new Vector2(0f, 0f) && playerCollision.onGround)
+//             {
+//                 if (playerInput.vertical > 0.3f)
+//                 {
 
-                    if (currentBufferDuration > lookAtBuffer)
-                    {
-                        isLooking = true;
-                        lookingDirection = Vector2.up;
-                        // trigger up
-                        playerCameraAnchor.lookAtDirection(lookingDirection);
-                    }
-                    else
-                    {
-                        currentBufferDuration = currentBufferDuration + Time.deltaTime;
-                    }
-
-
-
-
-                }
-                else if (playerInput.vertical < -0.3f)
-                {
-
-                    if (currentBufferDuration > lookAtBuffer)
-                    {
-                        isLooking = true;
-                        lookingDirection = Vector2.down;
-                        // trigger up
-                        playerCameraAnchor.lookAtDirection(lookingDirection);
-                    }
-                    else
-                    {
-                        currentBufferDuration = currentBufferDuration + Time.deltaTime;
-                    }
-
-                } else {
-                    currentBufferDuration = 0;
-                }
-            }
-
-        }
-        else
-        {
-            if (
-                !(
-                    playerRigidBody.velocity.x < 0.3f &&
-                    playerRigidBody.velocity.x > -0.3f &&
-                    playerRigidBody.velocity.y < 0.3f &&
-                    playerRigidBody.velocity.y > -0.3f
-                ) ||
-
-                !playerCollision.onGround)
-            {
-                isLooking = false;
-                lookingDirection = Vector2.zero;
-                playerCameraAnchor.stopLooking();
-            }
-            else
-            {
-                if (lookingDirection == Vector2.up && playerInput.vertical < 0.3f)
-                {
-
-                    isLooking = false;
-                    lookingDirection = Vector2.zero;
-                    playerCameraAnchor.stopLooking();
-
-                }
-                else if (lookingDirection == Vector2.down && playerInput.vertical > -0.3f)
-                {
-                    isLooking = false;
-                    lookingDirection = Vector2.zero;
-                    playerCameraAnchor.stopLooking();
-
-                }
-            }
-
-        }
+//                     if (currentBufferDuration > lookAtBuffer)
+//                     {
+//                         isLooking = true;
+//                         lookingDirection = Vector2.up;
+//                         // trigger up
+//                         playerCameraAnchor.lookAtDirection(lookingDirection);
+//                     }
+//                     else
+//                     {
+//                         currentBufferDuration = currentBufferDuration + Time.deltaTime;
+//                     }
 
 
 
-    }
+
+//                 }
+//                 else if (playerInput.vertical < -0.3f)
+//                 {
+
+//                     if (currentBufferDuration > lookAtBuffer)
+//                     {
+//                         isLooking = true;
+//                         lookingDirection = Vector2.down;
+//                         // trigger up
+//                         playerCameraAnchor.lookAtDirection(lookingDirection);
+//                     }
+//                     else
+//                     {
+//                         currentBufferDuration = currentBufferDuration + Time.deltaTime;
+//                     }
+
+//                 } else {
+//                     currentBufferDuration = 0;
+//                 }
+//             }
+
+//         }
+//         else
+//         {
+//             if (
+//                 !(
+//                     playerRigidBody.velocity.x < 0.3f &&
+//                     playerRigidBody.velocity.x > -0.3f &&
+//                     playerRigidBody.velocity.y < 0.3f &&
+//                     playerRigidBody.velocity.y > -0.3f
+//                 ) ||
+
+//                 !playerCollision.onGround)
+//             {
+//                 isLooking = false;
+//                 lookingDirection = Vector2.zero;
+//                 playerCameraAnchor.stopLooking();
+//             }
+//             else
+//             {
+//                 if (lookingDirection == Vector2.up && playerInput.vertical < 0.3f)
+//                 {
+
+//                     isLooking = false;
+//                     lookingDirection = Vector2.zero;
+//                     playerCameraAnchor.stopLooking();
+
+//                 }
+//                 else if (lookingDirection == Vector2.down && playerInput.vertical > -0.3f)
+//                 {
+//                     isLooking = false;
+//                     lookingDirection = Vector2.zero;
+//                     playerCameraAnchor.stopLooking();
+
+//                 }
+//             }
+
+//         }
+
+
+
+//     }
 }
