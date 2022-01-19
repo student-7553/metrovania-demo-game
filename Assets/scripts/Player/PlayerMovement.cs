@@ -416,7 +416,7 @@ public class PlayerMovement : MonoBehaviour
             bool looping = true;
             bool dashFixed = false;
             bool dashFixRightSide = false;
-            Vector2 savedVelocty = new Vector2();
+            // Vector2 savedVelocty = new Vector2();
 
             // secondary timer that if reaches 0 breaks out of this
             while (looping)
@@ -425,29 +425,27 @@ public class PlayerMovement : MonoBehaviour
                 // float acceleration = 10f;
                 float step = dashSpeed * Time.deltaTime;
 
-                Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, targetPostion, step);
+                
 
+                if (dashFixed && !playerCollision.onRightBottomWall && !playerCollision.onLeftBottomWall)
+                {
+                    // dashFixed = false;
+                    if (dashFixRightSide)
+                    {
+                        playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.y, playerRigidBody.velocity.y);
+                    }
+                    else
+                    {
+                        playerRigidBody.velocity = new Vector2(-playerRigidBody.velocity.y, playerRigidBody.velocity.y);
+                    }
 
-
-                // if (dashFixed && !playerCollision.onRightBottomWall && !playerCollision.onLeftBottomWall)
-                // {
-                //     dashFixed = false;
-                //     if (dashFixRightSide)
-                //     {
-                //         playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.y, playerRigidBody.velocity.y);
-                //     }
-                //     else
-                //     {
-                //         playerRigidBody.velocity = new Vector2(-playerRigidBody.velocity.y, playerRigidBody.velocity.y);
-                //     }
-
-                // }
+                }
 
                 if (playerRigidBody.velocity.x > 0.1f && playerCollision.onRightBottomWall)
                 {
                     dashFixRightSide = true;
                     // right dash
-                    savedVelocty = new Vector2(0, playerRigidBody.velocity.y);
+                    // savedVelocty = new Vector2(0, playerRigidBody.velocity.y);
                     dashFixed = true;
 
                 }
@@ -455,7 +453,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     dashFixRightSide = false;
                     // left dash
-                    savedVelocty = new Vector2(0, playerRigidBody.velocity.y);
+                    // savedVelocty = new Vector2(0, playerRigidBody.velocity.y);
                     dashFixed = true;
                 }
 
@@ -463,30 +461,27 @@ public class PlayerMovement : MonoBehaviour
                 if (!dashFixed)
                 {
 
-                    // playerRigidBody.MovePosition(newPosition);
-                    // Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, (Vector2)newLocation, step);
+                    Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, targetPostion, step);
 
-                    
-                    Vector2 newPositionDifference = newPosition - (Vector2)this.transform.position;
-
-                    Vector2 newVelocity = playerRigidBody.velocity + newPositionDifference;
-                    newVelocity = Vector2.ClampMagnitude(newVelocity, 50f);
-                    playerRigidBody.velocity = direction * dashSpeed;
-
-
+                    playerRigidBody.MovePosition(newPosition);
 
                 }
                 else
                 {
-                    Debug.Log(savedVelocty);
-                    playerRigidBody.velocity = savedVelocty;
+                                       
+                    Vector2 customTargetPostion = targetPostion;
+                    customTargetPostion.x = this.transform.position.x;
+
+                    Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, customTargetPostion, step);
+
+                    playerRigidBody.MovePosition(newPosition);
 
                 }
 
 
                 if (
-                    (transform.position.x + 0.5f > targetPostion.x && (transform.position.x - 0.5f) < targetPostion.x) &&
-                    (transform.position.y + 0.5f > targetPostion.y && (transform.position.y - 0.5f) < targetPostion.y)
+                    (transform.position.x + 0.1f > targetPostion.x && (transform.position.x - 0.1f) < targetPostion.x) &&
+                    (transform.position.y + 0.1f > targetPostion.y && (transform.position.y - 0.1f) < targetPostion.y)
                     )
                 {
                     // loop breaker
