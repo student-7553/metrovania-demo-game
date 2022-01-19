@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+// using SimpleJSON;
+using SimpleJSON;
+
 public class playerFloatResourceClass
 {
     public float currentHealth;
@@ -9,7 +13,6 @@ public class playerFloatResourceClass
     public float maximumMana;
     public float currentBaseAttackDamage;
     public float baseAttackDamage;
-
     public float currentSpiritRangedAttackDamage;
     public float currentSpiritMeleeAttackDamage;
 
@@ -29,14 +32,23 @@ public class playerBoolUpgrades
     public bool isDiveAvailable;
 
 }
+public class playerResourceUsageClass
+{
+    public float lance;
+    public float focusStrike;
+    public float focusDash;
+    public float focusDive;
+    public float deflect;
+}
 public class PlayerData : MonoBehaviour
 {
     static PlayerData current;
     static public bool isAlive;
 
-
     // death,trap
     static public string lastDeath;
+
+    static public playerResourceUsageClass playerResourceUsage;
 
     private playerFloatResourceClass m_playerFloatResources;
 
@@ -67,10 +79,8 @@ public class PlayerData : MonoBehaviour
     }
 
 
-    public class playerCollectables
-    {
 
-    }
+
     void Start()
     {
         if (current != null && current != this)
@@ -80,25 +90,50 @@ public class PlayerData : MonoBehaviour
         }
         current = this;
         DontDestroyOnLoad(gameObject);
+
+
+        // foreach(JSONNode record in data["startingPlayerFloatResource"])
+        // {
+        //     Debug.Log ("nombre: " + record["nombre"].Value + "score: " + record["puntos"].AsInt);
+        // }
+        // string jsonString = File.ReadAllText (path); 
+        // Debug.Log(jsonString);
+        // playerFloatResourceClass listaRecord = JsonUtility.FromJson<playerFloatResourceClass> (jsonString);
+        // // print(listaRecord);
+        // Debug.Log(listaRecord.currentHealth);
+
+
+
         initPlayerData();
     }
 
     void initPlayerData()
     {
 
+
+        string path = Application.dataPath + "/Json/PlayerData.json";
+        string jsonString = File.ReadAllText(path);
+        JSONNode data = JSON.Parse(jsonString);
+
         isAlive = true;
         lastDeath = "death";
-        // change this to read from save file 
+
+        playerResourceUsage = new playerResourceUsageClass();
+        playerResourceUsage.lance = data["playerResourceUsage"]["lance"];
+        playerResourceUsage.focusStrike = data["playerResourceUsage"]["focusStrike"];
+        playerResourceUsage.focusDash = data["playerResourceUsage"]["focusDash"];
+        playerResourceUsage.focusDive = data["playerResourceUsage"]["focusDive"];
+        playerResourceUsage.deflect = data["playerResourceUsage"]["deflect"];;
 
         m_playerFloatResources = new playerFloatResourceClass();
-        m_playerFloatResources.currentHealth = 30;
-        m_playerFloatResources.maximumHealth = 30;
-        m_playerFloatResources.currentMana = 50;
-        m_playerFloatResources.maximumMana = 50;
-        m_playerFloatResources.currentBaseAttackDamage = 10;
-        m_playerFloatResources.baseAttackDamage = 10;
-        m_playerFloatResources.currentSpiritRangedAttackDamage = 30;
-        m_playerFloatResources.currentSpiritMeleeAttackDamage = 30;
+        m_playerFloatResources.currentHealth = data["startingPlayerFloatResource"]["currentHealth"];
+        m_playerFloatResources.maximumHealth = data["startingPlayerFloatResource"]["maximumHealth"];
+        m_playerFloatResources.currentMana = data["startingPlayerFloatResource"]["currentMana"];
+        m_playerFloatResources.maximumMana = data["startingPlayerFloatResource"]["maximumMana"];
+        m_playerFloatResources.currentBaseAttackDamage = data["startingPlayerFloatResource"]["currentBaseAttackDamage"];
+        m_playerFloatResources.baseAttackDamage = data["startingPlayerFloatResource"]["baseAttackDamage"];
+        m_playerFloatResources.currentSpiritRangedAttackDamage = data["startingPlayerFloatResource"]["currentSpiritRangedAttackDamage"];
+        m_playerFloatResources.currentSpiritMeleeAttackDamage = data["startingPlayerFloatResource"]["currentSpiritMeleeAttackDamage"];
 
 
 
@@ -125,7 +160,7 @@ public class PlayerData : MonoBehaviour
         // check if player is alive
         if (m_playerFloatResources.currentHealth <= 0)
         {
-            
+
             // isAlive = false;
             GameManager.PlayerDied();
 

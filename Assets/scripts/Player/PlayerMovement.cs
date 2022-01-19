@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float crouchSpeed;
     public float wallJumpLerp;
     public float dashSpeed;
+    public float dashLength;
     public float coyoteDuration;
 
 
@@ -190,8 +191,10 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator JumpFinishHandler()
     {
         DOVirtual.Float(13, 0, .6f, RigidbodyDrag);
+
         yield return new WaitForSeconds(0.1f);
         yield return StartCoroutine(CheckForLanding());
+
         isJumping = false;
     }
 
@@ -309,14 +312,14 @@ public class PlayerMovement : MonoBehaviour
 
         animationScript.SetTrigger("dash");
 
-        float tempDashSpeed = dashSpeed;
         bool focused = false;
 
-        if (playerInput.focusHeld)
+        if (playerInput.focusHeld && PlayerData.playerFloatResources.currentMana >= PlayerData.playerResourceUsage.focusDash)
         {
             if (PlayerData.playerBoolUpgrades.isSpiritDashAvailable)
             {
-                tempDashSpeed = tempDashSpeed * 3f;
+                PlayerData.playerFloatResources.currentMana = PlayerData.playerFloatResources.currentMana - PlayerData.playerResourceUsage.focusDash;
+
                 playerCollision.allowEnemyTrigger = false;
                 focused = true;
             }
@@ -338,6 +341,7 @@ public class PlayerMovement : MonoBehaviour
 
         playerRigidBody.gravityScale = 0;
         playerRigidBody.drag = 0;
+        playerRigidBody.velocity = new Vector2(0f, 0f);
         canMove = false;
 
         betterJumpEnabled = false;
@@ -411,81 +415,65 @@ public class PlayerMovement : MonoBehaviour
         else
         {
 
-            Vector2 targetPostion = (Vector2)this.transform.position + (direction * 5.5f);
+            Vector2 targetPostion = (Vector2)this.transform.position + (direction * dashLength);
 
-            bool looping = true;
             bool dashFixed = false;
+            bool dashFixedSecond = false;
             bool dashFixRightSide = false;
-            // Vector2 savedVelocty = new Vector2();
+            float timer = 0f;
+
 
             // secondary timer that if reaches 0 breaks out of this
-            while (looping)
+            while (true)
             {
-
-                // float acceleration = 10f;
-                float step = dashSpeed * Time.deltaTime;
-
-                
-
-                if (dashFixed && !playerCollision.onRightBottomWall && !playerCollision.onLeftBottomWall)
+                timer = timer + Time.deltaTime;
+                if (timer > 0.26f)
                 {
-                    // dashFixed = false;
+                    break;
+                }
+                float step = dashSpeed * Time.deltaTime;
+                Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, targetPostion, step);
+
+
+                if (dashFixed && !dashFixedSecond && !playerCollision.onRightBottomWall && !playerCollision.onLeftBottomWall)
+                {
+                    dashFixedSecond = true;
                     if (dashFixRightSide)
                     {
-                        playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.y, playerRigidBody.velocity.y);
+
+                        targetPostion.x = this.transform.position.x + (targetPostion.y - this.transform.position.y);
                     }
                     else
                     {
-                        playerRigidBody.velocity = new Vector2(-playerRigidBody.velocity.y, playerRigidBody.velocity.y);
+                        targetPostion.x = this.transform.position.x - (targetPostion.y - this.transform.position.y);
+
                     }
 
                 }
 
-                if (playerRigidBody.velocity.x > 0.1f && playerCollision.onRightBottomWall)
+                if (!dashFixed && newPosition.x > transform.position.x && playerCollision.onRightBottomWall)
                 {
                     dashFixRightSide = true;
-                    // right dash
-                    // savedVelocty = new Vector2(0, playerRigidBody.velocity.y);
                     dashFixed = true;
+                    targetPostion.x = this.transform.position.x;
 
                 }
-                else if (playerRigidBody.velocity.x < 0.1f && playerCollision.onLeftBottomWall)
+                else if (!dashFixed && newPosition.x < transform.position.x && playerCollision.onLeftBottomWall)
                 {
                     dashFixRightSide = false;
-                    // left dash
-                    // savedVelocty = new Vector2(0, playerRigidBody.velocity.y);
                     dashFixed = true;
+                    targetPostion.x = this.transform.position.x;
                 }
 
-
-                if (!dashFixed)
-                {
-
-                    Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, targetPostion, step);
-
-                    playerRigidBody.MovePosition(newPosition);
-
-                }
-                else
-                {
-                                       
-                    Vector2 customTargetPostion = targetPostion;
-                    customTargetPostion.x = this.transform.position.x;
-
-                    Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, customTargetPostion, step);
-
-                    playerRigidBody.MovePosition(newPosition);
-
-                }
-
+                playerRigidBody.MovePosition(newPosition);
 
                 if (
                     (transform.position.x + 0.1f > targetPostion.x && (transform.position.x - 0.1f) < targetPostion.x) &&
                     (transform.position.y + 0.1f > targetPostion.y && (transform.position.y - 0.1f) < targetPostion.y)
                     )
                 {
-                    // loop breaker
-                    looping = false;
+                    // 
+                    break;
                 }
 
                 yield return null;
@@ -494,23 +482,7 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
-            Debug.Log("end position/" + (playerRigidBody.position));
-            // playerRigidBody.drag = 0;
-            // yield return new WaitForSeconds(.1f);
-
-            // playerRigidBody.drag = 9;
-
-            // yield return new WaitForSeconds(.06f);
-            // playerRigidBody.drag = 34;
-
-            // yield return new WaitForSeconds(.02f);
-
-            // playerRigidBody.drag = 0;
-
-
-
-
-
+            Debug.Log("timer/" + timer);
         }
 
 

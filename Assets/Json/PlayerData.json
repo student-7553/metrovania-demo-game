@@ -1,0 +1,23 @@
+{
+    "startingPlayerFloatResource": {
+        "currentHealth": 30,
+        "maximumHealth": 30,
+        "currentMana": 50,
+        "maximumMana": 50,
+        "currentBaseAttackDamage": 10,
+        "baseAttackDamage": 10,
+        "currentSpiritRangedAttackDamage": 30,
+        "currentSpiritMeleeAttackDamage": 30
+    },
+
+    "playerResourceUsage": {
+        "lance": 10,
+        "focusStrike": 10,
+        "focusDash": 5,
+        "focusDive": 10,
+        "deflect": 10
+    }
+
+
+
+}

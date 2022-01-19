@@ -116,6 +116,8 @@ public class PlayerAttack : MonoBehaviour
 
         playerRigidBody.velocity = new Vector2(0, playerRigidBody.velocity.y);
 
+        // playerMovement.canMove = false;
+
         Vector2 lockedAxis = new Vector2(playerInput.horizontal, playerInput.vertical);
         StartCoroutine(BasicAttackWait(lockedAxis));
         StartCoroutine(BasicAttackGroundWait());
