@@ -11,34 +11,38 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
 
 
-    void Start() {
-        //  if (current != null)
-        // {
-        //     Destroy(gameObject);
-        //     return;
-        // }
-        // current = this;
-        // DontDestroyOnLoad(gameObject);
+    void Start()
+    {
+        if (current != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        current = this;
+        DontDestroyOnLoad(gameObject);
     }
 
 
-    public void Resume(){
-        Debug.Log("Are we getting triggered?");
+    public void Resume()
+    {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isGamePaused = false;
     }
-    public void LoadMenu(){
+    public void LoadMenu()
+    {
         Debug.Log("Load Menu");
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    public void Quit(){
-        
+    public void Quit()
+    {
+
         Debug.Log("Quitting");
         SceneManager.LoadScene("MainMenu");
         // Application.Quit();
     }
-    private void Pause(){
+    private void Pause()
+    {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isGamePaused = true;
@@ -47,10 +51,14 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         // if(Input.GetKeyDown(KeyCode.Escape)){
-        if(Input.GetButtonDown("Cancel")){
-            if(isGamePaused){
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (isGamePaused)
+            {
                 Resume();
-            } else {
+            }
+            else
+            {
                 Pause();
             }
         }

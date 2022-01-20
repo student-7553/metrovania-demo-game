@@ -9,8 +9,10 @@ public class UiManager : MonoBehaviour
 
     static UiManager current;
 
-	public TextMeshProUGUI orbText;			//Text element showing number of orbs
-	public TextMeshProUGUI timeText;		//Text element showing amount of time
+	public TextMeshProUGUI healthTextBar;			
+	public TextMeshProUGUI resourceTextBar;	
+    public TextMeshProUGUI currencyTextBar;		
+    
 	public TextMeshProUGUI deathText;		//Text element showing number or deaths
 	public TextMeshProUGUI gameOverText;	//Text element showing the Game Over message
     void Start()
@@ -32,5 +34,11 @@ public class UiManager : MonoBehaviour
         
         current.gameOverText.enabled = true;
     } 
+
+    private void Update() {
+        healthTextBar.text = PlayerData.playerFloatResources.maximumHealth.ToString()+"/"+ PlayerData.playerFloatResources.currentHealth.ToString();
+        resourceTextBar.text = PlayerData.playerFloatResources.maximumMana.ToString()+"/"+ PlayerData.playerFloatResources.currentMana.ToString();
+        currencyTextBar.text = PlayerData.playerFloatResources.currentCurrencyCount.ToString();
+    }
     
 }

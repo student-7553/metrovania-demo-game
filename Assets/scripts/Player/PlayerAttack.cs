@@ -11,7 +11,7 @@ public class PlayerAttack : MonoBehaviour
     [Space]
     [Header("Booleans")]
     public bool isAttacking;
-    public bool isBasicAttacking,isSpiritRangedAttacking,isSpiritMeleeAttacking;
+    public bool isBasicAttacking, isSpiritRangedAttacking, isSpiritMeleeAttacking;
 
     public bool drawDebugRay;
 
@@ -52,35 +52,52 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerInput.focusHeld && playerInput.rangedPressed && !isAttacking)
+        if (playerMovement.canMove)
         {
-            // ranged spirit attack
-            if (playerMovement.canMove)
-            {
 
-                rangedSpiritAttack(playerInput.horizontal, playerInput.vertical);
+
+            if (playerInput.focusHeld && playerInput.rangedPressed && !isAttacking)
+            {
+                // ranged spirit attack
+                if (
+                    PlayerData.playerBoolUpgrades.isRangedSpiritAttackAvailable &&
+                    PlayerData.playerFloatResources.currentMana >= PlayerData.playerResourceUsage.lance)
+                {
+                    PlayerData.playerFloatResources.currentMana = PlayerData.playerFloatResources.currentMana - PlayerData.playerResourceUsage.lance;
+                    rangedSpiritAttack(playerInput.horizontal, playerInput.vertical);
+
+                }
+
+
             }
 
-        }
 
-        if (playerInput.focusHeld && playerInput.attackPressed && !isAttacking)
-        {
-            // melee heavy spirit attack
-            if (playerMovement.canMove)
+
+            if (playerInput.focusHeld && playerInput.attackPressed && !isAttacking)
             {
-                meleeSpiritAttack(playerInput.horizontal);
+                // melee heavy spirit attack
+                // ranged spirit attack
+                if (
+                    PlayerData.playerBoolUpgrades.isRangedSpiritAttackAvailable &&
+                    PlayerData.playerFloatResources.currentMana >= PlayerData.playerResourceUsage.focusStrike)
+                {
+                    PlayerData.playerFloatResources.currentMana = PlayerData.playerFloatResources.currentMana - PlayerData.playerResourceUsage.focusStrike;
+                    meleeSpiritAttack(playerInput.horizontal);
+
+                }
+
+
+
             }
 
-        }
-
-        if (playerInput.attackPressed && !isAttacking)
-        {
-            if (playerMovement.canMove)
+            if (playerInput.attackPressed && !isAttacking)
             {
+
+
                 BasicAttack();
 
-            }
 
+            }
         }
 
 

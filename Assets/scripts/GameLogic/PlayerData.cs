@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-// using SimpleJSON;
 using SimpleJSON;
 
 public class playerFloatResourceClass
@@ -11,6 +10,9 @@ public class playerFloatResourceClass
     public float maximumHealth;
     public float currentMana;
     public float maximumMana;
+
+    public float currentCurrencyCount;
+
     public float currentBaseAttackDamage;
     public float baseAttackDamage;
     public float currentSpiritRangedAttackDamage;
