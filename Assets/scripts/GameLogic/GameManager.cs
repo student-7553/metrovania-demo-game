@@ -100,16 +100,18 @@ public class GameManager : MonoBehaviour
 
     public static void awakeGameLogic()
     {
+        if (current == null)
+            return;
 
         PlayerMovement playerMovement = (PlayerMovement)FindObjectOfType(typeof(PlayerMovement));
         PlayerCameraAchor playerCameraAchor = (PlayerCameraAchor)FindObjectOfType(typeof(PlayerCameraAchor));
-
 
 
         if (playerMovement != null && playerCameraAchor != null)
         {
             current.m_playerSpikeRespawnData = new respawnLocation();
             current.m_playerDeathRespawnData = new respawnLocation();
+
             current.m_playerSpikeRespawnData.playerlocation = playerMovement.transform.position;
             current.m_playerSpikeRespawnData.cameraLocation = playerCameraAchor.transform.position;
             current.m_playerSpikeRespawnData.cameraAnchorState = playerCameraAchor.anchorState;
@@ -195,12 +197,31 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        int targetBuildIndex = SceneManager.GetSceneAt(1).buildIndex;
+        int targetBuildIndex = SceneManager.GetActiveScene().buildIndex;
 
-        SceneManager.UnloadSceneAsync(1);
+
+        SceneManager.UnloadSceneAsync(targetBuildIndex);
         SceneManager.LoadSceneAsync(targetBuildIndex, LoadSceneMode.Additive);
+      
+    }
 
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        
+        if(scene.name != "Core"){
+            SceneManager.SetActiveScene(scene);
+        }
 
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
 

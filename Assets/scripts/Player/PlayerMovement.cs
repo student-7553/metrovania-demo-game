@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isHorizontalLerp;
     public bool wallSlide;
     public bool isDashing;
+    public bool isFocusDashing;
     public bool overrideBetterJumping = true;
     public bool isJumping;
     public bool isFacingRight;
@@ -275,9 +276,6 @@ public class PlayerMovement : MonoBehaviour
 
         remainingDashes--;
 
-
-
-
         float radian = Mathf.Atan2(x, y);
 
 
@@ -290,8 +288,6 @@ public class PlayerMovement : MonoBehaviour
         float breakingAngleDiv = breakingAngle / 2f;
 
         float newDegree = (int)(degree / breakingAngleDiv);
-        // float remainder = (degree % breakingAngle);
-
 
         if (newDegree % 2 == 0)
         {
@@ -306,8 +302,7 @@ public class PlayerMovement : MonoBehaviour
 
         float newX = 1f * Mathf.Sin(newRadians);
         float newY = 1f * Mathf.Cos(newRadians);
-        // float newX = 1f * Mathf.Sin(Mathf.Atan2(x, y));
-        // float newY = 1f * Mathf.Cos(Mathf.Atan2(x, y));
+
         Vector2 dir = new Vector2(newX, newY);
 
         animationScript.SetTrigger("dash");
@@ -326,9 +321,6 @@ public class PlayerMovement : MonoBehaviour
 
 
         }
-
-
-        // playerRigidBody.velocity = dir * tempDashSpeed;
 
         dashCoroutine = DashAfter(focused, dir);
 
@@ -349,12 +341,21 @@ public class PlayerMovement : MonoBehaviour
 
         isDashing = true;
 
+        if(focused){
+            isFocusDashing = true;
+        }
+
 
         yield return DashWaitCounter(focused, direction);
 
 
         canMove = true;
         isDashing = false;
+
+        if(focused){
+            isFocusDashing = false;
+        }
+
         playerRigidBody.gravityScale = 1f;
 
         yield return new WaitForSeconds(.1f);
@@ -371,49 +372,31 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator DashWaitCounter(bool focused, Vector2 direction)
     {
 
-        if (focused)
-        {
-            Vector2 prePosition = transform.position;
+        // if (focused)
+        // {
+        //     Vector2 prePosition = transform.position;
 
-            playerRigidBody.drag = 0;
+        //     playerRigidBody.drag = 0;
 
-            // yield return new WaitForSeconds(.03f);
-            // playerRigidBody.drag = 9;
-            // yield return new WaitForSeconds(.05f);
+        //     // yield return new WaitForSeconds(.03f);
+        //     // playerRigidBody.drag = 9;
+        //     // yield return new WaitForSeconds(.05f);
 
-            yield return new WaitForSeconds(.06f);
+        //     yield return new WaitForSeconds(.06f);
 
-            playerRigidBody.drag = 42;
+        //     playerRigidBody.drag = 42;
+          //     Vector2 prePosition = transform.position;
+        //     Vector2 postPosition = transform.position;
+        //     playerAttack.DashAttack(prePosition, postPosition);
 
-            Vector2 postPosition = transform.position;
-            playerAttack.DashAttack(prePosition, postPosition);
+        //     yield return new WaitForSeconds(.02f);
 
-            yield return new WaitForSeconds(.02f);
+        //     playerRigidBody.velocity = new Vector2(0f, 0f);
+        //     playerRigidBody.drag = 0;
 
-            playerRigidBody.velocity = new Vector2(0f, 0f);
-            playerRigidBody.drag = 0;
-
-
-
-            // yield return new WaitForSeconds(.03f);
-
-            // playerRigidBody.velocity = playerRigidBody.velocity - (playerRigidBody.velocity / 2);
-
-            // yield return new WaitForSeconds(.05f);
-
-            // playerRigidBody.velocity = playerRigidBody.velocity / 4;
-
-            // Vector2 postPosition = transform.position;
-            // playerAttack.DashAttack(prePosition, postPosition);
-
-            // playerRigidBody.drag = 22;
-
-            // yield return new WaitForSeconds(.02f);
-
-            // playerRigidBody.drag = 0;
-        }
-        else
-        {
+        // }
+        // else
+        // {
 
             Vector2 targetPostion = (Vector2)this.transform.position + (direction * dashLength);
 
@@ -422,18 +405,37 @@ public class PlayerMovement : MonoBehaviour
             bool dashFixRightSide = false;
             float timer = 0f;
 
+            float focusedTimer = 0.2f; 
+            float normalTimer = 0.26f;
 
             // secondary timer that if reaches 0 breaks out of this
             while (true)
             {
                 timer = timer + Time.deltaTime;
-                if (timer > 0.26f)
-                {
-                    break;
+                if(focused){
+                    if (timer > focusedTimer)
+                    {
+                        break;
+                    }
+                } else {
+                    if (timer > normalTimer)
+                    {
+                        break;
+                    }
                 }
+
+                
+               
                 float step = dashSpeed * Time.deltaTime;
+
+                if(focused){
+                    step = step * 1.5f;
+                }
                 Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, targetPostion, step);
 
+                // Vector2 prePosition = transform.position;
+                // Vector2 postPosition = transform.position;
+                // playerAttack.DashAttack(prePosition, postPosition);
 
                 if (dashFixed && !dashFixedSecond && !playerCollision.onRightBottomWall && !playerCollision.onLeftBottomWall)
                 {
@@ -466,7 +468,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 playerRigidBody.MovePosition(newPosition);
-
+                Debug.Log("moving to new position");
                 if (
                     (transform.position.x + 0.1f > targetPostion.x && (transform.position.x - 0.1f) < targetPostion.x) &&
                     (transform.position.y + 0.1f > targetPostion.y && (transform.position.y - 0.1f) < targetPostion.y)
@@ -482,8 +484,7 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
-            Debug.Log("timer/" + timer);
-        }
+        // }
 
 
     }
@@ -494,6 +495,12 @@ public class PlayerMovement : MonoBehaviour
         // StopAllCoroutines();
         canMove = true;
         isDashing = false;
+        
+        if(isFocusDashing){
+            isFocusDashing = false;
+            playerCollision.allowEnemyTrigger = true;
+
+        }
         playerRigidBody.gravityScale = 3;
         overrideBetterJumping = false;
 
@@ -853,13 +860,15 @@ public class PlayerMovement : MonoBehaviour
         // END limit verticalVelocity
     }
 
-    public IEnumerator knockBackPlayer(Vector2 direction, float impactValue)
+    public IEnumerator knockBackPlayer(Vector2 direction, float impactValue, float duration)
     {
+        //  this needs a switch
         animationScript.SetTrigger("isGettingKnockedBack");
+
         canMove = false;
         isHorizontalLerp = true;
         playerRigidBody.velocity = (direction + new Vector2(0f, 2f)) * impactValue;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(duration);
         canMove = true;
         isHorizontalLerp = false;
     }

@@ -157,13 +157,9 @@ public class PlayerData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         // check if player is alive
         if (m_playerFloatResources.currentHealth <= 0)
         {
-
-            // isAlive = false;
             GameManager.PlayerDied();
 
         }

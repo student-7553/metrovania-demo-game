@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class AirFollower : BaseEnemy
 {
-    // void FixedUpdate()
-    // {
-    //     if (!isAlive)
-    //     {
-    //         return;
-    //     }
-    //     if (!isAbleToMove)
-    //     {
-    //         return;
-    //     }
-    //     if (targetGameObject != null)
-    //     {
-    //         float step = acceleration * Time.deltaTime;
-    //         Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, (Vector2)targetGameObject.transform.position + new Vector2(0f, 2f), step);
-    //         Vector2 newPositionDifference = newPosition - (Vector2)this.transform.position;
-    //         baseRigidbody2D.velocity = baseRigidbody2D.velocity + newPositionDifference;
-    //         baseRigidbody2D.velocity = Vector2.ClampMagnitude(baseRigidbody2D.velocity, maxSpeed);
-    //     }
-    //     else
-    //     {
-    //         this.sentryLocationUpdate();
-    //     }
-    // }
+    void FixedUpdate()
+    {
+        if (!isAlive)
+        {
+            return;
+        }
+        if (!isAbleToMove)
+        {
+            return;
+        }
+        if (targetGameObject != null)
+        {
+            float step = acceleration * Time.deltaTime;
+            Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, (Vector2)targetGameObject.transform.position + new Vector2(0f, 2f), step);
+            Vector2 newPositionDifference = newPosition - (Vector2)this.transform.position;
+            baseRigidbody2D.velocity = baseRigidbody2D.velocity + newPositionDifference;
+            baseRigidbody2D.velocity = Vector2.ClampMagnitude(baseRigidbody2D.velocity, maxSpeed);
+        }
+        else
+        {
+            this.sentryLocationUpdate();
+        }
+    }
 
     public override void StartAfter()
     {
@@ -37,6 +37,7 @@ public class AirFollower : BaseEnemy
     {
         if (target.layer == playerLayer && targetGameObject == null)
         {
+            // Debug.Log("are ");
             targetGameObject = target;
         }
     }

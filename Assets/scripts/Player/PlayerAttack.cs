@@ -305,17 +305,19 @@ public class PlayerAttack : MonoBehaviour
         isSpiritMeleeAttacking = true;
         Vector2 direction = new Vector2(playerMovement.isFacingRight ? 1f : -1f, 0);
         playerRigidBody.velocity = new Vector2(0f, 0f);
+        playerRigidBody.gravityScale = 0;
         playerMovement.canMove = false;
-        StartCoroutine(meleeSpiritAttack(direction));
+        playerMovement.overrideBetterJumping = true;
+        StartCoroutine(meleeSpiritAttackAfter(direction));
 
 
     }
 
-    private IEnumerator meleeSpiritAttack(Vector2 direction)
+    private IEnumerator meleeSpiritAttackAfter(Vector2 direction)
     {
 
 
-        yield return new WaitForSeconds(0.03f);
+        yield return new WaitForSeconds(0.2f);
 
         RaycastHit2D[] hits = Physics2D.CircleCastAll((Vector2)transform.position + (direction * 2) + new Vector2(0f, 1f), 2.5f, direction, 2.5f, attackAbleLayerValue);
 
@@ -337,6 +339,8 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         isAttacking = false;
         isSpiritMeleeAttacking = false;
+        playerRigidBody.gravityScale = 3;
+        playerMovement.overrideBetterJumping = false;
         playerMovement.canMove = true;
     }
     private static IEnumerator WaitForFrames(int frameCount)

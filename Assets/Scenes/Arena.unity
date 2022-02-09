@@ -228,13 +228,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 30
-  damage: 5
+  damage: 15
   maxSpeed: 4
   acceleration: 30
   isKnockable: 1
   arraySentryLocations:
   - {x: -20, y: -4.5}
   - {x: -10, y: -4.5}
+  targetGameObject: {fileID: 0}
 --- !u!212 &47421973
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -659,6 +660,7 @@ MonoBehaviour:
   acceleration: 10
   isKnockable: 1
   arraySentryLocations: []
+  targetGameObject: {fileID: 0}
   aggroBreakDistance: 30
   chargeAnticipationTime: 1
   chargingVelocity: 20
@@ -7090,6 +7092,7 @@ MonoBehaviour:
   isKnockable: 1
   arraySentryLocations:
   - {x: -20, y: 5.05}
+  targetGameObject: {fileID: 0}
 --- !u!1 &454833108
 GameObject:
   m_ObjectHideFlags: 0
@@ -7145,6 +7148,7 @@ MonoBehaviour:
   isKnockable: 1
   arraySentryLocations:
   - {x: -20, y: 5.05}
+  targetGameObject: {fileID: 0}
 --- !u!61 &454833111
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17495,7 +17499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultX: 1.5
-  defaultY: 1.5
+  defaultY: 1
   downScaleY: 0
   upScaleY: 1.5
 --- !u!212 &1005394964
@@ -17807,6 +17811,7 @@ MonoBehaviour:
   acceleration: 18
   isKnockable: 1
   arraySentryLocations: []
+  targetGameObject: {fileID: 0}
 --- !u!61 &1038474416
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18016,29 +18021,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalSpeed: 10
-  jumpForce: 45
+  jumpForce: 55
   slideSpeed: 4
   crouchSpeed: 5
   wallJumpLerp: 5
-  dashSpeed: 30
-  dashLength: 0
+  dashSpeed: 45
+  dashLength: 5
   coyoteDuration: 0.1
   verticalVelocityLimit: 19
-  fallMultiplier: 4
+  fallMultiplier: 5
   lowJumpMultiplier: 10
   canMove: 1
   wallGrab: 0
   isHorizontalLerp: 0
   wallSlide: 0
   isDashing: 0
+  isFocusDashing: 0
   overrideBetterJumping: 0
-  betterJumpingForceSpaceEnabled: 0
   isJumping: 0
   isFacingRight: 1
   isCrouching: 0
   allowedDashes: 1
-  groundTouch: 1
   remainingDashes: 0
+  groundTouch: 1
   dashParticle: {fileID: 0}
   jumpParticle: {fileID: 1931235429}
   groundEntryParticles:
@@ -23040,6 +23045,7 @@ MonoBehaviour:
   acceleration: 30
   isKnockable: 1
   arraySentryLocations: []
+  targetGameObject: {fileID: 0}
 --- !u!61 &1117244673
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24515,7 +24521,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196079384}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -30.000008, y: 3.479999, z: -30}
+  m_LocalPosition: {x: -29.999992, y: 3.479999, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2052520689}

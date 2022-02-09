@@ -42,7 +42,7 @@ public class BaseEnemy : MonoBehaviour
     [System.NonSerialized]
     public int playerLayer;
 
-    [System.NonSerialized]
+    // [System.NonSerialized]
     public GameObject targetGameObject = null;
 
 
@@ -181,7 +181,8 @@ public class BaseEnemy : MonoBehaviour
         else
         {
             if (isKnockable)
-            {
+            {   
+                Debug.Log("enemy getting knocked back");
                 StartCoroutine(normalKnockBack(directionOfForce));
             }
 

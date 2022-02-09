@@ -6,8 +6,10 @@ public class MainMenu : MonoBehaviour
     public void clickedPlayButton()
     {
         // LoadScene();
-        SceneManager.LoadSceneAsync("Core", LoadSceneMode.Single);
-        SceneManager.LoadSceneAsync("demo", LoadSceneMode.Additive);
+        // SceneManager.LoadSceneAsync("Core", LoadSceneMode.Single);
+        // SceneManager.LoadSceneAsync("demo", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("demo", LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync("Core", LoadSceneMode.Additive);
     }
 
 
