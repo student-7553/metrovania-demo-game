@@ -182,7 +182,6 @@ public class BaseEnemy : MonoBehaviour
         {
             if (isKnockable)
             {   
-                Debug.Log("enemy getting knocked back");
                 StartCoroutine(normalKnockBack(directionOfForce));
             }
 

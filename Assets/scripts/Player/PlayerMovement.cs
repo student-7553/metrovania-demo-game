@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     public bool groundTouch;
 
 
- 
+
 
 
 
@@ -309,7 +309,9 @@ public class PlayerMovement : MonoBehaviour
 
         bool focused = false;
 
-        if (playerInput.focusHeld && PlayerData.playerFloatResources.currentMana >= PlayerData.playerResourceUsage.focusDash)
+        if (playerInput.focusHeld
+        && PlayerData.playerFloatResources.currentMana >= PlayerData.playerResourceUsage.focusDash
+        )
         {
             if (PlayerData.playerBoolUpgrades.isSpiritDashAvailable)
             {
@@ -341,7 +343,8 @@ public class PlayerMovement : MonoBehaviour
 
         isDashing = true;
 
-        if(focused){
+        if (focused)
+        {
             isFocusDashing = true;
         }
 
@@ -352,13 +355,16 @@ public class PlayerMovement : MonoBehaviour
         canMove = true;
         isDashing = false;
 
-        if(focused){
+        if (focused)
+        {
             isFocusDashing = false;
         }
 
-        playerRigidBody.gravityScale = 1f;
+        playerRigidBody.gravityScale = 0.5f;
+        // playerRigidBody.velocity = new Vector2( 0f, 0f);
+        // yield return new WaitForSeconds(.1f);
 
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.2f);
 
         playerRigidBody.gravityScale = 3;
         overrideBetterJumping = false;
@@ -385,7 +391,7 @@ public class PlayerMovement : MonoBehaviour
         //     yield return new WaitForSeconds(.06f);
 
         //     playerRigidBody.drag = 42;
-          //     Vector2 prePosition = transform.position;
+        //     Vector2 prePosition = transform.position;
         //     Vector2 postPosition = transform.position;
         //     playerAttack.DashAttack(prePosition, postPosition);
 
@@ -397,47 +403,58 @@ public class PlayerMovement : MonoBehaviour
         // }
         // else
         // {
+        // float chosenDashLength = dashLength;
 
-            Vector2 targetPostion = (Vector2)this.transform.position + (direction * dashLength);
+        // if(focused){
+        //     chosenDashLength
+        // }
+        Vector2 prePosition = transform.position;
+        Vector2 targetPostion = (Vector2)this.transform.position + (direction * (focused ? dashLength * 1.25f : dashLength));
 
-            bool dashFixed = false;
-            bool dashFixedSecond = false;
-            bool dashFixRightSide = false;
-            float timer = 0f;
+        bool dashFixed = false;
+        bool dashFixedSecond = false;
+        bool dashFixRightSide = false;
+        float step = dashSpeed * Time.deltaTime;
 
-            float focusedTimer = 0.2f; 
-            float normalTimer = 0.26f;
+        if (focused)
+        {
+            step = step * 2f;
+        }
 
-            // secondary timer that if reaches 0 breaks out of this
-            while (true)
+        float timer = 0f;
+        float focusedTimer = 0.2f;
+        float normalTimer = 0.26f;
+
+        // secondary timer that if reaches 0 breaks out of this
+        while (true)
+        {
+            timer = timer + Time.deltaTime;
+            if (focused)
             {
-                timer = timer + Time.deltaTime;
-                if(focused){
-                    if (timer > focusedTimer)
-                    {
-                        break;
-                    }
-                } else {
-                    if (timer > normalTimer)
-                    {
-                        break;
-                    }
+                if (timer > focusedTimer)
+                {
+                    break;
                 }
-
-                
-               
-                float step = dashSpeed * Time.deltaTime;
-
-                if(focused){
-                    step = step * 1.5f;
+            }
+            else
+            {
+                if (timer > normalTimer)
+                {
+                    break;
                 }
-                Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, targetPostion, step);
+            }
 
-                // Vector2 prePosition = transform.position;
-                // Vector2 postPosition = transform.position;
-                // playerAttack.DashAttack(prePosition, postPosition);
 
-                if (dashFixed && !dashFixedSecond && !playerCollision.onRightBottomWall && !playerCollision.onLeftBottomWall)
+
+
+            Vector2 newPosition = Vector2.MoveTowards((Vector2)this.transform.position, targetPostion, step);
+
+
+
+            if (dashFixed && !dashFixedSecond)
+            {
+
+                if (!playerCollision.onRightBottomWall && !playerCollision.onLeftBottomWall)
                 {
                     dashFixedSecond = true;
                     if (dashFixRightSide)
@@ -450,41 +467,89 @@ public class PlayerMovement : MonoBehaviour
                         targetPostion.x = this.transform.position.x - (targetPostion.y - this.transform.position.y);
 
                     }
-
                 }
-
-                if (!dashFixed && newPosition.x > transform.position.x && playerCollision.onRightBottomWall)
-                {
-                    dashFixRightSide = true;
-                    dashFixed = true;
-                    targetPostion.x = this.transform.position.x;
-
-                }
-                else if (!dashFixed && newPosition.x < transform.position.x && playerCollision.onLeftBottomWall)
-                {
-                    dashFixRightSide = false;
-                    dashFixed = true;
-                    targetPostion.x = this.transform.position.x;
-                }
-
-                playerRigidBody.MovePosition(newPosition);
-                Debug.Log("moving to new position");
-                if (
-                    (transform.position.x + 0.1f > targetPostion.x && (transform.position.x - 0.1f) < targetPostion.x) &&
-                    (transform.position.y + 0.1f > targetPostion.y && (transform.position.y - 0.1f) < targetPostion.y)
-                    )
-                {
-                    // 
-                    break;
-                }
-
-                yield return null;
 
 
 
             }
 
-        // }
+
+            if (!dashFixed)
+            {
+                if (
+                    newPosition.x > transform.position.x &&
+                    newPosition.y > transform.position.y &&
+                    playerCollision.onRightBottomWall
+                )
+                {
+                    // up right
+                    dashFixRightSide = true;
+                    dashFixed = true;
+                    targetPostion.x = this.transform.position.x;
+
+                }
+                else if (
+                    newPosition.x < transform.position.x &&
+                    newPosition.y > transform.position.y &&
+                    playerCollision.onLeftBottomWall
+                    )
+                {
+                    // up left
+                    dashFixRightSide = false;
+                    dashFixed = true;
+                    targetPostion.x = this.transform.position.x;
+                }
+                else if (
+                    newPosition.x < transform.position.x &&
+                    newPosition.y < transform.position.y &&
+                    playerCollision.onGround
+                )
+                {
+                    // down left
+                    dashFixRightSide = false;
+                    dashFixed = true;
+                    targetPostion.y = this.transform.position.y;
+
+                }
+                else if (
+                  newPosition.x > transform.position.x &&
+                  newPosition.y < transform.position.y &&
+                  playerCollision.onGround
+                )
+                {
+                    // down right
+                    dashFixRightSide = true;
+                    dashFixed = true;
+                    targetPostion.y = this.transform.position.y;
+                }
+            }
+
+
+
+
+
+            playerRigidBody.MovePosition(newPosition);
+
+
+            // BREAK WHEN THE PLAYER REACHES LOCATION
+            if (
+                (transform.position.x + 0.1f > targetPostion.x && (transform.position.x - 0.1f) < targetPostion.x) &&
+                (transform.position.y + 0.1f > targetPostion.y && (transform.position.y - 0.1f) < targetPostion.y)
+                )
+            {
+                break;
+            }
+
+            yield return null;
+
+
+
+        }
+
+        if (focused)
+        {
+            playerAttack.DashAttack(prePosition, targetPostion);
+        }
 
 
     }
@@ -495,10 +560,10 @@ public class PlayerMovement : MonoBehaviour
         // StopAllCoroutines();
         canMove = true;
         isDashing = false;
-        
-        if(isFocusDashing){
+
+        if (isFocusDashing)
+        {
             isFocusDashing = false;
-            playerCollision.allowEnemyTrigger = true;
 
         }
         playerRigidBody.gravityScale = 3;
@@ -693,7 +758,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         // Vector2 dir = new Vector2(xRaw, yRaw);
-        if (canMove)
+        if (canMove && !playerAttack.isAttacking)
         {
             animationScript.SetHorizontalMovement(x, y, playerRigidBody.velocity.y, playerRigidBody.velocity.x);
         }
@@ -860,10 +925,14 @@ public class PlayerMovement : MonoBehaviour
         // END limit verticalVelocity
     }
 
-    public IEnumerator knockBackPlayer(Vector2 direction, float impactValue, float duration)
+    public IEnumerator knockBackPlayer(Vector2 direction, float impactValue, float duration, string trigger)
     {
-        //  this needs a switch
-        animationScript.SetTrigger("isGettingKnockedBack");
+        //  this needs a switch\
+        if (trigger != null)
+        {
+            animationScript.SetTrigger(trigger);
+        }
+
 
         canMove = false;
         isHorizontalLerp = true;

@@ -143,9 +143,9 @@ public class PlayerInput : MonoBehaviour
 
         vertical = Input.GetAxis("Vertical");
 
-        horizontal = Input.GetAxis("HorizontalSoft");
+        // horizontal = Input.GetAxis("HorizontalSoft");
 
-        vertical = Input.GetAxis("VerticalSoft");
+        // vertical = Input.GetAxis("VerticalSoft");
 
         jumpPressed = jumpPressed || Input.GetButtonDown("Jump");
 
@@ -169,6 +169,8 @@ public class PlayerInput : MonoBehaviour
         rangedPressed = rangedPressed || Input.GetButtonDown("Ranged");
 
         focusHeld = focusHeld || (Input.GetAxis("Focus") == 1 ? true : false);
+
+        focusHeld = focusHeld || (Input.GetButton("Focus") ? true : false);
 
 
     }

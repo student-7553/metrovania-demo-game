@@ -25,6 +25,8 @@ public class PlayerAttack : MonoBehaviour
     private AnimationScript animationScript;
     public int baseAttackFrameCount = 25;
 
+    public GameObject spiritOrb;
+
     [HideInInspector]
     private Color debugCollisionColor = Color.red;
     private int attackAbleLayerValue, groundWithAttackableLayerValue;
@@ -34,7 +36,6 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
-
         attackAbleLayerValue = LayerMask.GetMask("Enemies");
 
         string[] tempLayers = { "Enemies", "Platform" };
@@ -54,8 +55,6 @@ public class PlayerAttack : MonoBehaviour
     {
         if (playerMovement.canMove)
         {
-
-
             if (playerInput.focusHeld && playerInput.rangedPressed && !isAttacking)
             {
                 // ranged spirit attack
@@ -65,38 +64,41 @@ public class PlayerAttack : MonoBehaviour
                 {
                     PlayerData.playerFloatResources.currentMana = PlayerData.playerFloatResources.currentMana - PlayerData.playerResourceUsage.lance;
                     rangedSpiritAttack(playerInput.horizontal, playerInput.vertical);
-
                 }
-
-
             }
 
 
 
-            if (playerInput.focusHeld && playerInput.attackPressed && !isAttacking)
+            // if (playerInput.focusHeld && playerInput.attackPressed && !isAttacking)
+            // {
+            //     // melee heavy spirit attack
+            //     if (
+            //         PlayerData.playerBoolUpgrades.isRangedSpiritAttackAvailable &&
+            //         PlayerData.playerFloatResources.currentMana >= PlayerData.playerResourceUsage.focusStrike)
+            //     {
+            //         PlayerData.playerFloatResources.currentMana = PlayerData.playerFloatResources.currentMana - PlayerData.playerResourceUsage.focusStrike;
+            //         meleeSpiritAttack(playerInput.horizontal);
+            //     }
+            // }
+
+            if (
+                playerInput.focusHeld && 
+
+                // need to change this to diffrent keybind
+                playerInput.attackPressed &&
+
+                !isAttacking)
             {
-                // melee heavy spirit attack
-                // ranged spirit attack
-                if (
-                    PlayerData.playerBoolUpgrades.isRangedSpiritAttackAvailable &&
-                    PlayerData.playerFloatResources.currentMana >= PlayerData.playerResourceUsage.focusStrike)
-                {
-                    PlayerData.playerFloatResources.currentMana = PlayerData.playerFloatResources.currentMana - PlayerData.playerResourceUsage.focusStrike;
-                    meleeSpiritAttack(playerInput.horizontal);
-
-                }
-
-
-
+                // isAttacking = true;
+                GameObject newSpiritOrb = Instantiate(spiritOrb, transform.position + new Vector3(0f,2f,0f), Quaternion.identity);
+                newSpiritOrb.GetComponent<Rigidbody2D>().velocity = new Vector2(8f,10f);
+                // newSpiritOrb.velocity = transform.forward * 2f;
             }
+
 
             if (playerInput.attackPressed && !isAttacking)
             {
-
-
                 BasicAttack();
-
-
             }
         }
 

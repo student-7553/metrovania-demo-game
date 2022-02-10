@@ -7112,7 +7112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &454833109
 Transform:
   m_ObjectHideFlags: 0
@@ -7635,7 +7635,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 709395318}
-  m_Layer: 14
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7669,7 +7669,7 @@ GameObject:
   - component: {fileID: 790935543}
   - component: {fileID: 790935545}
   - component: {fileID: 790935544}
-  m_Layer: 14
+  m_Layer: 6
   m_Name: GroundEntryParticle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12564,7 +12564,7 @@ GameObject:
   - component: {fileID: 840680491}
   - component: {fileID: 840680493}
   - component: {fileID: 840680492}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17465,7 +17465,7 @@ GameObject:
   - component: {fileID: 1005394965}
   - component: {fileID: 1005394964}
   - component: {fileID: 1005394963}
-  m_Layer: 14
+  m_Layer: 6
   m_Name: Smear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17499,9 +17499,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultX: 1.5
-  defaultY: 1
-  downScaleY: 0
-  upScaleY: 1.5
+  defaultY: 0.9
+  downScaleY: -0.5
+  upScaleY: 2
 --- !u!212 &1005394964
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -17733,7 +17733,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1036856333}
-  m_Layer: 14
+  m_Layer: 6
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17927,7 +17927,7 @@ GameObject:
   - component: {fileID: 1053348683}
   - component: {fileID: 1053348682}
   - component: {fileID: 1053348680}
-  m_Layer: 14
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -17984,6 +17984,8 @@ MonoBehaviour:
   drawDebugRay: 1
   attackAnimationCounter: 0
   baseAttackFrameCount: 25
+  spiritOrb: {fileID: 4623448401151454249, guid: 22b4513f84d45994881a1a8f061d308e,
+    type: 3}
 --- !u!114 &1053348683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18140,7 +18142,7 @@ GameObject:
   - component: {fileID: 1112427725}
   - component: {fileID: 1112427727}
   - component: {fileID: 1112427726}
-  m_Layer: 14
+  m_Layer: 6
   m_Name: WallJumpParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24755,7 +24757,7 @@ GameObject:
   - component: {fileID: 1266829242}
   - component: {fileID: 1266829244}
   - component: {fileID: 1266829243}
-  m_Layer: 14
+  m_Layer: 6
   m_Name: DashAfterEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24969,7 +24971,7 @@ GameObject:
   - component: {fileID: 1356832695}
   - component: {fileID: 1356832697}
   - component: {fileID: 1356832696}
-  m_Layer: 14
+  m_Layer: 6
   m_Name: SlideParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29832,7 +29834,7 @@ GameObject:
   - component: {fileID: 1504639574}
   - component: {fileID: 1504639573}
   - component: {fileID: 1504639572}
-  m_Layer: 14
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29944,7 +29946,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1511226571}
-  m_Layer: 14
+  m_Layer: 6
   m_Name: GroundEntryParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30198,7 +30200,7 @@ GameObject:
   - component: {fileID: 1604897739}
   - component: {fileID: 1604897741}
   - component: {fileID: 1604897740}
-  m_Layer: 14
+  m_Layer: 6
   m_Name: GroundEntryParticle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35257,7 +35259,7 @@ GameObject:
   - component: {fileID: 1931235427}
   - component: {fileID: 1931235429}
   - component: {fileID: 1931235428}
-  m_Layer: 14
+  m_Layer: 6
   m_Name: JumpParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
