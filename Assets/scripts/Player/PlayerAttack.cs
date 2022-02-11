@@ -25,21 +25,30 @@ public class PlayerAttack : MonoBehaviour
     private AnimationScript animationScript;
     public int baseAttackFrameCount = 25;
 
+    private float timer = 0f;
+
+    private bool rangedBombPreping;
+
     public GameObject spiritOrb;
 
     [HideInInspector]
     private Color debugCollisionColor = Color.red;
     private int attackAbleLayerValue, groundWithAttackableLayerValue;
 
+    private int enemyHitBoxLayerIndex;
+
 
     // private int hitLayer;	
 
     void Start()
     {
-        attackAbleLayerValue = LayerMask.GetMask("Enemies");
+        attackAbleLayerValue = LayerMask.GetMask("EnemyHitBox");
 
-        string[] tempLayers = { "Enemies", "Platform" };
+        string[] tempLayers = { "EnemyHitBox", "Platform" };
         groundWithAttackableLayerValue = LayerMask.GetMask(tempLayers);
+
+        enemyHitBoxLayerIndex = LayerMask.NameToLayer("EnemyHitBox");
+
 
         playerRigidBody = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
@@ -69,37 +78,80 @@ public class PlayerAttack : MonoBehaviour
 
 
 
-            // if (playerInput.focusHeld && playerInput.attackPressed && !isAttacking)
-            // {
-            //     // melee heavy spirit attack
-            //     if (
-            //         PlayerData.playerBoolUpgrades.isRangedSpiritAttackAvailable &&
-            //         PlayerData.playerFloatResources.currentMana >= PlayerData.playerResourceUsage.focusStrike)
-            //     {
-            //         PlayerData.playerFloatResources.currentMana = PlayerData.playerFloatResources.currentMana - PlayerData.playerResourceUsage.focusStrike;
-            //         meleeSpiritAttack(playerInput.horizontal);
-            //     }
-            // }
+            if (playerInput.focusHeld && playerInput.attackPressed && !isAttacking)
+            {
+                // melee heavy spirit attack
+                if (
+                    PlayerData.playerBoolUpgrades.isRangedSpiritAttackAvailable &&
+                    PlayerData.playerFloatResources.currentMana >= PlayerData.playerResourceUsage.focusStrike)
+                {
+                    PlayerData.playerFloatResources.currentMana = PlayerData.playerFloatResources.currentMana - PlayerData.playerResourceUsage.focusStrike;
+                    meleeSpiritAttack(playerInput.horizontal);
+                }
+            }
 
             if (
-                playerInput.focusHeld && 
-
-                // need to change this to diffrent keybind
-                playerInput.attackPressed &&
-
-                !isAttacking)
+                playerInput.focusHeld &&
+                playerInput.rangedBombPressed &&
+                !rangedBombPreping &&
+                !isAttacking
+                )
             {
-                // isAttacking = true;
-                GameObject newSpiritOrb = Instantiate(spiritOrb, transform.position + new Vector3(0f,2f,0f), Quaternion.identity);
-                newSpiritOrb.GetComponent<Rigidbody2D>().velocity = new Vector2(8f,10f);
-                // newSpiritOrb.velocity = transform.forward * 2f;
+
+                isAttacking = true;
+                rangedBombPreping = true;
+                playerMovement.canMove = false;
+                playerRigidBody.velocity = new Vector2(0f, 0f);
+                playerRigidBody.gravityScale = 0;
+                playerMovement.overrideBetterJumping = true;
             }
+
 
 
             if (playerInput.attackPressed && !isAttacking)
             {
                 BasicAttack();
             }
+        }
+        else if (
+            rangedBombPreping &&
+            !playerInput.rangedBombHeld &&
+            timer > 1f
+
+
+          )
+        {
+
+            // throw the spirit orb
+
+            timer = 0f;
+            rangedBombPreping = false;
+            playerMovement.overrideBetterJumping = false;
+            isAttacking = false;
+            playerRigidBody.gravityScale = 3;
+            playerMovement.canMove = true;
+
+            GameObject newSpiritOrb = Instantiate(spiritOrb, transform.position + new Vector3(0f, 1f), Quaternion.identity);
+            newSpiritOrb.GetComponent<Rigidbody2D>().velocity = new Vector2(playerInput.horizontalSoft * 25, playerInput.verticalSoft * 20);
+        }
+        else if (
+            rangedBombPreping &&
+            !playerInput.rangedBombHeld &&
+            timer < 1f
+            )
+        {
+            // reset stance on spirit orb
+            Debug.Log("reseting stance");
+            timer = 0f;
+            rangedBombPreping = false;
+            playerMovement.overrideBetterJumping = false;
+            isAttacking = false;
+            playerRigidBody.gravityScale = 3;
+            playerMovement.canMove = true;
+        }
+        else if (rangedBombPreping)
+        {
+            timer = timer + Time.deltaTime;
         }
 
 
@@ -174,7 +226,7 @@ public class PlayerAttack : MonoBehaviour
         {
             direction = Vector2.up;
         }
-        else if (lockedAxis.y < -0.1f)
+        else if (lockedAxis.y < -0.1f && !playerCollision.onGround)
         {
             direction = Vector2.down;
         }
@@ -218,11 +270,11 @@ public class PlayerAttack : MonoBehaviour
 
         foreach (RaycastHit2D hit in hits)
         {
-            if (!hit.collider.isTrigger)
-            {
-
-                hit.collider.gameObject.SendMessage("onHit", tempStorage);
-            }
+            // if (!hit.collider.isTrigger)
+            // {
+            Debug.Log("Length/" + hit.collider.gameObject.name + "/" + hit.collider.gameObject.layer);
+            hit.collider.gameObject.transform.parent.gameObject.SendMessage("onHit", tempStorage);
+            // }
         }
 
         yield return WaitForFrames(3);
@@ -250,10 +302,11 @@ public class PlayerAttack : MonoBehaviour
 
         foreach (RaycastHit2D hit in hits)
         {
-            if (!hit.collider.isTrigger)
-            {
-                hit.collider.gameObject.SendMessage("onHit", tempStorage);
-            }
+            // if (!hit.collider.isTrigger)
+            // {
+            hit.collider.gameObject.transform.parent.gameObject.SendMessage("onHit", tempStorage);
+            // hit.collider.gameObject.SendMessage("onHit", tempStorage);
+            // }
         }
     }
 
@@ -282,10 +335,11 @@ public class PlayerAttack : MonoBehaviour
         tempStorage[1] = direction;
         foreach (RaycastHit2D hit in hits)
         {
-            if (hit && !hit.collider.isTrigger && hit.collider.gameObject.layer == 16)
+            if (hit && hit.collider.gameObject.layer == enemyHitBoxLayerIndex)
             {
-                Debug.Log(hit.collider.name);
-                hit.collider.gameObject.SendMessage("onHit", tempStorage);
+
+                // hit.collider.gameObject.transform.parent.gameObject.SendMessage("onHit", tempStorage);
+                hit.collider.gameObject.transform.parent.gameObject.SendMessage("onHit", tempStorage);
             }
         }
 
@@ -331,11 +385,11 @@ public class PlayerAttack : MonoBehaviour
 
         foreach (RaycastHit2D hit in hits)
         {
-            if (!hit.collider.isTrigger)
-            {
+            // if (!hit.collider.isTrigger)
+            // {
 
-                hit.collider.gameObject.SendMessage("onHit", tempStorage);
-            }
+            hit.collider.gameObject.transform.parent.gameObject.SendMessage("onHit", tempStorage);
+            // }
         }
 
         yield return new WaitForSeconds(0.8f);

@@ -8,6 +8,7 @@ public class SmearScript : MonoBehaviour
     private PlayerMovement move;
     private PlayerAttack attack;
     private PlayerInput input;
+    private PlayerCollision playerCollision;
 
     private bool counter = false;
 
@@ -22,6 +23,7 @@ public class SmearScript : MonoBehaviour
         attack = GetComponentInParent<PlayerAttack>();
         move = GetComponentInParent<PlayerMovement>();
         input = GetComponentInParent<PlayerInput>();
+        playerCollision = GetComponentInParent<PlayerCollision>();
     }
     void Update()
     {
@@ -48,7 +50,7 @@ public class SmearScript : MonoBehaviour
         if (!attack.isBasicAttacking)
         {
 
-            if ((y > 0.5f || y < -0.5f))
+            if ((y > 0.5f || (y < -0.5f && !playerCollision.onGround)))
             {
                 transform.localPosition = new Vector2(0, y > 0 ? upScaleY : downScaleY);
                 if (move.isFacingRight)
@@ -76,7 +78,21 @@ public class SmearScript : MonoBehaviour
             }
 
             anim.SetFloat("xAxis", x);
-            anim.SetFloat("yAxis", y);
+
+            if (y < -0.5f && playerCollision.onGround)
+            {
+
+                anim.SetFloat("yAxis", 0);
+
+            }
+            else
+            {
+
+                anim.SetFloat("yAxis", y);
+
+            }
+
+
             anim.SetFloat("attackCounter", attack.attackAnimationCounter);
         }
 

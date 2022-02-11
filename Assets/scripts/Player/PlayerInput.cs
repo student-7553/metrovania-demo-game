@@ -13,6 +13,8 @@ public class PlayerInput : MonoBehaviour
     public float vertical;
     public float horizontalSoft;
     public float verticalSoft;
+
+
     public bool jumpHeld;
     public bool jumpPressed;
     public bool simJumpPressed;
@@ -24,6 +26,10 @@ public class PlayerInput : MonoBehaviour
     public bool attackPressed;
     public bool interactPressed;
     public bool rangedPressed;
+
+    public bool rangedBombHeld;
+    public bool rangedBombPressed;
+
     public bool focusHeld;
 
 
@@ -134,6 +140,10 @@ public class PlayerInput : MonoBehaviour
         interactPressed = false;
 
         rangedPressed = false;
+
+        rangedBombHeld = false;
+
+        rangedBombPressed = false;
     }
 
     void ProcessInputs()
@@ -143,9 +153,9 @@ public class PlayerInput : MonoBehaviour
 
         vertical = Input.GetAxis("Vertical");
 
-        // horizontal = Input.GetAxis("HorizontalSoft");
+        horizontalSoft = Input.GetAxis("HorizontalSoft");
 
-        // vertical = Input.GetAxis("VerticalSoft");
+        verticalSoft = Input.GetAxis("VerticalSoft");
 
         jumpPressed = jumpPressed || Input.GetButtonDown("Jump");
 
@@ -167,6 +177,11 @@ public class PlayerInput : MonoBehaviour
         interactPressed = interactPressed || Input.GetButtonDown("Interact");
 
         rangedPressed = rangedPressed || Input.GetButtonDown("Ranged");
+
+        rangedBombHeld = rangedBombHeld || Input.GetButton("RangedBomb");
+
+        rangedBombPressed = rangedBombPressed || Input.GetButtonDown("RangedBomb");
+
 
         focusHeld = focusHeld || (Input.GetAxis("Focus") == 1 ? true : false);
 

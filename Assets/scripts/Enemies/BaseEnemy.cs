@@ -42,12 +42,15 @@ public class BaseEnemy : MonoBehaviour
     [System.NonSerialized]
     public int playerLayer;
 
+    [System.NonSerialized]
+    public int enemyHitBoxLayer;
+
     // [System.NonSerialized]
     public GameObject targetGameObject = null;
 
 
-    public virtual void StartAfter() {}
-    public virtual void recieveAggroRange(GameObject target){}
+    public virtual void StartAfter() { }
+    public virtual void recieveAggroRange(GameObject target) { }
 
     void Start()
     {
@@ -56,6 +59,7 @@ public class BaseEnemy : MonoBehaviour
         baseRigidbody2D = GetComponent<Rigidbody2D>();
         baseCollider2D = GetComponent<Collider2D>();
         playerLayer = LayerMask.NameToLayer("Player");
+        enemyHitBoxLayer = LayerMask.NameToLayer("EnemyHitBox");
 
         if (arraySentryLocations.Length > 0)
         {
@@ -68,7 +72,7 @@ public class BaseEnemy : MonoBehaviour
 
     }
 
-    
+
 
     public void sentryLocationUpdate()
     {
@@ -175,20 +179,32 @@ public class BaseEnemy : MonoBehaviour
             isAlive = false;
             // Collider2D playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
             // Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), playerCollider, true);
+
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (transform.GetChild(i).gameObject.layer == enemyHitBoxLayer)
+                {
+                    transform.GetChild(i).gameObject.SetActive(false);
+                    break;
+                }
+
+                //Do something with child
+            }
+
             StartCoroutine(deathKnockBack(directionOfForce));
 
         }
         else
         {
             if (isKnockable)
-            {   
+            {
                 StartCoroutine(normalKnockBack(directionOfForce));
             }
 
         }
     }
 
-    
+
 
 
 }
