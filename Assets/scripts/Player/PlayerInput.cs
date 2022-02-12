@@ -32,6 +32,8 @@ public class PlayerInput : MonoBehaviour
 
     public bool focusHeld;
 
+    public bool parryPressed;
+
 
     public bool m_logInput;
     private bool readyToClear;
@@ -41,6 +43,8 @@ public class PlayerInput : MonoBehaviour
     public float attackPressedAllowanceTime = 0.3f;
 
     private float attackPressedRemainingAllowedTime = 0f;
+
+    private bool parryButtonReset;
 
 
 
@@ -144,6 +148,14 @@ public class PlayerInput : MonoBehaviour
         rangedBombHeld = false;
 
         rangedBombPressed = false;
+
+        parryPressed = false;
+
+        if (Input.GetAxis("Parry") == 0)
+        {
+            // parryPressed = false;
+            parryButtonReset = true;
+        }
     }
 
     void ProcessInputs()
@@ -178,14 +190,27 @@ public class PlayerInput : MonoBehaviour
 
         rangedPressed = rangedPressed || Input.GetButtonDown("Ranged");
 
+        rangedBombPressed = rangedBombPressed || Input.GetButtonDown("RangedBomb");
+
         rangedBombHeld = rangedBombHeld || Input.GetButton("RangedBomb");
 
-        rangedBombPressed = rangedBombPressed || Input.GetButtonDown("RangedBomb");
 
 
         focusHeld = focusHeld || (Input.GetAxis("Focus") == 1 ? true : false);
 
         focusHeld = focusHeld || (Input.GetButton("Focus") ? true : false);
+
+
+        if (Input.GetAxis("Parry") == 1 && !parryPressed && parryButtonReset)
+        {
+
+
+            parryButtonReset = false;
+            parryPressed = true;
+
+        }
+
+        parryPressed = parryPressed || (Input.GetButton("Parry") ? true : false);
 
 
     }

@@ -17981,11 +17981,13 @@ MonoBehaviour:
   isSpiritRangedAttacking: 0
   isSpiritMeleeAttacking: 0
   isBasicAttacking: 0
+  isParrying: 0
   attackAnimationCounter: 0
   baseAttackFrameCount: 25
   spiritOrb: {fileID: 4623448401151454249, guid: 22b4513f84d45994881a1a8f061d308e,
     type: 3}
   attackCoolDownTimer: 0.1
+  parryDuration: 0.25
 --- !u!114 &1053348683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18083,6 +18085,7 @@ MonoBehaviour:
   rangedBombHeld: 0
   rangedBombPressed: 0
   focusHeld: 0
+  parryPressed: 0
   m_logInput: 0
   jumpPressedAllowanceTime: 0.1
   attackPressedAllowanceTime: 0.3

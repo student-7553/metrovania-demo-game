@@ -12,7 +12,7 @@ public class PlayerAttack : MonoBehaviour
     [Header("Booleans")]
 
     public bool isAttacking;
-    public bool isSpiritRangedAttacking, isSpiritMeleeAttacking, isBasicAttacking;
+    public bool isSpiritRangedAttacking, isSpiritMeleeAttacking, isBasicAttacking, isParrying;
 
     public float attackAnimationCounter = 1;
     public int baseAttackFrameCount = 25;
@@ -20,6 +20,8 @@ public class PlayerAttack : MonoBehaviour
     public GameObject spiritOrb;
 
     public float attackCoolDownTimer;
+
+    public float parryDuration;
 
 
     private Rigidbody2D playerRigidBody;
@@ -35,19 +37,21 @@ public class PlayerAttack : MonoBehaviour
     private int enemyHitBoxLayerIndex;
     private bool rangedBombPreping;
     private float timer = 0f;
-    public
+
 
 
     // private int hitLayer;	
 
     void Start()
     {
+
         attackAbleLayerValue = LayerMask.GetMask("EnemyHitBox");
+        enemyHitBoxLayerIndex = LayerMask.NameToLayer("EnemyHitBox");
 
         string[] tempLayers = { "EnemyHitBox", "Platform" };
         groundWithAttackableLayerValue = LayerMask.GetMask(tempLayers);
 
-        enemyHitBoxLayerIndex = LayerMask.NameToLayer("EnemyHitBox");
+
 
 
         playerRigidBody = GetComponent<Rigidbody2D>();
@@ -64,7 +68,10 @@ public class PlayerAttack : MonoBehaviour
     {
         if (playerMovement.canMove)
         {
-            if (playerInput.focusHeld && playerInput.rangedPressed && !isAttacking)
+            if (
+                playerInput.focusHeld &&
+                playerInput.rangedPressed &&
+                !isAttacking)
             {
                 // ranged spirit attack
                 if (
@@ -78,7 +85,10 @@ public class PlayerAttack : MonoBehaviour
 
 
 
-            if (playerInput.focusHeld && playerInput.attackPressed && !isAttacking)
+            if (
+                playerInput.focusHeld &&
+                playerInput.attackPressed &&
+                !isAttacking)
             {
                 // melee heavy spirit attack
                 if (
@@ -86,7 +96,8 @@ public class PlayerAttack : MonoBehaviour
                     PlayerData.playerFloatResources.currentMana >= PlayerData.playerResourceUsage.focusStrike)
                 {
                     PlayerData.playerFloatResources.currentMana = PlayerData.playerFloatResources.currentMana - PlayerData.playerResourceUsage.focusStrike;
-                    meleeSpiritAttack(playerInput.horizontal);
+
+                    StartCoroutine(meleeSpiritAttack());
                 }
             }
 
@@ -98,6 +109,8 @@ public class PlayerAttack : MonoBehaviour
                 )
             {
 
+                // ranged bomb prep
+
                 isAttacking = true;
                 rangedBombPreping = true;
                 playerMovement.canMove = false;
@@ -107,11 +120,22 @@ public class PlayerAttack : MonoBehaviour
             }
 
 
-
-            if (playerInput.attackPressed && !isBasicAttacking)
+            if (
+                playerInput.parryPressed &&
+                !isAttacking
+                )
             {
+
+                StartCoroutine(Parry());
+            }
+
+            if (playerInput.attackPressed && !isBasicAttacking && !isAttacking)
+            {
+                // basic attack
                 BasicAttack();
             }
+
+
         }
 
         preppingAttack();
@@ -229,6 +253,33 @@ public class PlayerAttack : MonoBehaviour
     //     playerMovement.canMove = true;
     // }
 
+    private IEnumerator Parry()
+    {
+
+        isAttacking = true;
+        isParrying = true;
+        playerMovement.canMove = false;
+        playerRigidBody.velocity = new Vector2(0f, 0f);
+
+        yield return new WaitForSeconds(parryDuration);
+
+        isParrying = false;
+        isAttacking = false;
+        playerMovement.canMove = true;
+
+    }
+
+    public void ParryTrigger(){
+
+        // if attack is heavy
+        // if heavy just take the knockback with no damage
+
+        // if light 
+        // Push message to all enemies around to knock them back and stagger them
+        // 
+
+    }   
+
     private IEnumerator BasicAttackWait(Vector2 lockedAxis)
     {
 
@@ -291,12 +342,8 @@ public class PlayerAttack : MonoBehaviour
 
         yield return WaitForFrames(baseAttackFrameCount - 5);
 
-
-        // yield return new WaitForSeconds(0.2f);
-
         playerMovement.canMove = true;
         isAttacking = false;
-        Debug.Log("you can move now");
 
 
         yield return new WaitForSeconds(attackCoolDownTimer);
@@ -369,12 +416,14 @@ public class PlayerAttack : MonoBehaviour
         playerMovement.canMove = true;
     }
 
-    private void meleeSpiritAttack(float xAxis)
+
+
+    private IEnumerator meleeSpiritAttack()
     {
 
         if (!PlayerData.playerBoolUpgrades.iSpiritMeleeAttackAvailable)
         {
-            return;
+            yield break;
         }
 
         isAttacking = true;
@@ -384,14 +433,6 @@ public class PlayerAttack : MonoBehaviour
         playerRigidBody.gravityScale = 0;
         playerMovement.canMove = false;
         playerMovement.overrideBetterJumping = true;
-        StartCoroutine(meleeSpiritAttackAfter(direction));
-
-
-    }
-
-    private IEnumerator meleeSpiritAttackAfter(Vector2 direction)
-    {
-
 
         yield return new WaitForSeconds(0.2f);
 
