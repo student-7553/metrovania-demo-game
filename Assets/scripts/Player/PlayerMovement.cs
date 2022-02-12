@@ -101,15 +101,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Walk(Vector2 dir)
     {
-        if (!canMove)
+        if (!canMove || wallGrab)
         {
             return;
         }
 
-        if (wallGrab)
-        {
-            return;
-        }
 
         Vector2 newVel = new Vector2(dir.x * currentSpeed, playerRigidBody.velocity.y);
 
@@ -760,6 +756,7 @@ public class PlayerMovement : MonoBehaviour
         // Vector2 dir = new Vector2(xRaw, yRaw);
         if (canMove && !playerAttack.isAttacking)
         {
+
             animationScript.SetHorizontalMovement(x, y, playerRigidBody.velocity.y, playerRigidBody.velocity.x);
         }
         Vector2 walkDir = new Vector2(x, y);
@@ -821,11 +818,14 @@ public class PlayerMovement : MonoBehaviour
             animationScript.SetTrigger("flip");
         }
 
-        if (playerRigidBody.velocity.x > 0.01 && isFacingRight == false)
+        // if (playerRigidBody.velocity.x > 0.01 && isFacingRight == false)
+
+        if (x > 0.1f && isFacingRight == false)
         {
             isFacingRight = true;
         }
-        else if (playerRigidBody.velocity.x < -0.01 && isFacingRight == true)
+        // else if (playerRigidBody.velocity.x < -0.01 && isFacingRight == true)
+        else if (x < -0.1f && isFacingRight == true)
         {
             isFacingRight = false;
         }

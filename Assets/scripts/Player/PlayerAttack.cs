@@ -10,32 +10,32 @@ public class PlayerAttack : MonoBehaviour
 
     [Space]
     [Header("Booleans")]
-    public bool isAttacking;
-    public bool isBasicAttacking, isSpiritRangedAttacking, isSpiritMeleeAttacking;
 
-    public bool drawDebugRay;
+    public bool isAttacking;
+    public bool isSpiritRangedAttacking, isSpiritMeleeAttacking, isBasicAttacking;
 
     public float attackAnimationCounter = 1;
-    //  public LayerMask attackAbleLayer;	
+    public int baseAttackFrameCount = 25;
+
+    public GameObject spiritOrb;
+
+    public float attackCoolDownTimer;
+
 
     private Rigidbody2D playerRigidBody;
     private PlayerMovement playerMovement;
     private PlayerInput playerInput;
     private PlayerCollision playerCollision;
     private AnimationScript animationScript;
-    public int baseAttackFrameCount = 25;
-
-    private float timer = 0f;
-
-    private bool rangedBombPreping;
-
-    public GameObject spiritOrb;
 
     [HideInInspector]
     private Color debugCollisionColor = Color.red;
     private int attackAbleLayerValue, groundWithAttackableLayerValue;
 
     private int enemyHitBoxLayerIndex;
+    private bool rangedBombPreping;
+    private float timer = 0f;
+    public
 
 
     // private int hitLayer;	
@@ -108,54 +108,60 @@ public class PlayerAttack : MonoBehaviour
 
 
 
-            if (playerInput.attackPressed && !isAttacking)
+            if (playerInput.attackPressed && !isBasicAttacking)
             {
                 BasicAttack();
             }
         }
-        else if (
-            rangedBombPreping &&
+
+        preppingAttack();
+
+    }
+
+    private void preppingAttack()
+    {
+        if (rangedBombPreping)
+        {
+            if (
             !playerInput.rangedBombHeld &&
             timer > 1f
-
-
           )
-        {
+            {
 
-            // throw the spirit orb
+                // throw the spirit orb
+                timer = 0f;
+                rangedBombPreping = false;
+                playerMovement.overrideBetterJumping = false;
+                isAttacking = false;
+                playerRigidBody.gravityScale = 3;
+                playerMovement.canMove = true;
 
-            timer = 0f;
-            rangedBombPreping = false;
-            playerMovement.overrideBetterJumping = false;
-            isAttacking = false;
-            playerRigidBody.gravityScale = 3;
-            playerMovement.canMove = true;
+                GameObject newSpiritOrb = Instantiate(spiritOrb, transform.position + new Vector3(0f, 1f), Quaternion.identity);
+                newSpiritOrb.GetComponent<Rigidbody2D>().velocity = new Vector2(playerInput.horizontalSoft * 25, playerInput.verticalSoft * 20);
+            }
+            else if (
+                !playerInput.rangedBombHeld &&
+                timer < 1f
+                )
+            {
+                // reset stance on spirit orb
 
-            GameObject newSpiritOrb = Instantiate(spiritOrb, transform.position + new Vector3(0f, 1f), Quaternion.identity);
-            newSpiritOrb.GetComponent<Rigidbody2D>().velocity = new Vector2(playerInput.horizontalSoft * 25, playerInput.verticalSoft * 20);
-        }
-        else if (
-            rangedBombPreping &&
-            !playerInput.rangedBombHeld &&
-            timer < 1f
-            )
-        {
-            // reset stance on spirit orb
-            Debug.Log("reseting stance");
-            timer = 0f;
-            rangedBombPreping = false;
-            playerMovement.overrideBetterJumping = false;
-            isAttacking = false;
-            playerRigidBody.gravityScale = 3;
-            playerMovement.canMove = true;
-        }
-        else if (rangedBombPreping)
-        {
-            timer = timer + Time.deltaTime;
+                timer = 0f;
+                rangedBombPreping = false;
+                playerMovement.overrideBetterJumping = false;
+                isAttacking = false;
+                playerRigidBody.gravityScale = 3;
+                playerMovement.canMove = true;
+            }
+            else
+            {
+                timer = timer + Time.deltaTime;
+            }
         }
 
 
     }
+
     private void BasicAttack()
     {
         if (!PlayerData.playerBoolUpgrades.isAttackAvailable)
@@ -189,29 +195,39 @@ public class PlayerAttack : MonoBehaviour
 
         // playerMovement.canMove = false;
 
+        if (playerCollision.onGround)
+        {
+            playerMovement.canMove = false;
+        }
+        else
+        {
+            playerMovement.canMove = true;
+        }
+
         Vector2 lockedAxis = new Vector2(playerInput.horizontal, playerInput.vertical);
         StartCoroutine(BasicAttackWait(lockedAxis));
-        StartCoroutine(BasicAttackGroundWait());
+        // StartCoroutine(BasicAttackGroundWait());
 
     }
 
-    private IEnumerator BasicAttackGroundWait()
-    {
-        while (isBasicAttacking)
-        {
-            if (playerCollision.onGround)
-            {
-                playerMovement.canMove = false;
-            }
-            else
-            {
-                playerMovement.canMove = true;
-            }
+    // private IEnumerator BasicAttackGroundWait()
+    // {
+    //     while (isBasicAttacking)
+    //     // while (isAttacking)
+    //     {
+    //         if (playerCollision.onGround)
+    //         {
+    //             playerMovement.canMove = false;
+    //         }
+    //         else
+    //         {
+    //             playerMovement.canMove = true;
+    //         }
 
-            yield return null;
-        }
-        playerMovement.canMove = true;
-    }
+    //         yield return null;
+    //     }
+    //     playerMovement.canMove = true;
+    // }
 
     private IEnumerator BasicAttackWait(Vector2 lockedAxis)
     {
@@ -263,26 +279,30 @@ public class PlayerAttack : MonoBehaviour
 
         if (hits.Length > 0 && direction == Vector2.down)
         {
-
             playerMovement.PlayerUpBump();
-
         }
 
         foreach (RaycastHit2D hit in hits)
         {
-            // if (!hit.collider.isTrigger)
-            // {
-            Debug.Log("Length/" + hit.collider.gameObject.name + "/" + hit.collider.gameObject.layer);
             hit.collider.gameObject.transform.parent.gameObject.SendMessage("onHit", tempStorage);
-            // }
         }
 
         yield return WaitForFrames(3);
 
         yield return WaitForFrames(baseAttackFrameCount - 5);
-        isBasicAttacking = false;
-        isAttacking = false;
+
+
+        // yield return new WaitForSeconds(0.2f);
+
         playerMovement.canMove = true;
+        isAttacking = false;
+        Debug.Log("you can move now");
+
+
+        yield return new WaitForSeconds(attackCoolDownTimer);
+
+
+        isBasicAttacking = false;
 
 
 
@@ -399,6 +419,7 @@ public class PlayerAttack : MonoBehaviour
         playerMovement.overrideBetterJumping = false;
         playerMovement.canMove = true;
     }
+
     private static IEnumerator WaitForFrames(int frameCount)
     {
         while (frameCount > 0)

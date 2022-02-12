@@ -50,26 +50,30 @@ public class SmearScript : MonoBehaviour
         if (!attack.isBasicAttacking)
         {
 
+
             if ((y > 0.5f || (y < -0.5f && !playerCollision.onGround)))
             {
                 transform.localPosition = new Vector2(0, y > 0 ? upScaleY : downScaleY);
-                if (move.isFacingRight)
+
+                // if (move.isFacingRight)
+                if (x > 0.1f)
                 {
                     anim.SetFloat("isRightFloat", 1);
                 }
-                else if (!move.isFacingRight)
+                else if (x < -0.1f)
                 {
                     anim.SetFloat("isRightFloat", -1);
                 }
             }
             else
             {
-                if (move.isFacingRight)
+                // if (move.isFacingRight)
+                if (x > 0.1f)
                 {
                     transform.localPosition = new Vector2(defaultX, defaultY);
                     anim.SetFloat("isRightFloat", 1);
                 }
-                else if (!move.isFacingRight)
+                else if (x < -0.1f)
                 {
                     transform.localPosition = new Vector2(-defaultX, defaultY);
                     anim.SetFloat("isRightFloat", -1);

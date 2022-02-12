@@ -59,11 +59,10 @@ public class AttackSpiritOrb : MonoBehaviour
 
         RaycastHit2D[] hits = Physics2D.CircleCastAll((Vector2)this.transform.position, 1.5f, Vector2.zero, 0f, enemyHitBoxLayerMask);
 
-        Debug.Log("Length/" + hits.Length);
 
         foreach (RaycastHit2D hit in hits)
         {
-            Debug.Log("Length/" + hit.collider.gameObject.name + "/" + hit.collider.gameObject.layer);
+            
             if (hit && hit.collider.gameObject.layer == enemyHitBoxLayer)
             {
 

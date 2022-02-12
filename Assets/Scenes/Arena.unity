@@ -17978,14 +17978,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
-  isBasicAttacking: 0
   isSpiritRangedAttacking: 0
   isSpiritMeleeAttacking: 0
-  drawDebugRay: 1
+  isBasicAttacking: 0
   attackAnimationCounter: 0
   baseAttackFrameCount: 25
   spiritOrb: {fileID: 4623448401151454249, guid: 22b4513f84d45994881a1a8f061d308e,
     type: 3}
+  attackCoolDownTimer: 0.1
 --- !u!114 &1053348683
 MonoBehaviour:
   m_ObjectHideFlags: 0
