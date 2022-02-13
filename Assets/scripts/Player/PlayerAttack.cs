@@ -32,11 +32,12 @@ public class PlayerAttack : MonoBehaviour
 
     [HideInInspector]
     private Color debugCollisionColor = Color.red;
-    private int attackAbleLayerValue, groundWithAttackableLayerValue;
+    private int enemyHitBoxLayerMask, groundWithAttackableLayerMask;
 
     private int enemyHitBoxLayerIndex;
     private bool rangedBombPreping;
     private float timer = 0f;
+    private bool parryTriggered;
 
 
 
@@ -45,11 +46,11 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
 
-        attackAbleLayerValue = LayerMask.GetMask("EnemyHitBox");
+        enemyHitBoxLayerMask = LayerMask.GetMask("EnemyHitBox");
         enemyHitBoxLayerIndex = LayerMask.NameToLayer("EnemyHitBox");
 
         string[] tempLayers = { "EnemyHitBox", "Platform" };
-        groundWithAttackableLayerValue = LayerMask.GetMask(tempLayers);
+        groundWithAttackableLayerMask = LayerMask.GetMask(tempLayers);
 
 
 
@@ -122,6 +123,7 @@ public class PlayerAttack : MonoBehaviour
 
             if (
                 playerInput.parryPressed &&
+                playerCollision.onGround &&
                 !isAttacking
                 )
             {
@@ -234,24 +236,7 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
-    // private IEnumerator BasicAttackGroundWait()
-    // {
-    //     while (isBasicAttacking)
-    //     // while (isAttacking)
-    //     {
-    //         if (playerCollision.onGround)
-    //         {
-    //             playerMovement.canMove = false;
-    //         }
-    //         else
-    //         {
-    //             playerMovement.canMove = true;
-    //         }
 
-    //         yield return null;
-    //     }
-    //     playerMovement.canMove = true;
-    // }
 
     private IEnumerator Parry()
     {
@@ -263,22 +248,72 @@ public class PlayerAttack : MonoBehaviour
 
         yield return new WaitForSeconds(parryDuration);
 
-        isParrying = false;
-        isAttacking = false;
-        playerMovement.canMove = true;
+        if (parryTriggered)
+        {
+            parryTriggered = false;
+        }
+        else
+        {
+            isParrying = false;
+            isAttacking = false;
+            playerMovement.canMove = true;
+        }
+
+
 
     }
 
-    public void ParryTrigger(){
+    public void ParryTrigger(bool isHeavy)
+    {
+        parryTriggered = true;
+        if (isHeavy)
+        {
+            // if heavy just take the knockback with no damage
+        }
+        else
+        {
+            StartCoroutine(ParryLight());
+            // light
+            // trigger animation
 
-        // if attack is heavy
-        // if heavy just take the knockback with no damage
 
-        // if light 
-        // Push message to all enemies around to knock them back and stagger them
-        // 
+        }
 
-    }   
+
+    }
+
+    private IEnumerator ParryLight()
+    {
+        // trigger animation
+
+        //  SendMessage to all enemies around to knock them back and stagger them
+        RaycastHit2D[] hits = Physics2D.CircleCastAll((Vector2)this.transform.position, 1.5f, Vector2.zero, 0f, enemyHitBoxLayerMask);
+
+
+        foreach (RaycastHit2D hit in hits)
+        {
+
+            if (hit && hit.collider.gameObject.layer == enemyHitBoxLayerIndex)
+            {
+
+                object[] tempStorage = new object[2];
+
+                tempStorage[0] = PlayerData.playerFloatResources.baseAttackDamage;
+                tempStorage[1] = new Vector2(0f, 1f);
+
+
+                hit.collider.gameObject.transform.parent.gameObject.SendMessage("onDeflect", tempStorage);
+            }
+        }
+
+
+
+        yield return new WaitForSeconds(0.1f);
+
+        isParrying = false;
+        isAttacking = false;
+        playerMovement.canMove = true;
+    }
 
     private IEnumerator BasicAttackWait(Vector2 lockedAxis)
     {
@@ -321,7 +356,7 @@ public class PlayerAttack : MonoBehaviour
             }
         }
 
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(pos + (direction * 2) + new Vector2(0f, 1f), 2.5f, direction, 0.5f, attackAbleLayerValue);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(pos + (direction * 2) + new Vector2(0f, 1f), 2.5f, direction, 0.5f, enemyHitBoxLayerMask);
 
 
         object[] tempStorage = new object[2];
@@ -362,7 +397,7 @@ public class PlayerAttack : MonoBehaviour
         float newY = 1f * Mathf.Cos(Mathf.Atan2(tempRemainder.x, tempRemainder.y));
         Vector2 direction = new Vector2(newX, newY);
 
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(prePosition, 2f, direction, Vector2.Distance(prePosition, postPosition), attackAbleLayerValue);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(prePosition, 2f, direction, Vector2.Distance(prePosition, postPosition), enemyHitBoxLayerMask);
         object[] tempStorage = new object[2];
         tempStorage[0] = PlayerData.playerFloatResources.currentBaseAttackDamage;
         tempStorage[1] = new Vector2(0f, 0f);
@@ -395,7 +430,7 @@ public class PlayerAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(0.35f);
 
-        RaycastHit2D[] hits = Physics2D.CircleCastAll((Vector2)this.transform.position + new Vector2(0f, 1f), 1.5f, direction, 10f, groundWithAttackableLayerValue);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll((Vector2)this.transform.position + new Vector2(0f, 1f), 1.5f, direction, 10f, groundWithAttackableLayerMask);
 
         object[] tempStorage = new object[2];
         tempStorage[0] = PlayerData.playerFloatResources.currentSpiritRangedAttackDamage;
@@ -436,7 +471,7 @@ public class PlayerAttack : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
-        RaycastHit2D[] hits = Physics2D.CircleCastAll((Vector2)transform.position + (direction * 2) + new Vector2(0f, 1f), 2.5f, direction, 2.5f, attackAbleLayerValue);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll((Vector2)transform.position + (direction * 2) + new Vector2(0f, 1f), 2.5f, direction, 2.5f, enemyHitBoxLayerMask);
 
 
         object[] tempStorage = new object[2];

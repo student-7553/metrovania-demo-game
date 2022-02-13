@@ -8,12 +8,12 @@ public class AttackSpiritOrb : MonoBehaviour
 
     Rigidbody2D thisRigidBody;
     SpriteRenderer thisSpriteRenderer;
-    private int enemyHitBoxLayer, enemyHitBoxLayerMask;
+    private int enemyHitBoxLayerIndex, enemyHitBoxLayerMask;
 
     void Start()
     {
 
-        enemyHitBoxLayer = LayerMask.NameToLayer("EnemyHitBox");
+        enemyHitBoxLayerIndex = LayerMask.NameToLayer("EnemyHitBox");
         enemyHitBoxLayerMask = LayerMask.GetMask("EnemyHitBox");
 
         thisRigidBody = GetComponent<Rigidbody2D>();
@@ -42,7 +42,7 @@ public class AttackSpiritOrb : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // hit an enemy
-        if (collision.gameObject.layer != enemyHitBoxLayer)
+        if (collision.gameObject.layer != enemyHitBoxLayerIndex)
         {
 
             return;
@@ -63,7 +63,7 @@ public class AttackSpiritOrb : MonoBehaviour
         foreach (RaycastHit2D hit in hits)
         {
             
-            if (hit && hit.collider.gameObject.layer == enemyHitBoxLayer)
+            if (hit && hit.collider.gameObject.layer == enemyHitBoxLayerIndex)
             {
 
                 object[] tempStorage = new object[2];
