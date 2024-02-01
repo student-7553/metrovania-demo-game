@@ -30,7 +30,7 @@ TextureImporter:
       213: -2358011827094946728
     second: background_wall_moss_outerEdges_down_8
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -51,6 +51,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -89,6 +90,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -128,6 +130,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Windows Store Apps
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
@@ -340,6 +354,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      background_wall_moss_outerEdges_down_1: 2109237418334524535
+      background_wall_moss_outerEdges_down_5: -3052585996631499812
+      background_wall_moss_outerEdges_down_2: 2428034225824402672
+      background_wall_moss_outerEdges_down_0: 9173605493961409128
+      background_wall_moss_outerEdges_down_3: 6371899931342120088
+      background_wall_moss_outerEdges_down_4: 7072042234122751367
+      background_wall_moss_outerEdges_down_7: 1197165978669561461
+      background_wall_moss_outerEdges_down_6: -9186572437222808141
+      background_wall_moss_outerEdges_down_8: -2358011827094946728
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

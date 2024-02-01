@@ -63,7 +63,7 @@ TextureImporter:
       213: -796271007283105335
     second: background_wall_fractured_base_19
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -84,6 +84,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -122,6 +123,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -161,6 +163,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Windows Store Apps
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
@@ -604,6 +618,27 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      background_wall_fractured_base_11: -730978617039191764
+      background_wall_fractured_base_6: 4695268515025336037
+      background_wall_fractured_base_18: 1781238077177009805
+      background_wall_fractured_base_2: 8066692811484561973
+      background_wall_fractured_base_3: 6367413103499169863
+      background_wall_fractured_base_8: 4855285375500609062
+      background_wall_fractured_base_0: 2522280615431791251
+      background_wall_fractured_base_19: -796271007283105335
+      background_wall_fractured_base_7: -6861852879740900220
+      background_wall_fractured_base_14: -9186524807394487844
+      background_wall_fractured_base_10: 5201385690481415597
+      background_wall_fractured_base_13: 2826609266204649009
+      background_wall_fractured_base_5: -6361185171449912366
+      background_wall_fractured_base_4: -6895839852774055135
+      background_wall_fractured_base_1: 2016531570569087604
+      background_wall_fractured_base_15: -173803518326151469
+      background_wall_fractured_base_16: -6149020923266034979
+      background_wall_fractured_base_9: 2873084442261411502
+      background_wall_fractured_base_12: 6512187090299812451
+      background_wall_fractured_base_17: 9016741421694447584
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

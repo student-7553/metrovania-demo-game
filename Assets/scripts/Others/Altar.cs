@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 using DG.Tweening;
 
 public class Altar : MonoBehaviour
@@ -12,7 +12,7 @@ public class Altar : MonoBehaviour
     public GameObject alterText;
     private bool highlighted = false;
 
-    private Light2D alterLightScript;
+    private UnityEngine.Rendering.Universal.Light2D alterLightScript;
 
     public float lightIntensity = 8f;
 
@@ -23,7 +23,7 @@ public class Altar : MonoBehaviour
         inRange = false;
         // anim = GetComponent<Animator>();
         playerLayer = LayerMask.NameToLayer("Player");
-        alterLightScript = alterLight.GetComponent<Light2D>();
+        alterLightScript = alterLight.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
     }
 
     void Update()

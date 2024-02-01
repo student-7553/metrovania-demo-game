@@ -33,7 +33,7 @@ TextureImporter:
       213: -4898016565836633913
     second: background_wall_fractured_edges_up_9
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -54,6 +54,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -92,6 +93,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -131,6 +133,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Windows Store Apps
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
@@ -364,6 +378,17 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      background_wall_fractured_edges_up_0: 964492782172763283
+      background_wall_fractured_edges_up_4: -6331757995161481456
+      background_wall_fractured_edges_up_1: 2597372303494116130
+      background_wall_fractured_edges_up_8: 1109514485105697471
+      background_wall_fractured_edges_up_9: -4898016565836633913
+      background_wall_fractured_edges_up_6: 4029820070774563966
+      background_wall_fractured_edges_up_2: 5581052445215879283
+      background_wall_fractured_edges_up_7: -2484313773465037868
+      background_wall_fractured_edges_up_3: -4127756879631023293
+      background_wall_fractured_edges_up_5: 9040130375690137140
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

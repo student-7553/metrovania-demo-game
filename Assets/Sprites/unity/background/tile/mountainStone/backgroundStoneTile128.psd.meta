@@ -771,7 +771,7 @@ TextureImporter:
       213: -2428932924618191450
     second: backgroundStoneTile128_255
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -792,6 +792,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -830,6 +831,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -869,6 +871,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -6268,6 +6282,263 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      backgroundStoneTile128_185: -853644083145087387
+      backgroundStoneTile128_68: 2432274615597736860
+      backgroundStoneTile128_233: -1799726839069669485
+      backgroundStoneTile128_127: -2363828809025851830
+      backgroundStoneTile128_242: 6991182660385473379
+      backgroundStoneTile128_255: -2428932924618191450
+      backgroundStoneTile128_12: -5519879368447406630
+      backgroundStoneTile128_177: 6047230994601194322
+      backgroundStoneTile128_50: 4881900707832016957
+      backgroundStoneTile128_10: 7898043073366567081
+      backgroundStoneTile128_43: -5409021819166394415
+      backgroundStoneTile128_4: 4414752595569546004
+      backgroundStoneTile128_54: 1135916714487123409
+      backgroundStoneTile128_104: 7935572787561678673
+      backgroundStoneTile128_243: 3442894963932525708
+      backgroundStoneTile128_112: 7340776621820249736
+      backgroundStoneTile128_25: 5045779531251661139
+      backgroundStoneTile128_83: -4079959234869916167
+      backgroundStoneTile128_99: -3513076504200160270
+      backgroundStoneTile128_80: 48449406258812389
+      backgroundStoneTile128_159: -7935141580082443043
+      backgroundStoneTile128_146: 4364687343786754054
+      backgroundStoneTile128_154: 8113319817705617555
+      backgroundStoneTile128_124: -9102148584324505620
+      backgroundStoneTile128_186: -3518460722610828406
+      backgroundStoneTile128_126: 7903897331555343447
+      backgroundStoneTile128_231: -1441913066477315935
+      backgroundStoneTile128_201: -2669679341555657318
+      backgroundStoneTile128_90: 8577156323796551861
+      backgroundStoneTile128_8: 3686192966166584917
+      backgroundStoneTile128_254: -3511964179704593342
+      backgroundStoneTile128_38: -8543056877129413486
+      backgroundStoneTile128_136: -9188733371116501785
+      backgroundStoneTile128_245: -6310305252593029382
+      backgroundStoneTile128_34: -1423715931717958295
+      backgroundStoneTile128_79: -5200624928422319222
+      backgroundStoneTile128_48: 5624760774146037554
+      backgroundStoneTile128_28: 5732472567279259586
+      backgroundStoneTile128_131: -5700234749168037714
+      backgroundStoneTile128_162: 5705910695071661347
+      backgroundStoneTile128_250: 6885262303305505701
+      backgroundStoneTile128_71: -4820135147063176223
+      backgroundStoneTile128_134: 3446716866364285923
+      backgroundStoneTile128_181: 3615100319327227928
+      backgroundStoneTile128_35: 8077675754214730358
+      backgroundStoneTile128_47: -5272789048694604554
+      backgroundStoneTile128_192: 2281078433912639348
+      backgroundStoneTile128_129: 9067502473155245724
+      backgroundStoneTile128_170: -1028806348019046753
+      backgroundStoneTile128_223: -3935965477165995695
+      backgroundStoneTile128_55: 3374443061049616179
+      backgroundStoneTile128_148: -2082133022277421293
+      backgroundStoneTile128_204: 7781669108106205831
+      backgroundStoneTile128_76: -1094160217281012542
+      backgroundStoneTile128_117: 3610638666842452377
+      backgroundStoneTile128_118: -7584525666868125397
+      backgroundStoneTile128_189: -500701152768750621
+      backgroundStoneTile128_95: -1439887978912570347
+      backgroundStoneTile128_74: 3095742227538037247
+      backgroundStoneTile128_152: 1056650620650718502
+      backgroundStoneTile128_248: 5967565624093239593
+      backgroundStoneTile128_133: 3565309271981182450
+      backgroundStoneTile128_227: -6267737611657959838
+      backgroundStoneTile128_13: -6584171156239443442
+      backgroundStoneTile128_252: -5579623424496801737
+      backgroundStoneTile128_128: -1759616589396067448
+      backgroundStoneTile128_92: -545845501716439299
+      backgroundStoneTile128_84: -202285113753220448
+      backgroundStoneTile128_42: -7792281092601981571
+      backgroundStoneTile128_168: 4400946479295242753
+      backgroundStoneTile128_251: -8890659075936042117
+      backgroundStoneTile128_59: -6931795719894850648
+      backgroundStoneTile128_143: 4876981738418653390
+      backgroundStoneTile128_238: 1090328659238067926
+      backgroundStoneTile128_5: -760614326334591321
+      backgroundStoneTile128_24: 554965091677521449
+      backgroundStoneTile128_78: 5952716417183261974
+      backgroundStoneTile128_106: 8317158891907005657
+      backgroundStoneTile128_105: 6727760124727929306
+      backgroundStoneTile128_184: 6994748426464886743
+      backgroundStoneTile128_30: -7404151107204305153
+      backgroundStoneTile128_60: -4739158233560585899
+      backgroundStoneTile128_51: -2717756808771924133
+      backgroundStoneTile128_66: -2465996946557067502
+      backgroundStoneTile128_101: -3197579784031153746
+      backgroundStoneTile128_41: 6701707584526647172
+      backgroundStoneTile128_140: -1320541649202533407
+      backgroundStoneTile128_225: 7726169582238687128
+      backgroundStoneTile128_234: -5562014087749713783
+      backgroundStoneTile128_191: -9046229217890648126
+      backgroundStoneTile128_72: -3638312705921246653
+      backgroundStoneTile128_224: -2774420724175550047
+      backgroundStoneTile128_247: -7020804210402613753
+      backgroundStoneTile128_236: 3377024461136038224
+      backgroundStoneTile128_7: -5666580535408505350
+      backgroundStoneTile128_215: -1421165627865894312
+      backgroundStoneTile128_33: 1386542959928515113
+      backgroundStoneTile128_197: 8557936207633783345
+      backgroundStoneTile128_63: 4537219859997407266
+      backgroundStoneTile128_81: 5864630321054323861
+      backgroundStoneTile128_214: -4081342251520285137
+      backgroundStoneTile128_39: -4515950299999756628
+      backgroundStoneTile128_145: -2027720750744867505
+      backgroundStoneTile128_94: -7870086574832416796
+      backgroundStoneTile128_19: 8833034383882800873
+      backgroundStoneTile128_246: 6572468817770003424
+      backgroundStoneTile128_166: -2060883338091279634
+      backgroundStoneTile128_167: 2643671872614535313
+      backgroundStoneTile128_199: 2597396632870430763
+      backgroundStoneTile128_151: -5330747392384051263
+      backgroundStoneTile128_239: -8299174469557634915
+      backgroundStoneTile128_6: 2403114611055297186
+      backgroundStoneTile128_18: -7464199538820992084
+      backgroundStoneTile128_22: -6934340617666866224
+      backgroundStoneTile128_56: 3262822472424919510
+      backgroundStoneTile128_187: 8038975375901475394
+      backgroundStoneTile128_157: 6211178358479482739
+      backgroundStoneTile128_88: -7748567697071214240
+      backgroundStoneTile128_229: -6746190275821331192
+      backgroundStoneTile128_73: 905511629406104121
+      backgroundStoneTile128_26: -2757997043223284600
+      backgroundStoneTile128_37: -5019066886488525663
+      backgroundStoneTile128_218: 3567921281228281046
+      backgroundStoneTile128_179: -2933153198245879453
+      backgroundStoneTile128_17: 4977801033965851914
+      backgroundStoneTile128_196: 8736676745807004776
+      backgroundStoneTile128_9: 6745981675514000644
+      backgroundStoneTile128_240: 4931579290862903293
+      backgroundStoneTile128_237: -7666812099824019126
+      backgroundStoneTile128_102: 1546692217094984915
+      backgroundStoneTile128_27: -9204800268112506288
+      backgroundStoneTile128_122: 655123982361208199
+      backgroundStoneTile128_20: -5198063648832483970
+      backgroundStoneTile128_161: -7301024376457589991
+      backgroundStoneTile128_207: -1491839832175684579
+      backgroundStoneTile128_144: -9069321032445678924
+      backgroundStoneTile128_82: 1583719257778466681
+      backgroundStoneTile128_85: 8260076946301928734
+      backgroundStoneTile128_180: 6418084925805325217
+      backgroundStoneTile128_212: 1088102522438572561
+      backgroundStoneTile128_69: -3113956117788423398
+      backgroundStoneTile128_221: 7826340544967869208
+      backgroundStoneTile128_205: -1956180075673894538
+      backgroundStoneTile128_44: 3034612333414255342
+      backgroundStoneTile128_222: 902927917720461672
+      backgroundStoneTile128_110: 2492375866238701508
+      backgroundStoneTile128_135: 2829201609125028175
+      backgroundStoneTile128_115: -3859526518101294914
+      backgroundStoneTile128_111: 6000362762822877952
+      backgroundStoneTile128_2: 5362459040017566763
+      backgroundStoneTile128_107: 1699521847819093024
+      backgroundStoneTile128_178: -1077042179057051350
+      backgroundStoneTile128_3: -4093211697806948689
+      backgroundStoneTile128_120: -5228757736455010938
+      backgroundStoneTile128_89: -791617141343018773
+      backgroundStoneTile128_153: -2672446442643725778
+      backgroundStoneTile128_141: 6481585014731096465
+      backgroundStoneTile128_91: 4894406848204984554
+      backgroundStoneTile128_1: -7582258636644533889
+      backgroundStoneTile128_138: 2109631855051494921
+      backgroundStoneTile128_174: 390628322056969059
+      backgroundStoneTile128_183: -2708471363902583554
+      backgroundStoneTile128_160: -5535728484022869051
+      backgroundStoneTile128_169: -1978301234320002305
+      backgroundStoneTile128_29: -1371373812693568458
+      backgroundStoneTile128_21: 5280020401865402440
+      backgroundStoneTile128_147: -9175196235795055340
+      backgroundStoneTile128_70: -377523265450280492
+      backgroundStoneTile128_165: 7725381667337765301
+      backgroundStoneTile128_113: -2286152172779907739
+      backgroundStoneTile128_32: 965654029688579324
+      backgroundStoneTile128_194: 6550303601152502151
+      backgroundStoneTile128_249: 7412278486513145040
+      backgroundStoneTile128_123: -3767319591474463063
+      backgroundStoneTile128_150: 458692948685237694
+      backgroundStoneTile128_171: -8696084536048029820
+      backgroundStoneTile128_193: -5422061269837480426
+      backgroundStoneTile128_132: 1643059636138754712
+      backgroundStoneTile128_64: 4785543127427950479
+      backgroundStoneTile128_253: 4242101797951950931
+      backgroundStoneTile128_46: 4638590748031703093
+      backgroundStoneTile128_58: -3825719514685645288
+      backgroundStoneTile128_96: 5568394120617179655
+      backgroundStoneTile128_182: -5076399416896222536
+      backgroundStoneTile128_100: 8886082641069779780
+      backgroundStoneTile128_219: -2650478872349461367
+      backgroundStoneTile128_62: 1772069335702108563
+      backgroundStoneTile128_98: 1754320170420890584
+      backgroundStoneTile128_125: -8285398888792624230
+      backgroundStoneTile128_195: 6544160652075084503
+      backgroundStoneTile128_232: -801131033851374422
+      backgroundStoneTile128_31: -5570733716306010322
+      backgroundStoneTile128_108: -7238977576531631629
+      backgroundStoneTile128_130: 8160221222197040579
+      backgroundStoneTile128_202: 2965838001773765320
+      backgroundStoneTile128_217: 2210800044020233132
+      backgroundStoneTile128_220: -8508360943010599177
+      backgroundStoneTile128_172: 1909201599318085814
+      backgroundStoneTile128_121: 5434191073351087428
+      backgroundStoneTile128_114: 5027759535784439911
+      backgroundStoneTile128_137: -1036213451611055233
+      backgroundStoneTile128_45: 3538129124023777470
+      backgroundStoneTile128_67: -783229344980439968
+      backgroundStoneTile128_156: -4846160169506220153
+      backgroundStoneTile128_228: 2298897555607252205
+      backgroundStoneTile128_109: -7662433418068625714
+      backgroundStoneTile128_208: 1221862207665963797
+      backgroundStoneTile128_173: 3779704346838544129
+      backgroundStoneTile128_175: -3752236013802774911
+      backgroundStoneTile128_210: -4356921535796364691
+      backgroundStoneTile128_158: -8069844674227063478
+      backgroundStoneTile128_116: 1073376623098879676
+      backgroundStoneTile128_211: -8827572306945576991
+      backgroundStoneTile128_53: 8989988461241384790
+      backgroundStoneTile128_65: 6359209268475126488
+      backgroundStoneTile128_235: -5074776310363826667
+      backgroundStoneTile128_198: -6356706782610830860
+      backgroundStoneTile128_49: 6745203290185577663
+      backgroundStoneTile128_209: -6759481228719081905
+      backgroundStoneTile128_23: -7086995422628029886
+      backgroundStoneTile128_216: -3927607778928846301
+      backgroundStoneTile128_230: 3860200210910626190
+      backgroundStoneTile128_11: -4701852251035810517
+      backgroundStoneTile128_0: 6294422047393197658
+      backgroundStoneTile128_87: -5689380116899434434
+      backgroundStoneTile128_119: -6687842630647455328
+      backgroundStoneTile128_15: 8814604767300473777
+      backgroundStoneTile128_139: 1729846385845600037
+      backgroundStoneTile128_40: 7249916259172316481
+      backgroundStoneTile128_226: 1380277544594538081
+      backgroundStoneTile128_149: 9221681414592304109
+      backgroundStoneTile128_213: 5767708533985287380
+      backgroundStoneTile128_164: -3456283965799231898
+      backgroundStoneTile128_16: 3720067543909087386
+      backgroundStoneTile128_93: -3619817940244324140
+      backgroundStoneTile128_14: 7353363688667827795
+      backgroundStoneTile128_77: 8496519683344176216
+      backgroundStoneTile128_155: -1946232487910244109
+      backgroundStoneTile128_200: -1781421448879955938
+      backgroundStoneTile128_206: 4450438663172496050
+      backgroundStoneTile128_86: -6957309978962747428
+      backgroundStoneTile128_52: 2121813089365709463
+      backgroundStoneTile128_241: -7378237750209987927
+      backgroundStoneTile128_176: -6448498708529922829
+      backgroundStoneTile128_61: 3731716449706455632
+      backgroundStoneTile128_103: -5363287073663517025
+      backgroundStoneTile128_244: -9015372917098100759
+      backgroundStoneTile128_75: -7735250214466151068
+      backgroundStoneTile128_57: 5157458371005412845
+      backgroundStoneTile128_36: -1628926668085563945
+      backgroundStoneTile128_142: -1581367611225329616
+      backgroundStoneTile128_163: -4917472550196714644
+      backgroundStoneTile128_190: -3851702489047951543
+      backgroundStoneTile128_97: 6575964105268085082
+      backgroundStoneTile128_203: 6347783379979446419
+      backgroundStoneTile128_188: -4832309584514828928
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 1

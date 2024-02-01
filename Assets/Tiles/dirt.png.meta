@@ -234,7 +234,7 @@ TextureImporter:
       213: 1810729237412723732
     second: dirt_76
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -255,6 +255,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -293,6 +294,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -332,6 +334,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -1972,6 +1986,84 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      dirt_33: -535955754643264456
+      dirt_71: -7074751421251992938
+      dirt_47: -6949761519861056275
+      dirt_26: -9113066901439858745
+      dirt_57: -4301319907650087209
+      dirt_9: -6252486248573733601
+      dirt_11: 703120487251447869
+      dirt_40: 1575844731295193724
+      dirt_4: 8945134245928345701
+      dirt_50: -2266582300133149831
+      dirt_52: 5812558954633133593
+      dirt_27: -1789677753036037815
+      dirt_24: 7971986067615452217
+      dirt_75: 2146468797251195136
+      dirt_38: -4592188602785551655
+      dirt_56: 4008673111945767315
+      dirt_60: 1407161821982630853
+      dirt_16: 1584959600808551503
+      dirt_61: 6213467442833892100
+      dirt_1: 4599323450485179080
+      dirt_43: 2889184218642640239
+      dirt_53: 1263565577170295747
+      dirt_23: -3057520779992004693
+      dirt_67: 320236639848900951
+      dirt_48: -8875021457287782287
+      dirt_13: -4590260581976899338
+      dirt_17: 204613489817746490
+      dirt_3: 4340402923186232840
+      dirt_68: 6774867460641148647
+      dirt_73: -5288069878905001141
+      dirt_51: -1394350117677619087
+      dirt_21: -4643241923584157249
+      dirt_6: 1741364125068972350
+      dirt_22: -307551692407819652
+      dirt_46: 2329128783078813897
+      dirt_20: 903708101836699179
+      dirt_34: 1943859967494798541
+      dirt_37: 6103175503790741419
+      dirt_45: -3046543944341947034
+      dirt_12: -2650713670310062566
+      dirt_59: 6042817027756061858
+      dirt_58: 2820299621188726531
+      dirt_8: 4840285518514534099
+      dirt_7: 8069240933849549733
+      dirt_15: 3849479111998487501
+      dirt_18: -2890310287067007835
+      dirt_19: -6855718002261116278
+      dirt_32: -256096827188923388
+      dirt_70: 1886801401178523836
+      dirt_41: -4472734364812420769
+      dirt_31: 1684332461669216695
+      dirt_30: -2250979663647398285
+      dirt_55: 3048835865359986818
+      dirt_14: 2211203847774832394
+      dirt_35: 4162261161075656089
+      dirt_10: 8723449380172197769
+      dirt_5: -7463445084774042835
+      dirt_74: -1471545673440545199
+      dirt_29: -7194069241667589499
+      dirt_36: -1669332399143208820
+      dirt_54: 1453568892020145227
+      dirt_64: 215736675616071823
+      dirt_66: 3946778569754797500
+      dirt_42: 357372696762157004
+      dirt_62: -2166554411414430091
+      dirt_69: 6243630151894114500
+      dirt_2: 8148967778456589955
+      dirt_28: 1792825530352931239
+      dirt_72: -765901267273121366
+      dirt_76: 1810729237412723732
+      dirt_65: -6779824400908340728
+      dirt_49: 6566067774427322960
+      dirt_25: -867320447883301778
+      dirt_44: 140217470176163583
+      dirt_63: -1760913499836194350
+      dirt_0: 5634026908348037240
+      dirt_39: 8547961508836682354
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
